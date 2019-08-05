@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Issues to fix</h1>
+    <table>
+        {% for item in items %}
+            <tr>
+                {% if item.done %}
+                
+                    
+                {% else %}
+                    <td>{{item.name}}</td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <p>No issues, for now...</p>
+        {% endfor %}
+    </table>
+
+    <!-- displayes issues that have been resolved -->
+    <h1>Resolved issues</h1>
+    <table>
+        {% for done_items in items %}
+            <tr>
+                {% if done_items.done %}
+                <td><strike>{{done_items.name}}</strike></td>
+                {% endif %}
+            </tr>
+        {% empty %}
+            <p>Nothing solved, for now...</p>
+        {% endfor %}
+    </table>
+    <br>
+    
+    <a href="add">Add a new item</a>
+
+</body>
+</html>
