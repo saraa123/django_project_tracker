@@ -8,13 +8,15 @@
 ### Features left to implement
 
 ## Methods used
-*bootstrap
-*HTML
-*CSS
-*Javascript & jQuery
+* Django
+* Bootstrap
+* HTML
+* CSS
+* Javascript & jQuery
+
 
 ## Testing techniques
-### Jasmine
+
 ### Manual testing
 
 ## Deployment
