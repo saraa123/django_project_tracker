@@ -1,0 +1,12 @@
+*.sqlite3
+*.pyc
+*.__pycache__
+*.dbsqlite3
+*.coverage
+*htmlcov/
+*.DS_Store
+*include/
+*lib
+*.Python
+*bin/
+*dbsqlite3
