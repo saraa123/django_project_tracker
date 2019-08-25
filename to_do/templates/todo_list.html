@@ -1,45 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Issue list</title>
-</head>
-<body>
-    
-    <h1>Issues to fix</h1>
-    <table>
-        {% for item in items %}
-            <tr>
-                {% if item.done %}
-                
-                    
-                {% else %}
-                    <td>{{item.name}}</td>
-                {% endif %}
-            </tr>
-        {% empty %}
-            <p>No issues, for now...</p>
-        {% endfor %}
-    </table>
+{% extends 'base.html' %}
+{% block content %}
 
-    <!-- displayes issues that have been resolved -->
-    <h1>Resolved issues</h1>
-    <table>
-        {% for done_items in items %}
-            <tr>
-                {% if done_items.done %}
-                <td><strike>{{done_items.name}}</strike></td>
-                {% endif %}
-            </tr>
-        {% empty %}
-            <p>Nothing solved, for now...</p>
-        {% endfor %}
-    </table>
-    <br>
-    
-    <a href="add">Add a new item</a>
+<div class="container">
+    <div class="row">
+        <div class="col-s-12">
+            <h1>Welcome to your issue tracker</h1>
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-s-4">
+            {% if messages %}
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Issues to fix</h2>
+            <table>
+                {% for item in items %}
+                <tr>
+                    {% if item.done %}
+            
+            
+                    {% else %}
+                    <td>{{item.name}}</td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <p>No issues, for now...</p>
+                {% endfor %}
+            </table>
+            <br>
+            <!-- displayes issues that have been resolved -->
+            <h2>Resolved issues</h2>
+            <table>
+                {% for done_items in items %}
+                <tr>
+                    {% if done_items.done %}
+                    <td><strike>{{done_items.name}}</strike></td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <p>Nothing solved, for now...</p>
+                {% endfor %}
+            </table>
+            <br>
+            
+            <a href="add">Add a new item</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
 
 </body>
-</html>
+</html> -->
+
