@@ -13,10 +13,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import dj_database_url 
 
-if os.environ.get("DEVELOPMENT"):
-    development = True
-else:
-    development = False
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,9 +26,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4fwndsya@e^7djg54jplzbtu%$1hn(1(lp=p^!k=#9@(fr4nws'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = development
+DEBUG = True
 
-ALLOWED_HOSTS = [os.environ.get('HOSTNAME')]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -62,7 +59,7 @@ ROOT_URLCONF = 'djangoProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,15 +78,11 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if development:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:
-    DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
+
+DATABASES = {'default': dj_database_url.parse(
+    "postgres://sxkycsfxoeajko:e3d82d932f699c418dd01bb49c633b1049b3b03df14da55425d9648f195d7ef9@ec2-54-217-234-157.eu-west-1.compute.amazonaws.com:5432/d2a8ih2gmkmbha")}
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -128,3 +121,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
