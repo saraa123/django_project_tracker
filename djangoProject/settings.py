@@ -28,7 +28,7 @@ SECRET_KEY = '4fwndsya@e^7djg54jplzbtu%$1hn(1(lp=p^!k=#9@(fr4nws'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sara-django-issue-tracker.herokuapp.com']
+ALLOWED_HOSTS = ['sara-django-issue-tracker.herokuapp.com','127.0.0.1']
 
 
 # Application definition
