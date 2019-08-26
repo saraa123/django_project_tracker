@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^add$', new_item),
     url(r'^edit/(?P<id>\d+)$', edit_an_item),
     url(r'^toggle/(?P<id>\d+)$', toggle_status),
-    url(r'^register/$', index, name='index'),
+    url(r'^register/$', index, name='register'),
     url(r'^account/logout/$', logout, name='logout'),
     url(r'^account/login/$', login, name='login'),
 ]
