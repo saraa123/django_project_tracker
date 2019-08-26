@@ -16,11 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from to_do.views import todo_list, new_item, edit_an_item, toggle_status
+from accounts.views import index, logout, login
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', todo_list),
+    url(r'^$', todo_list, name='home'), # home refers to to_do view from to_do app
     url(r'^add$', new_item),
     url(r'^edit/(?P<id>\d+)$', edit_an_item),
-    url(r'^toggle/(?P<id>\d+)$', toggle_status)
+    url(r'^toggle/(?P<id>\d+)$', toggle_status),
+    url(r'^register/$', index, name='index'),
+    url(r'^account/logout/$', logout, name='logout'),
+    url(r'^account/login/$', login, name='login'),
 ]
