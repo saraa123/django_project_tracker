@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block page_title %}Edit Issue Page{% endblock %}
+{% block content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Issue</title>
-</head>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Edit your issue</h1>
+        </div>
+    </div>
+</div>
 
-<body>
-    <h1>Edit your issue</h1>
-
+<div class="container">
     <form method="GET">
-
         {% csrf_token %}
         {{ form.as_p}}
         <button type="submit">Save</button>
     </form>
+</div>
 
-</body>
-
-</html>
+{% endblock %}

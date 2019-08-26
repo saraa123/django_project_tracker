@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add New Issue</title>
-</head>
-<body>
-    <h1>Adding new issue </h1>
+{% extends 'base.html' %}
+{% block page_title %}Add New Issue Page{% endblock %}
+{% block content %}
 
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Add a New Issue</h1>
+        </div>
+    </div>
+</div>
+    
+<div class="container">
     <form method="POST">
-
         {% csrf_token %}
         {{ form.as_p}}
         <button type="submit">Save</button>
     </form>
+</div>
 
-</body>
-</html>
+{% endblock %}
