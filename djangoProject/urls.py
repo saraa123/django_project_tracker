@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from to_do.views import todo_list, new_item, edit_an_item, toggle_status
-from accounts.views import index, logout, login
+from accounts.views import index, logout, login, profile
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^register/$', index, name='register'),
     url(r'^account/logout/$', logout, name='logout'),
     url(r'^account/login/$', login, name='login'),
+    url(r'^account/profile/$', profile, name='profile')
 ]
