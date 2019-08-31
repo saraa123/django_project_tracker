@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap_tags %}
+
 {% block page_title %}Login Page{% endblock %}
 {% block content %}
 
@@ -13,10 +15,14 @@
 <div class="container">
     <form method="POST">
         {% csrf_token  %}
-        {{ login_form }}
-        <button type="submit">Login</button>
+        {{ login_form | as_bootstrap }}
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
+    <br>
+    <p><a href='{% url "password_reset" %}'>Forgotten password</a></p>
 </div>
+
+
 
     {% if messages %}
         {% for message in messages %}
