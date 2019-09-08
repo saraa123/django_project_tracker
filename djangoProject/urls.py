@@ -13,10 +13,33 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+
+# urls for to_do app
 from to_do.views import todo_list, new_item, edit_an_item, toggle_status
-from accounts.views import index, logout, login, profile
+
+# urls for accounts app
+# from accounts.views import index, logout, login, profile
+from accounts.views import index 
+from accounts import urls as accounts_urls
+
+# urls for products app
+from products import urls as products_urls
+from products.views import all_products
+
+# urls for cart app
+from cart import urls as cart_urls
+
+# urls for search app
+from search import urls as search_urls
+
+# urls for checkout app
+from checkout import urls as checkout_urls
+
+# imports for media
+from django.views import static
+from .settings import MEDIA_ROOT
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,8 +47,15 @@ urlpatterns = [
     url(r'^add$', new_item),
     url(r'^edit/(?P<id>\d+)$', edit_an_item),
     url(r'^toggle/(?P<id>\d+)$', toggle_status),
-    url(r'^register/$', index, name='register'),
-    url(r'^account/logout/$', logout, name='logout'),
-    url(r'^account/login/$', login, name='login'),
-    url(r'^account/profile/$', profile, name='profile')
+    # url(r'^register/$', index, name='register'),
+    # url(r'^account/logout/$', logout, name='logout'),
+    # url(r'^account/login/$', login, name='login'),
+    # url(r'^account/profile/$', profile, name='profile'),
+    url(r'^accounts/', include(accounts_urls)),
+    # url(r'^all_products/$', name="all_products"),
+    url(r'^products/', include(products_urls)),
+    url(r'^cart/', include(cart_urls)),
+    url(r'^search/', include(search_urls)),
+    url(r'^checkout/', include(checkout_urls)),
+    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
 ]
