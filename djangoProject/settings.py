@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import env
 import dj_database_url 
 
 
@@ -23,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4fwndsya@e^7djg54jplzbtu%$1hn(1(lp=p^!k=#9@(fr4nws'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_forms_bootstrap',
     'to_do',
-    'accounts'
+    'accounts',
+    'products',
+    'cart',
+    'checkout'
 ]
 
 MIDDLEWARE = [
@@ -67,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'cart.contexts.cart_content'
             ],
         },
     },
@@ -79,8 +86,11 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 
-DATABASES = {'default': dj_database_url.parse(
-    "postgres://sxkycsfxoeajko:e3d82d932f699c418dd01bb49c633b1049b3b03df14da55425d9648f195d7ef9@ec2-54-217-234-157.eu-west-1.compute.amazonaws.com:5432/d2a8ih2gmkmbha")}
+DATABASES = {
+    'default': dj_database_url.parse(
+    "postgres://sxkycsfxoeajko:e3d82d932f699c418dd01bb49c633b1049b3b03df14da55425d9648f195d7ef9@ec2-54-217-234-157.eu-west-1.compute.amazonaws.com:5432/d2a8ih2gmkmbha"),
+    
+}
 
 
 
@@ -102,6 +112,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'accounts.backends.CaseInsensitiveAuth'
+# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -121,4 +135,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+# All media stored here
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/images/'
+
+STRIPE_PUBLISHABLE = os.getenv("STRIPE_PUBLISHABLE")
+STRIPE_SECRET = os.getenv("STRIPE_SECRET")
+
+""" Allow functionality to email user if they have forgotten their password """
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
