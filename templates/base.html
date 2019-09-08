@@ -8,11 +8,88 @@
     <title>{% block page_title %} {% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css">
+    {% block head_js %}
+    {% endblock head_js %}
 </head>
 <body>
     <div class="body">
-        <ul class="nav justify-content-end">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'home' %}">Bug Finder</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">Account</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Speak to us!
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Email us</a>
+                            <a class="dropdown-item" href="#">Send a tweet</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Read our start up blog</a>
+                        </div>
+                    </li> -->
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <!--contact icons to be displayed in the nav -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item nav-link">
+                        Twitter
+                    </li>
+                    <li class="nav-item nav-link">
+                        Facebook
+                    </li>
+                    <li class="nav-item nav-link">
+                        Email
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li>
+                        <a href="{% url 'view_cart' %}">
+                            <i class="fa fa-shipping-cart"></i> Shopping bag
+                            {% if product_count > 0 %}
+                            <label class="badge badge-warning">{{ product_count }}</label>
+                            {% endif %}
+                        </a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+                
+            </div>
+        </nav>
+
+        <!-- <ul class="nav justify-content-end">
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'home' %}">Home</a>
@@ -35,29 +112,34 @@
                 </li>
             {% endif %}
             
-            <!-- <li class="nav-item">
+             <li class="nav-item">
                 <a class="nav-link" href="#">Contact Us</a>
-            </li> -->
-        </ul>
+            </li>
+        </ul> -->
         
 
         {% block content %}
         {% endblock %}
 
-        <footer class="card-footer text-muted">
+        <!-- <footer class="text-muted ">
             <div class="row footer">
                 <div class="col-xs-12 col-sm-3">
-                    <p>contact us</p>
+                    <p>Email us</p>
                 </div>
                 <div class="col-xs-12 col-sm-3">
-                    <p>our blog</p>
+                    <p>Our blog</p>
                 </div>
                 <div class="col-xs-12 col-sm-3">
-                    <p>twitter</p>
+                    <p>Twitter</p>
                 </div>
                 <div class="col-xs-12 col-sm-3">
                     <p>Facebook</p>
                 </div>   
+            </div>
+        </footer> -->
+        <footer>
+            <div class="container footer_container">
+                <p>Help</p>
             </div>
         </footer>
     </div><!-- closing body class -->
