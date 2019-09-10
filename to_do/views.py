@@ -1,11 +1,12 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-from .models import Item
-from .forms import ItemForm 
+from .models import Item, Feature
+from .forms import ItemForm, FeatureForm
 
 # Create your views here.
 def todo_list(request):
     results = Item.objects.all()
-    return render(request, 'todo_list.html', {"items": results})
+    feature_results = Feature.objects.all()
+    return render(request, 'todo_list.html', {"items": results, "name": feature_results})
 
 def new_item(request):
     if request.method=='POST':
