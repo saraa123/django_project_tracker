@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block page_title %}Issues Page{% endblock %}
+
+{% block breadcrumb_overview_of_page %}
+<!-- Breadcrumbs of page overview -->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">
+        <a href="#">Issues</a>
+    </li>
+    <li class="breadcrumb-item active">Overview</li>
+</ol>
+{% endblock %}
+
+{% block body_text %}
+<div class="container non_overlay">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Issues to fix</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- <th scope="col">Issue no.</th> -->
+                        <th scope="col">Issue</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Handler</th>
+                        <th scope="col">Likes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    
+                    <tr>
+                        {% if item.done %}
+
+
+                        {% else %}
+
+                            {% if user.is_authenticated %}
+                            
+                            <td>{{item.Issue | title }}</td>
+
+                            <td>Status</td>
+
+                            <td>Handler</td>
+
+                            <td>   
+                                
+                                <form method="POST" action="toggle/{{ item.id }}">{% csrf_token %}<button
+                                        class="plain_button"><i class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}</form>   
+                            </td>
+
+                            <!-- <td>{{ item.likes.count }}</td> -->
+                            
+                            <!-- <input type="submit" value="Like Me"> -->
+                            {% else %}
+                            <td>{{item.Issue | title }}</td>
+                            
+                            <td>Status</td>
+                            
+                            <td>Handler</td>
+                            
+                            <td>
+                                <button class="plain_button login_to_like"><i class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}
+                            </td>
+                            
+                        {% endif %}
+
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <p>No issues, for now...</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> <!-- closing col-sm class -->
+    </div> <!-- closing row  -->
+            <br>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- displays issues that have been resolved -->
+            <h2>Resolved issues</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- <th scope="col">Issue no.</th> -->
+                        <th scope="col">Issue</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Handler</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for done_items in items %}
+                    <tr class="table-success">
+                        {% if done_items.done %}
+                        <td><strike>{{done_items.Issue}}</strike></td>
+                        <td>Complete</td>
+                        <td>Handler</td>
+                        {% endif %}
+                    </tr>
+                    
+                    {% empty %}
+                    <p>Nothing solved, for now...</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> <!-- closing sm class -->
+    </div> <!-- closing row for table for resolved issues -->
+            
+</div> <!-- closing container -->
+<br>
+
+{% endblock %}
