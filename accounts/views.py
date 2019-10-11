@@ -10,7 +10,7 @@ def index(request):
         return redirect(reverse('index'))
     
     if ['POST method']:
-        registration_form = UserRegistrationForm(request.POST)
+        registration_form = UserRegistrationForm(request.POST or None)
     
         if registration_form.is_valid():
             registration_form.save()
@@ -27,8 +27,6 @@ def index(request):
     else:
         registration_form = UserRegistrationForm()
 
-
-    registration_form = UserRegistrationForm()
     return render(request, "index.html", {'registration_form': registration_form})
 
 
@@ -49,6 +47,7 @@ def login(request):
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, "You have successfully logged in")
+                
                 return redirect(reverse('home'))
             else:
                 login_form.add_error(None, "Your username or password is incorrect")
