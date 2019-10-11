@@ -17,6 +17,8 @@ class UserRegistrationForm(UserCreationForm):
     password2 = forms.CharField(
                                 label="Password Confirmation", 
                                 widget=forms.PasswordInput)
+    
+    email = forms.EmailField(label="Email address")
 
     class Meta:
         model = User
@@ -28,7 +30,7 @@ class UserRegistrationForm(UserCreationForm):
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
         if User.objects.filter(email=email).exclude(username=username):
-            raise forms.ValidationError("Email address must be unique")
+            raise forms.ValidationError("This email address has already been used")
         return email 
     
     def clean_password2(self):
@@ -43,5 +45,13 @@ class UserRegistrationForm(UserCreationForm):
         """ if both passwords don't match """
         if password1 != password2:
             raise ValidationError("Both passwords must match")
-        
+            
         return password2
+
+# class UserRegistrationForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = [
+#             'username',
+#             'password'
+#         ]
