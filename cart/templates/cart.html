@@ -3,7 +3,8 @@
 {% load bootstrap_tags %}
 {% block page_title %}Cart{% endblock %}
 
-{% block content %}
+{% block body_text %}
+
 <div class="container">
     <div class="row row-flex">
         {% for item in cart_items %}
@@ -14,7 +15,7 @@
                 <div class="caption">
                     <h3>{{ item.product.name }}</h3>
                     <p class="product-description">{{ item.product.description }}</p>
-                    <p>{{ item.product.price }}</p>
+                    <p><i class="fa fa-gbp">{{ item.product.price }}</i></p>
                     <p>
                         <form class="form-inline" method="POST" action="{% url 'adjust_cart' item.id %}">
                             {% csrf_token %}
@@ -22,24 +23,43 @@
                                 <label for="exampleInputAmount" class="sr-only">New Qty</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">Qty</div>
-                                    <input name="quantity" type="number" min="0" max="10" class="form-control">
-                                    <div class="input-group-addon">{{item.quantity}}</div>
+                                    <input name="quantity" type="number" min="0" max="10" class="form-control" value="{{item.quantity}}">
+                                    
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>Amend</button>
+                           
+                            <div>
+                                <button type="submit" class="btn btn-primary margin_btn">Amend</button>
+                            </div>
                         </form>
                     </p>
 
                 </div>
             </div>
+            
         {% endfor %}
+        
+        <!-- Cart total and checkout -->
+        <div class="container">
+            {% if product_count == 0 %}
+                <p>Oops, your basket is empty!</p>
+            {% else %}
+                {% if user.is_authenticated %}
+                    <p>£{{total}}</p>
+                    <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign"
+                            aria-hidden="true"></span>Checkout</a>
+                {% else %}
+                    <p>£{{total}}</p>
+                    <p>Login or make an account to complete your order</p>
+                    <button class="btn"><a href="{% url 'register' %}">Join</a></button>
+                    <button class="btn"><a href="{% url 'login' %}">Login</a></button>
+                    
+                    {{cart.quantity}}
+                {% endif %}
+            {% endif %}
+        </div>
+
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <p>Total</p>
-        <p><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>{{ total }}</p>
-        <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Checkout</a>
-    </div>
-</div>
+
 {% endblock %}
