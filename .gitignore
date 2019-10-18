@@ -2,6 +2,7 @@
 *.pyc
 *.__pycache__
 *.dbsqlite3
+*dbsqlite3
 *.coverage
 *htmlcov/
 *.DS_Store
@@ -9,4 +10,7 @@
 *lib
 *.Python
 *bin/
-*dbsqlite3
+*dbsqlite3env.py
+env.py
+.vscode/
+
