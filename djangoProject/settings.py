@@ -41,12 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'django_forms_bootstrap',
     'to_do',
     'accounts',
     'products',
     'cart',
-    'checkout'
+    'checkout',
+    'charts',
+    
 ]
 
 MIDDLEWARE = [
