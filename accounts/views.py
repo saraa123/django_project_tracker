@@ -38,7 +38,7 @@ def login(request):
         return redirect(reverse('home'))
     
     if ['POST method']:
-        login_form = UserLoginForm(request.POST)
+        login_form = UserLoginForm(request.POST or None)
 
         if login_form.is_valid():
             user = auth.authenticate(username=request.POST['username'],
