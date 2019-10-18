@@ -48,10 +48,3 @@ class UserRegistrationForm(UserCreationForm):
             
         return password2
 
-# class UserRegistrationForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = [
-#             'username',
-#             'password'
-#         ]
