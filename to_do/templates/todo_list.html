@@ -1,65 +1,307 @@
 {% extends 'base.html' %}
 {% block page_title %}Home Page{% endblock %}
-{% block content %}
+
+
+{% block icon_cards %}
+<!-- Icon Cards-->
+<div class="row">
+    <div class="col-xl-4 col-sm-6 mb-3">
+        <div class="card text-white bg-primary o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fa fa-fw fa-comments"></i>
+                </div>
+
+                    <!-- count for issues and issues left to do -->
+                    
+                    <div class="mr-5">{{items.count}} Total Issues</div>
+                    {% for not_done in not_done_issues_count %}
+                    <div class="mr-5">{{not_done}} Pending Issues</div>
+                    {% endfor %}
+                
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="{% url 'all_products' %}">
+                <span class="float-left">Buy issue ticket</span>
+                <span class="float-right">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-3">
+        <div class="card text-white bg-warning o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fa fa-fw fa-list"></i>
+                </div>
+                <!-- count for features and features left to do -->
+                {% if name.count == 0 %}
+                    <div class="mr-5">No Feature Requests</div>
+                {% else %}
+                    <div class="mr-5">{{name.count}} Total Features</div>
+                {% endif %}
+                {% for features_to_do in pending_features_to_do_count %}
+                <div class="mr-5">{{features_to_do}} Pending Features</div>
+                {% endfor %}
+            </div>
+            
+            <a class="card-footer text-white clearfix small z-1" href="{% url 'all_products' %}">
+                <span class="float-left">Buy feature ticket</span>
+                <span class="float-right">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-6 mb-3">
+        <div class="card text-white bg-success o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fa fa-fw fa-shopping-cart"></i>
+                </div>
+                <div class="mr-5">{{name.count}} Total Orders</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="{% url 'all_products' %}">
+                <span class="float-left">Make an Order</span>
+                <span class="float-right">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
+
+{% block body_text %}
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Welcome to your issue tracker</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-s-4">
+                {% if messages %}
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-s-4">
-            {% if messages %}
-                {% for message in messages %}
-                    {{message}}
-                {% endfor %}
-            {% endif %}
+    <br>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <h2>Game Tracker</h2>
+                <br>
+                <p>Let us know what issues you've come across, and also what new features you want us to bring along.</p>
+                <p>Also keep a lookout for the new features you request!</p>
+            </div>
         </div>
     </div>
-</div>
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Issues to fix</h2>
-            <table>
-                {% for item in items %}
-                <tr>
-                    {% if item.done %}
-            
-            
-                    {% else %}
-                    <td>{{item.name}}</td>
-                    {% endif %}
-                </tr>
-                {% empty %}
-                <p>No issues, for now...</p>
-                {% endfor %}
-            </table>
-            <br>
-            <!-- displayes issues that have been resolved -->
-            <h2>Resolved issues</h2>
-            <table>
-                {% for done_items in items %}
-                <tr>
-                    {% if done_items.done %}
-                    <td><strike>{{done_items.name}}</strike></td>
-                    {% endif %}
-                </tr>
-                {% empty %}
-                <p>Nothing solved, for now...</p>
-                {% endfor %}
-            </table>
-            <br>
-            
-            <a href="add">Add a new item</a>
-        </div>
-    </div>
-</div>
+    <br>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Issues to fix table -->
+                <h2>Issues to fix</h2>
+                <p><a href="{% url 'all_products' %}">Request a new issue ticket</a></p>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Issue</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Upvotes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+    
+                        <tr>
+                            {% if item.done %}
+    
+    
+                            {% else %}
+
+                            <!-- If a user is logged in, they can upvote an issue -->
+                            {% if user.is_authenticated %}
+    
+                            <td>{{item.Issue | title }}</td>
+    
+                            <td>In Progress</td>
+
+                            
+    
+                            <td>
+    
+                                <form method="POST" action="toggle/{{ item.id }}">{% csrf_token %}<button
+                                        class="plain_button border-radius-button"><i
+                                            class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}</form>
+                            </td>
+    
+                            
+                            {% else %}
+                            <td>{{item.Issue | title }}</td>
+    
+                            <td>In Progress</td>
+    
+                            <!-- If the user isn't logged in, they will be sent an alert to log in -->
+                            <td>
+                                <button class="plain_button border-radius-button login_to_like"><i
+                                        class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}
+                            </td>
+    
+                            {% endif %}
+    
+                            {% endif %}
+                        </tr>
+                        {% empty %}
+                        <p>No issues, for now...</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> <!-- closing col-sm class -->
+        </div> <!-- closing row  -->
+        <br>
+    
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Displays issues that have been resolved -->
+                <h2>Resolved Issues</h2>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Issue</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for done_items in items %}
+                        <tr class="table-success">
+                            {% if done_items.done %}
+                            <td><strike>{{done_items.Issue | title}}</strike></td>
+                            <td>Complete</td>
+                            <td>{{ done_items.last_updated }}</td>
+                            {% endif %}
+                        </tr>
+    
+                        {% empty %}
+                        <p>Nothing solved, for now...</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> <!-- closing sm class -->
+        </div> <!-- closing row for table for resolved issues -->
+    
+    </div> <!-- closing container -->
+
+
+    <br>
+    <!-- Features table -->
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>New Feature Requests</h2>
+                <p><a href="{% url 'all_products' %}">Request a new feature ticket</a></p>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <!-- <th scope="col">Issue no.</th> -->
+                            <th scope="col">Feature</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Upvotes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for feature in name %}
+    
+                        <tr>
+                            {% if feature.done %}
+    
+    
+                            {% else %}
+    
+                            {% if user.is_authenticated %}
+    
+                            <td>{{feature.name | title }}</td>
+    
+                            <td>In Progress</td>
+    
+    
+                            <td>
+    
+                                <form method="POST" action="toggle/{{ feature.id }}">{% csrf_token %}<button class="plain_button border-radius-button"><i
+                                            class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}</form>
+                                
+                                
+                            </td>
+    
+                            
+                            {% else %}
+                            <td>{{feature.name | title }}</td>
+    
+                            <td>In Progress</td>
+    
+    
+                            <td>
+                                <button class="plain_button border-radius-button login_to_like"><i
+                                        class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}
+                            </td>
+    
+                            {% endif %}
+    
+                            {% endif %}
+                        </tr>
+                        {% empty %}
+                        <p>No features, for now...</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> <!-- closing sm class -->
+        </div> <!-- closing row -->
+    
+        <!-- Table for features implemented -->
+    
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>New Features Implemented</h2>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <!-- <th scope="col">Issue no.</th> -->
+                            <th scope="col">Feature</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for done_feature in name %}
+                        <tr class="table-success">
+                            {% if done_feature.done %}
+                            <td><strike>{{done_feature.name | title}}</strike></td>
+                            <td>Complete</td>
+                            <td>{{ done_feature.last_updated }}</td>
+                            {% endif %}
+                        </tr>
+    
+                        {% empty %}
+                        <p>No new features Implemented, for now...</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> <!-- closing sm class -->
+        </div> <!-- closing row for implemented features  -->
+    </div> <!-- closing container -->
+     
+
+</div> <!-- closing wrapper class -->
+
 
 {% endblock %}
 
