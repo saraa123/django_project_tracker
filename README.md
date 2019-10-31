@@ -18,6 +18,8 @@ This project focuses on incorporating django, in order to provide front-end user
 ### Features left to implement
 
 > Front-end features
+- Give users the ability to edit their issues and add comments
+    * I initially was working on a function that would enable users to edit an issue they may have add, but due to time restraints I decided this would be something that would be better to work on in the future. 
 - Allow users to leave feedback 
     * Currently feedback is hardcoded. However, in the future I would like to learn how to develop a real feedback section for users, as well as have snippets of this feedback presented on the progress page. 
 
