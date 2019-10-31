@@ -130,12 +130,13 @@
                             <!-- If a user is logged in, they can upvote an issue -->
                             {% if user.is_authenticated %}
     
-                            <td>{{item.Issue | title }}</td>
+                            <td>
+                                <p>{{item.Issue | title }}</p>
+                                <p><b>added:</b> {{ item.date_created }}</p>
+                            </td>
     
                             <td>In Progress</td>
 
-                            
-    
                             <td>
     
                                 <form method="POST" action="toggle/{{ item.id }}">{% csrf_token %}<button
@@ -145,7 +146,10 @@
     
                             
                             {% else %}
-                            <td>{{item.Issue | title }}</td>
+                            <td>
+                                <p>{{item.Issue | title }}</p>
+                                <p><b>added:</b> {{ item.date_created }}</p>
+                            </td>
     
                             <td>In Progress</td>
     
@@ -229,7 +233,10 @@
     
                             {% if user.is_authenticated %}
     
-                            <td>{{feature.name | title }}</td>
+                            <td>
+                                <p>{{feature.name | title }}</p>
+                                <p><b>added:</b> {{ feature.date_created }}</p>
+                            </td>
     
                             <td>In Progress</td>
     
@@ -244,7 +251,10 @@
     
                             
                             {% else %}
-                            <td>{{feature.name | title }}</td>
+                            <td>
+                                <p>{{feature.name | title }}</p>
+                                <p><b>added:</b> {{ feature.date_created }}</p>
+                            </td>
     
                             <td>In Progress</td>
     
