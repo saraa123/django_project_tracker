@@ -49,7 +49,7 @@ def todo_list(request):
                   "not_done_issues_count": not_done_issues_count, "pending_features_to_do_count": pending_features_to_do_count})
 
 def new_item(request):
-    "Function for adding a new issue"
+    # Function for adding a new issue
 
     if request.method=='POST':
         form = ItemForm(request.POST, request.FILES)
@@ -64,7 +64,7 @@ def new_item(request):
 
 
 def toggle_status(request, id):
-    "Function to upvote an issue or feature"
+    # Function to upvote an issue or feature
 
     user = request.user
 
