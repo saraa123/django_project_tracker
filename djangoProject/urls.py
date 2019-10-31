@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 # urls for to_do app
-from to_do.views import todo_list, new_item, edit_an_item, toggle_status
+from to_do.views import todo_list, new_item, toggle_status
 
 # urls for accounts app
 # from accounts.views import index, logout, login, profile
@@ -37,6 +37,9 @@ from search import urls as search_urls
 # urls for checkout app
 from checkout import urls as checkout_urls
 
+# urls for charts app
+from charts import urls as charts_urls
+
 # imports for media
 from django.views import static
 from .settings import MEDIA_ROOT
@@ -45,17 +48,12 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', todo_list, name='home'), # home refers to to_do view from to_do app
     url(r'^add$', new_item),
-    url(r'^edit/(?P<id>\d+)$', edit_an_item),
     url(r'^toggle/(?P<id>\d+)$', toggle_status),
-    # url(r'^register/$', index, name='register'),
-    # url(r'^account/logout/$', logout, name='logout'),
-    # url(r'^account/login/$', login, name='login'),
-    # url(r'^account/profile/$', profile, name='profile'),
     url(r'^accounts/', include(accounts_urls)),
-    # url(r'^all_products/$', name="all_products"),
     url(r'^products/', include(products_urls)),
     url(r'^cart/', include(cart_urls)),
     url(r'^search/', include(search_urls)),
     url(r'^checkout/', include(checkout_urls)),
-    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
+    url(r'^charts/', include(charts_urls)),
+    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT})
 ]
