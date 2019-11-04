@@ -13,4 +13,4 @@
 *dbsqlite3env.py
 env.py
 .vscode/
-
+.bashrc
