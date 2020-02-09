@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block page_title %}Charts{% endblock %}
 
-
 {% block jquery %}
-
 <script>
 // variables for issues 
 var defaultData = []
@@ -28,10 +26,10 @@ $.ajax({
         labelsProg = data.progress_labels
         ProgData = data.progress_default
 
-        // chart function to call issues chart for total and completed count
+        // chart function to call issues chart: total issues and completed count
         setChart()
 
-        // chart function to call chart of features total and completed count
+        // chart function to call features chart: total features and completed count
         setProgressChart()
 
         console.log("Well hello there you curious cat!")
@@ -43,7 +41,6 @@ $.ajax({
     }
 })
     
-
 </script>
 {% endblock %}
 
@@ -59,8 +56,9 @@ $.ajax({
         </div>
     </div>
 </div>
-
+<br>
 {% endblock %}
+
 
 {% block chart_scripts %}
 
