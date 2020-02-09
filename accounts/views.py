@@ -46,7 +46,7 @@ def login(request):
 
             if user:
                 auth.login(user=user, request=request)
-                messages.success(request, "You have successfully logged in")
+                messages.success(request, "Hi there " + str(user) + " you've successfully logged in")
                 
                 return redirect(reverse('home'))
             else:
@@ -60,7 +60,7 @@ def login(request):
 def logout(request):
     """Log the user out"""
     auth.logout(request)
-    messages.success(request, "You have logged out, make sure you come back!")
+    messages.success(request, "You've logged out, hopefully we'll see you again soon!")
     return redirect(reverse('home'))
 
 def profile(request):
