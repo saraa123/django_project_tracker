@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-import env
 import dj_database_url 
 
 
@@ -147,8 +146,8 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STRIPE_PUBLISHABLE = os.getenv("STRIPE_PUBLISHABLE")
-STRIPE_SECRET = os.getenv("STRIPE_SECRET")
+STRIPE_PUBLISHABLE = os.environ.get("STRIPE_PUBLISHABLE")
+STRIPE_SECRET = os.environ.get("STRIPE_SECRET")
 
 """ Allow functionality to email user if they have forgotten their password """
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
