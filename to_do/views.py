@@ -1,8 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404, reverse 
-from .models import Item, Feature
-from .forms import ItemForm, FeatureForm
+from django.contrib import auth, messages
+from .models import Item, Feature, Feedback
+from .forms import ItemForm, FeatureForm, FeedbackForm
 from django.contrib.auth.models import User
 from django.db.models import Count, Case, When
+
+import random
 
 
 def todo_list(request):
@@ -45,10 +48,18 @@ def todo_list(request):
     for k,v in features_not_done_count.items():
             pending_features_to_do_count.append(v)
 
-    
+    feedback = Feedback.objects.all()
+
+    random_feedback = random.choice(feedback)
+
     return render(request, 'todo_list.html', 
-                  {"items": results, "name": feature_results, "Done_results": Done_results, 
-                  "not_done_issues_count": not_done_issues_count, "pending_features_to_do_count": pending_features_to_do_count})
+                  {"items": results, 
+                  "name": feature_results, 
+                  "Done_results": Done_results, 
+                  "not_done_issues_count": not_done_issues_count, 
+                  "pending_features_to_do_count": pending_features_to_do_count,
+                  "feedback": feedback,
+                  "random_feedback": random_feedback})
 
 
 def new_item(request):
@@ -63,6 +74,30 @@ def new_item(request):
             form = ItemForm()
 
     return render(request, 'add_new_item.html', {'form': form})
+
+
+def add_feedback(request):
+    """ Function for adding feedback """
+
+    feedback = Feedback.objects.all()
+
+    random_feedback = random.choice(feedback)
+
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST, request.FILES)
+        if form.is_valid():
+            messages.success(request, "Thanks for your feedback!")    
+            form.save()
+            return redirect(todo_list)
+    else:
+            form = FeedbackForm()
+
+
+    return render(request, 'add_feedback.html', 
+                {'form': form,
+                "feedback": feedback,
+                "random_feedback": random_feedback})
 
 
 
