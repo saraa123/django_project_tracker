@@ -27,20 +27,15 @@
 <!--              BOOTSTRAP THEME with my own changes                -->
             
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-                
                 <a class="navbar-brand mr-1" href="{% url 'home' %}">Game Bug</a>
                 
-
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 
-            
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                    
-                    
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent page-top">
                     <ul class="navbar-nav">
 
                         <!-- Contact icons -->
@@ -80,7 +75,6 @@
                         </li>
                         {% endif %}
 
-                        
                         <!-- shopping bag icon -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'view_cart' %}" role="button" aria-haspopup="true" aria-expanded="false">
@@ -94,33 +88,8 @@
                                 <i class="fa fa-shopping-bag"></i>
                             </a>
                         </li>
-                        
-                        
                     </ul>
-                    
-                    <!-- Search function -->
-                    <!-- <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form> -->
-
-                    <!-- <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                        <div class="input-group collapse navbar-collapse" id="navbarSupportedContent">
-                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"
-                                aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form> -->
-
-                    <!-- <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Account</button>
-                    </form> -->
-                </div>
+                </div> <!-- Closing collapse class -->
             </nav>
 
 
@@ -152,6 +121,13 @@
                             <span class="sidebar_color">Products</span></a>
                     </li>
                     
+                    <!-- Add feedback page -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_feedback' %}">
+                            <i class="fa fa-fw fa fa-plus-circle"></i>
+                            <span class="sidebar_color">Feedback</span></a>
+                    </li>
+            
                 </ul>
         
                 <div id="content-wrapper">
@@ -188,42 +164,12 @@
                     </footer>
         
                 </div> <!-- /.content-wrapper -->
-                
             </div> <!-- /#wrapper -->
             
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fa fa-arrow-circle-up"></i>
-            </a>
-        
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        
-
         
         {% block content %}
         {% endblock %}
        
-        
-
     </div><!-- closing body class -->
 
     
@@ -238,15 +184,10 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     
-
     <script src="{% static 'js/script.js' %}"></script>
     
     {% block chart_scripts %}
     {% endblock %}
-    
-   
-    <!-- Custom scripts for all pages-->
-    <!-- <script src="{% static 'bootstrap_theme/js/sb-admin.min.js' %}"></script> -->
     
     
 </body>
