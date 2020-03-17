@@ -1,5 +1,5 @@
 from django import forms
-from .models import Item, Feature
+from .models import Item, Feature, Feedback
 
 class ItemForm(forms.ModelForm):
     class Meta:
@@ -10,3 +10,8 @@ class FeatureForm(forms.ModelForm):
     class Meta:
         model = Feature
         fields = ("name", )
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ('feedback', 'name', )
