@@ -45,10 +45,10 @@
                 </div>
 
                 <!-- Count features -->
-                {% if name.count == 0 %}
+                {% if features.count == 0 %}
                     <div class="mr-5">No Feature Requests</div>
                 {% else %}
-                    <div class="mr-5">{{name.count}} Total Features</div>
+                    <div class="mr-5">{{features.count}} Total Features</div>
                 {% endif %}
 
                 <!-- Count features pending to do -->
@@ -202,11 +202,12 @@
                         <tr>
                             <th scope="col">Feature</th>
                             <th scope="col">Status</th>
+                            <th scope="col">££ got/££ needed</th>
                             <th scope="col">Upvotes</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for feature in name %}
+                        {% for feature in features %}
 
                         <tr>
                             <!-- Features that are completed are ignored -->
@@ -224,6 +225,8 @@
                                 </td>
 
                                 <td>In Progress</td>
+                                
+                                <td>{{amount_got}}/{{feature.amount_needed}}</td>
 
                                 <td>
                                     <!-- The code for upvoting a feature when logged in -->
@@ -240,6 +243,8 @@
                                 </td>
 
                                 <td>In Progress</td>
+
+                                <td>{{feature.amount_needed}}</td>
 
                                 <td>
                                     <!-- Code with an extra class that will pop up an alert telling users to login before upvoting -->
@@ -259,10 +264,10 @@
             </div> <!-- closing sm class -->
         </div> <!-- closing row -->
 
-        <!-- Table for features that have been completed -->
+        <!-- Features in progress -->
         <div class="row">
             <div class="col-sm-12">
-                <h2>New Features Implemented</h2>
+                <h2>Features In Progress</h2>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -272,7 +277,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for done_feature in name %}
+                        {% for done_feature in features %}
+                        <tr>
+                            
+                            <td></td>
+                            <td>In Progress</td>
+                            <td></td>
+                            
+                        </tr>
+        
+                        {% empty %}
+                        <p>No new features Implemented, for now...</p>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> <!-- closing sm class -->
+        </div> <!-- closing row -->
+
+        <!-- Table for features that have been completed -->
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Completed Features</h2>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Feature</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for done_feature in features %}
                         <tr class="table-success">
                             {% if done_feature.done %}
                             <td><strike>{{done_feature.name | title}}</strike></td>
