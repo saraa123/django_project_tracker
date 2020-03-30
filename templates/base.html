@@ -22,154 +22,105 @@
 </head>
 <body id="page-top">
     <div class="body">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'home' %}">Game Bug</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'charts' %}">Progress</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'all_products' %}">Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_feedback' %}">Feedback</a>
+                    </li>
 
-<!--              BOOTSTRAP THEME with my own changes                -->
-            
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-                <a class="navbar-brand mr-1" href="{% url 'home' %}">Game Bug</a>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <!-- Account actions and icon -->
+                    <li class="nav-item dropdown no-arrow">
+                        
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i>
+                        </a>
 
-                
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent page-top">
-                    <ul class="navbar-nav">
-
-                        <!-- Contact icons -->
-                        <li class="nav-item nav-link">
-                            <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="nav-item nav-link">
-                            <a href="https://www.facebook.com"><i class="fa fa-facebook-square"></i></a>
-                        </li>
-                        <li class="nav-item nav-link">
-                            <a href="mailto:example@hotmail.com?subject=Question about the tracker"><i class="fa fa-envelope"></i></a>
-                        </li>
-
-                        <!-- account icon and actions -->
+                        <!-- If user is already signed in -->
                         {% if user.is_authenticated %}
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user fa-fw"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{% url 'profile' %}">Account</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                             </div>
-                        </li>
                         {% else %}
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user fa-fw"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="{% url 'login' %}">Sign in</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'login' %}">Sign In</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{% url 'register' %}">Join Us</a>
                             </div>
-                        </li>
                         {% endif %}
-
-                        <!-- shopping bag icon -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'view_cart' %}" role="button" aria-haspopup="true" aria-expanded="false">
-                                {% if product_count > 0 %}
-                                <label class="badge badge-warning">{{ product_count }}</label>
-                                {% endif %}
-                            </a>
-                        </li>
-                        <li class="nav-item cart-icon">
-                            <a class="nav-link" href="{% url 'view_cart' %}" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-shopping-bag"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div> <!-- Closing collapse class -->
-            </nav>
-
-
-            <div id="wrapper">
-        
-                <!-- Sidebar -->
-                
-                <ul class="sidebar navbar-nav">
+                    </li>
+                    
+                    <!-- shopping bag icon -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">
-                            <i class="fa fa-fw fa-tachometer"></i>
-                            <span class="sidebar_color">Your Dashboard</span>
+                        <a class="nav-link" href="{% url 'view_cart' %}" role="button" aria-haspopup="true" aria-expanded="false">
+                            {% if product_count > 0 %}
+                            <label class="badge badge-warning">{{ product_count }}</label>
+                            {% endif %}
                         </a>
                     </li>
-                   
-
-                    <!-- Charts section -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'charts' %}">
-                            <i class="fa fa-fw fa-pie-chart"></i>
-                            <span class="sidebar_color">Our Progress</span></a>
+                    <li class="nav-item cart-icon">
+                        <a class="nav-link" href="{% url 'view_cart' %}" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-shopping-bag"></i>
+                        </a>
                     </li>
-        
-
-                    <!-- All products page -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'all_products' %}">
-                            <i class="fa fa-fw fa fa-users"></i>
-                            <span class="sidebar_color">Products</span></a>
-                    </li>
-                    
-                    <!-- Add feedback page -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'add_feedback' %}">
-                            <i class="fa fa-fw fa fa-plus-circle"></i>
-                            <span class="sidebar_color">Feedback</span></a>
-                    </li>
-            
                 </ul>
-        
-                <div id="content-wrapper">
-        
-                    <div class="container-fluid">
-                        
-                        {% block page_heading %}
-                        {% endblock %}
 
-                        {% block breadcrumb_overview_of_page %}
-                        {% endblock %}
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div> <!-- Closing collapse class -->
+        </nav>
 
-                        {% block icon_cards %}
-                        {% endblock %}
-
-                        {% block heading %}
-                        {% endblock %}
-                        
-                        {% block body_text %}
-                            {% block charts_js %}
-                            {% endblock %}
-                        {% endblock %}
-
-                    </div> <!-- /.container-fluid -->
-                    
-                    <br>
-                    <!-- Sticky Footer -->
-                    <footer class="sticky-footer">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>For education purposes</span>
-                            </div>
-                        </div>
-                    </footer>
-        
-                </div> <!-- /.content-wrapper -->
-            </div> <!-- /#wrapper -->
+        <!-- Content for body -->
+        <div class="container">
+            {% block page_heading %}
+            {% endblock %}
             
+            {% block breadcrumb_overview_of_page %}
+            {% endblock %}
+            
+            {% block icon_cards %}
+            {% endblock %}
+            
+            {% block heading %}
+            {% endblock %}
+            
+            {% block body_text %}
+                {% block charts_js %}
+                {% endblock %}
+            {% endblock %}
+        </div>
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>For education purposes</span>
+                </div>
+            </div>
+        </footer>
         
-        {% block content %}
-        {% endblock %}
-       
+            
     </div><!-- closing body class -->
 
     
