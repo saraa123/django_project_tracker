@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block page_title %}Closed issues{% endblock %}
+
+
+{% block icon_cards %}
+<!-- Icon Cards - will display icons at the top of the home page and count issues and features  -->
+<div class="row">
+
+    <!-- Icon card for issues -->
+    <div class="col-xl-6 col-sm-6 mb-3 margin_top">
+        <div class="card text-white bg-primary o-hidden h-100">
+
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fa fa-fw fa-comments"></i>
+                </div>
+
+                <!-- Total issues count -->
+                <div class="mr-5">{{items.count}} Total Issues</div>
+
+                <!-- Pending issues count -->
+                {% for not_done in not_done_issues_count %}
+                <div class="mr-5">{{not_done}} Pending Issues</div>
+                {% endfor %}
+
+            </div> <!-- Close card-body class -->
+
+            <!-- Link to products page -->
+            <a class="card-footer text-white clearfix small z-1" href="{% url 'all_products' %}">
+                <span class="float-left">Buy urgent issue ticket</span>
+                <span class="float-right">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
+        </div> <!-- Close card class -->
+    </div> <!-- Close col class -->
+
+    <!-- Icon card for features -->
+    <div class="col-xl-6 col-sm-6 mb-3 margin_top">
+
+        <div class="card text-white bg-success o-hidden h-100">
+            <div class="card-body">
+                <div class="card-body-icon">
+                    <i class="fa fa-fw fa-list"></i>
+                </div>
+
+                <!-- Count features -->
+                {% if features.count == 0 %}
+                <div class="mr-5">No Feature Requests</div>
+                {% else %}
+                <div class="mr-5">{{features.count}} Total Features</div>
+                {% endif %}
+
+                <!-- Count features pending to do -->
+                {% for features_to_do in pending_features_to_do_count %}
+                <div class="mr-5">{{features_to_do}} Feature Requests/{{features_in_progress_count}} in progress</div>
+                {% endfor %}
+            </div>
+
+            <!-- Link to products page -->
+            <a class="card-footer text-white clearfix small z-1" href="{% url 'all_products' %}">
+                <span class="float-left">Buy feature ticket</span>
+                <span class="float-right">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
+
+        </div> <!-- Close card class -->
+    </div> <!-- Close col class -->
+</div> <!-- Close row -->
+{% endblock %}
+
+{% block body_text %}
+
+<div class="container margin_top">
+    <div class="row">
+
+        <div class="col-sm-12 col-md-2">
+            <a class="custom_a" href="{% url 'home' %}">
+                <h4>Open Cases</h4>
+            </a>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <a class="custom_a" href="{% url 'closed_issues_and_features' %}">
+                <h4 class="active_page">Closed Cases</h4>
+            </a>
+        </div>
+
+    </div> <!-- Closing row -->
+</div> <!-- Closing container -->
+
+<!-- Displays issue and feature tables -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <!-- Displays issues that have been resolved -->
+            <h3 class="margin_top">Completed Issues</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Issue</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for done_items in items %}
+                    <tr class="table-success">
+                        {% if done_items.done %}
+                        <td><strike>{{done_items.Issue | title}}</strike></td>
+                        <td>Complete</td>
+                        <td>{{ done_items.last_updated }}</td>
+                        {% endif %}
+                    </tr>
+
+                    {% empty %}
+                    <p>Nothing solved, for now...</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div> <!-- Closing sm class -->
+    </div> <!-- Closing row for table for resolved issues -->
+
+    <!-- Table for features that have been completed -->
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="margin_top">Completed Features</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Feature</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for done_feature in features %}
+                        {% if done_feature.done %}
+                            <tr class="table-success">
+                                <td><strike>{{done_feature.name | title}}</strike></td>
+                                <td>Complete</td>
+                                <td>{{ done_feature.last_updated }}</td>
+                            </tr>
+                        {% endif %}
+    
+                    {% empty %}
+                    <p>No new features Implemented, for now...</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> <!-- Closing sm class -->
+    </div> <!-- Closing row for features  -->
+    
+    <!-- Scroll to Top Button-->
+    <a class="rounded" href="#page-top">
+        <i class="fa fa-arrow-circle-up"></i>
+    </a>
+
+</div> <!-- Closing container class -->
+
+
+{% endblock %}
