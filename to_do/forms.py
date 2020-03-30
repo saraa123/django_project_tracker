@@ -15,3 +15,5 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ('feedback', 'name', )
+        name = forms.CharField(label='name', max_length=30)
+        feedback = forms.CharField(label='feedback', max_length=200)        
