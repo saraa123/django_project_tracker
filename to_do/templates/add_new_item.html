@@ -9,12 +9,13 @@
         </div>
     </div>
 </div>
-    
+
+<!-- Form to add a new issue -->
 <div class="container">
     <form method="POST">
         {% csrf_token %}
         {{ form.as_p}}
-        <button type="submit">Add</button>
+        <button class="btn btn-primary" type="submit">Add</button>
     </form>
 </div>
 
