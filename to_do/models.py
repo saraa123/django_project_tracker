@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings 
 
-# Create your models here.
+
 class Item(models.Model):
     
     Issue = models.CharField(max_length=30, blank=False)
@@ -23,6 +23,9 @@ class Feature(models.Model):
     date_created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+    amount_needed = models.DecimalField(max_digits=6, decimal_places=2)
+    like_cost = models.DecimalField(max_digits=6, decimal_places=2)
+    money_received = models.DecimalField(max_digits=6, decimal_places=2)
 
 
     def __str__(self):
