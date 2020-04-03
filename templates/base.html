@@ -69,19 +69,26 @@
                         {% endif %}
                     </li>
                     
-                    <!-- shopping bag icon -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'view_cart' %}" role="button" aria-haspopup="true" aria-expanded="false">
+                    <!-- Shopping bag details -->
+                    
+                    <!-- Dropdown of cart -->
+                    <li class="nav-item dropdown no-arrow cart-icon">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-shopping-bag" id="shopping_bag"></i> 
+                            <!-- Shows product count only if there are items in the cart -->
                             {% if product_count > 0 %}
-                            <label class="badge badge-warning">{{ product_count }}</label>
+                                <span class="productCount">{{ product_count }}</span>
                             {% endif %}
                         </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">£ {{total}}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'view_cart' %}">View Full Basket</a>
+                        </div>
                     </li>
-                    <li class="nav-item cart-icon">
-                        <a class="nav-link" href="{% url 'view_cart' %}" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-shopping-bag"></i>
-                        </a>
-                    </li>
+                    
                 </ul>
 
                 <form class="form-inline my-2 my-lg-0">
@@ -110,20 +117,23 @@
                 {% endblock %}
             {% endblock %}
         </div>
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>For education purposes</span>
-                </div>
-            </div>
-        </footer>
-        
-            
+    
     </div><!-- closing body class -->
 
-    
+        <!-- Sticky Footer -->
+        <footer>
+            <div class="footerStick text-center">
+                <span>For education purposes</span>
+                <p>
+                    <!-- Contact icons -->
+                    <a href="https://twitter.com"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.facebook.com"><i class="fa fa-facebook-square"></i></a>
+                    <a href="mailto:example@hotmail.com?subject=Question about the tracker"><i class="fa fa-envelope"></i></a>
+                </p>
+            </div>
+        </footer>
+
+        
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
