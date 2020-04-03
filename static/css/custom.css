@@ -1,12 +1,17 @@
 /* body */
 body {
     height: 100%;
+    margin: 0px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 16px;
 }
 
 .margin_bottom {
     margin-bottom: 15px;
+}
+
+.margin_top {
+    margin-top: 30px;
 }
 
 .margin_btn {
@@ -51,31 +56,66 @@ span.sidebar_color{
     font-style: bold;
 }
 
+
+table {
+    border: 1px solid black;
+}
+
+.active_page {
+    text-decoration: bold;
+
+}
+
+.custom_a {
+    color: black;
+}
+
+.custom_a:hover {
+    text-decoration: none;
+}
+
+.custom_btn {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.custom_btn:hover {
+    color: white;   
+}
+
+
+
 /* Keep footer at the bottom of the page */
 .body {
-    min-height: calc(100vh - 50px);
+    min-height: calc(100vh - 80px);
 }
 
-footer {
+.footerStick {
+    position: relative; bottom: 0px;
     margin-top: 40px;
     border-top: 1px solid #ededed;
-    color: #A9A9A9;
-    height: 50px;
+    background-color: #ededed;
+    color: black;
+    padding-top: 15px;
+    height: 80px;
+    width: 100%;
+    line-height: -50px;
+
 }
+
 
 /* Badge for identifying the number of products in shopping cart */
-.badge {
-    padding-left: 9px;
-    padding-right: 9px;
+.productCount {
+    border: 1px solid #2ebafc;
+    background-color: #2ebafc;
     border-radius: 9px;
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
+    font-size: 13px;
+    padding: 4px;
+    color: white;
 }
 
-.label-warning[href],
-.badge-warning[href] {
-    background-color: #c67605;
-}
 
 /* Related to products  */
 .product {
@@ -126,8 +166,16 @@ caption p {
     margin-right: 5px;
 }
 
-.fa-user {
-    margin-left: 15px;
+
+.shopping_bag_alert {
+    color: orange;
+}
+
+.confirm_alert {
+    font-size: 20px;
+    background-color: orange;
+    border: orange;
+
 }
 
 /* Chart area */
