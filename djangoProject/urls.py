@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 # urls for to_do app
-from to_do.views import todo_list, new_item, add_feedback, toggle_status
+from to_do.views import todo_list, closed_issues_and_features, new_item, add_feedback, toggle_status
 
 # urls for accounts app
 # from accounts.views import index, logout, login, profile
@@ -34,6 +34,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', todo_list, name='home'), # home refers to to_do view from to_do app
     url(r'^add$', new_item, name='new_issue'),
+    url(r'^closed_issues_and_features$',
+        closed_issues_and_features, name='closed_issues_and_features'),
     url(r'^add_feedback$', add_feedback, name='add_feedback'),
     url(r'^toggle/(?P<id>\d+)$', toggle_status),
     url(r'^accounts/', include(accounts_urls)),
