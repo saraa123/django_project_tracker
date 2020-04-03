@@ -46,7 +46,7 @@ def login(request):
 
             if user:
                 auth.login(user=user, request=request)
-                messages.success(request, "Hi there " + str(user) + " you've successfully logged in")
+                messages.success(request, "Hi there " + str(user).capitalize() + "," + " you've successfully logged in")
                 
                 return redirect(reverse('home'))
             else:
