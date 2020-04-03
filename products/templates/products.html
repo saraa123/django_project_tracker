@@ -2,23 +2,18 @@
 
 {% block page_title %}Products Page{% endblock %}
 
-{% block breadcrumb_overview_of_page %}
-<!-- Breadcrumbs of page overview -->
-<ol class="breadcrumb">
-    <li class="breadcrumb-item">
-        <a href="#">All products</a>
-    </li>
-    <li class="breadcrumb-item active">Overview</li>
-</ol>
-{% endblock %}
 
 {% block body_text %}
 
-{% for message in messages %}
-    {% if message %}
-        {{message}}
-    {% endif %}
-{% endfor %}
+<!-- Prints 'added to basket' message.
+Function on script.js file -->
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-12">
+            <p id="confirmAlertMessage"></p>
+        </div>
+    </div>
+</div>
 
 
 <!-- Products to purchase new issue and feature tickets -->
@@ -36,30 +31,37 @@
                     {% if product.price == 0 %}
                         <p>Free</p>
                     {% else %}
-                        <p><i class="fa fa-gbp">{{ product.price }}</p></i>
+                        <p><i class="fa fa-gbp">{{ product.price }}</i></p>
                     {% endif %}
                     
                     <form method="POST" action="{% url 'add_to_cart' product.id %}">
                         {% csrf_token %}
                         <div class="input-group">
+                            {% if product.name == 'Free Issue'%}
+                                <div class="container">
+                                    <button class="edited_button btn btn-success margin_btn">
+                                        <a href="{% url 'new_issue' %}">Add a free issue</a>
+                                    </button>
+                                </div>
                             
-                            <select name="quantity" type="number" placeholder="Quantity">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                            <span class="input-group-btn">
-                                <button class="btn btn-success margin_btn" type="submit">Add to basket</button>
-                            
-                            </span>
-                            
+                            {% else %}
+                                <select class="margin_btn" name="quantity" type="number" placeholder="Quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                                <div class="container">
+                                    <button class="btn btn-success margin_btn add_confirm" id="confirm" onclick="addToBasket()" type="submit">Add to basket</button>
+                                </div>
+                                
+                            {% endif %}
+                                
                         </div>
                     </form>
-                </div>
-
-            </div>
+                </div> <!-- Close panel-body class -->
+            </div> <!-- Close col classes-->
         {% endfor %}
-    </div>
-</div>
+    </div> <!-- Close row -->
+</div> <!-- Close products container -->
 {% endblock %}
