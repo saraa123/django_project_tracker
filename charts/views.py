@@ -38,7 +38,7 @@ class ChartData(APIView):
         to_do_features_count = []
 
         # chart labels and data for issues done and pending
-        labels = ["Issues completed", "Issues To Do"]
+        labels = ["Issues Completed", "Issues To Do"]
         default_items = [done_issues_count, to_do_issues_count]
 
         # Completed issues count
