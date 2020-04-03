@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
-{% block page_title %}{{ user }}'s' Page{% endblock %}
+{% block page_title %}{{ user|title }}'s' Profile{% endblock %}
 {% block body_text %}
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h1>{{ user }}'s page</h1>
+            <h1>{{ user|title }}'s page</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h5>Welcome to your account!</h5>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <p><a href="{% url 'view_cart' %}">View your basket</a></p>
         </div>
     </div>
 </div>
