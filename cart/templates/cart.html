@@ -6,10 +6,10 @@
 {% block body_text %}
 
 <div class="container">
-    <div class="row row-flex">
+    <div class="row row-flex products_container">
         {% for item in cart_items %}
 
-            <div class="col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-6 col-md-4 display panel panel-display">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 product-card">
                 <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ item.product.image }}')"></div>
             
                 <div class="caption">
@@ -21,21 +21,22 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="exampleInputAmount" class="sr-only">New Qty</label>
+
                                 <div class="input-group">
                                     <div class="input-group-addon">Qty</div>
                                     <input name="quantity" type="number" min="0" max="10" class="form-control" value="{{item.quantity}}">
                                     
+                                    <div>
+                                        <button type="submit" class="btn btn-primary">Amend</button>
+                                    </div>
                                 </div>
-                            </div>
-                           
-                            <div>
-                                <button type="submit" class="btn btn-primary margin_btn">Amend</button>
-                            </div>
+
+                                
+                            </div> <!-- Close form-group class -->
                         </form>
                     </p>
-
-                </div>
-            </div>
+                </div> <!-- Close caption class -->
+            </div> <!-- Close col classes -->
             
         {% endfor %}
         
