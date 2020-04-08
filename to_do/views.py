@@ -137,6 +137,41 @@ def todo_list(request):
                   "features_in_progress_count": features_in_progress_count
                   })
 
+def closed_issues_and_features(request):
+    """ Load page displaying issues marked as 'done' """
+
+    # Issue objects
+    results = Item.objects.all()
+
+    # Feature objects
+    features = Feature.objects.all()
+
+    # Call function - count for how many issues are done 
+    issues_done = issues_done_count(request)
+
+    # Count for how many features are done
+    features_done = features_done_count(request)
+
+    # Call functions: pending_issue_count and pending_feature_count
+    not_done_issues_count = pending_issue_count(request)
+    pending_features_to_do_count = feature_request_count(request)
+
+    # Call in_progress_feature. Count how many features are in progress
+    features_in_progress = in_progress_feature(request)
+    features_in_progress_count = len(features_in_progress)
+
+    return render(request, "closed_issues_and_features.html",
+                {
+                    "items": results,
+                    "features": features,
+                    "not_done_issues_count": not_done_issues_count,
+                    "pending_features_to_do_count": pending_features_to_do_count,
+                    "features_in_progress_count": features_in_progress_count,
+                    "issues_done": issues_done,
+                    "features_done": features_done
+
+                })
+
 
 def new_item(request):
     """ Function for adding a new issue """
