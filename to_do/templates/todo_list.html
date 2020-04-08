@@ -53,7 +53,7 @@
 
                 <!-- Count features pending to do -->
                 {% for features_to_do in pending_features_to_do_count %}
-                    <div class="mr-5">{{features_to_do}} Pending Features</div>
+                    <div class="mr-5">{{features_to_do}} Feature Requests/{{features_in_progress_count}} in progress</div>
                 {% endfor %}
             </div>
             
@@ -72,267 +72,227 @@
 
 {% block body_text %}
 
-<div class="container">
-
-    <!-- Displays relevant messages depending on user actions -->
-    <div class="container margin_bottom">
-        <div class="row">
-            <div class="col-sm-12">
-                {% if messages %}
-                    {% for message in messages %}
-                        {{message}}
-                    {% endfor %}
-                {% endif %}
-            </div>
+<!-- Displays relevant messages depending on user actions -->
+<div class="container margin_bottom">
+    <div class="row">
+        <div class="col-sm-12">
+            {% if messages %}
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
-    <br>
+</div>
 
-    <!-- Table for issues and separate table for features -->
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
+<div class="container margin_top">
 
-                <!-- Table showing issue requests to do -->
-                <h2>Issues to fix</h2>
-                <p><a href="{% url 'new_issue' %}">Open a new free issue ticket</a></p>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Issue</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Upvotes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in items %}
+    <div class="row">
+        <div class="col-sm-12 col-md-2">
+            <a class="custom_a" href="{% url 'home' %}">
+                <h4 class="active_page">Open Cases</h4>
+            </a>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <a class="custom_a" href="{% url 'closed_issues_and_features' %}">
+                <h4>Closed Cases</h4>
+            </a>
+        </div>
+    </div>
 
-                        <tr>
-                            <!-- Nothing is displayed if an issue is marked as done -->
-                            {% if item.done %}
+</div>
 
-                            <!-- Look for all pending issues -->
-                            {% else %}
-
-                                <!-- Check if a user is logged in. If they are, they can upvote an issue -->
-                                {% if user.is_authenticated %}
-        
-                                    <td>
-                                        <p>{{item.Issue | title }}</p>
-                                        <p><b>added:</b> {{ item.date_created }}</p>
-                                    </td>
+<!-- Table for issues and separate table for features -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
             
-                                    <td>In Progress</td>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Open Issues <a class="custom_btn" href="{% url 'new_issue' %}">Add free issue</a></th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Upvotes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
 
-                                    <td>
-                                        <!-- This is the code that allows a logged in user to upvote an issue -->
-                                        <form method="POST" action="toggle/{{ item.id }}">{% csrf_token %}<button
-                                                class="plain_button border-radius-button like_button"><i
-                                                    class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}</form>
-                                    </td>
-        
-                                <!-- If the user isn't logged in they will be sent an alert telling them to log in before they can upvote an issue -->
-                                {% else %}
-                                
-                                    <td>
-                                        <p>{{item.Issue | title }}</p>
-                                        <p><b>added:</b> {{ item.date_created }}</p>
-                                    </td>
-            
-                                    <td>In Progress</td>
-            
-                                    <!-- This is the code that has an extra class which will activate an alert to login
-                                    before a user can upvote an issue -->
-                                    <td>
-                                        <button class="plain_button border-radius-button login_to_like like_button"><i
-                                                class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}
-                                    </td>
-        
-                                {% endif %}
+                    <tr>
+                        <!-- Nothing is displayed if an issue is marked as done -->
+                        {% if item.done %}
 
-                            {% endif %}
-                        </tr>
-                        {% empty %}
-                        <p>No issues, for now...</p>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div> <!-- closing col-sm class -->
-        </div> <!-- closing row  -->
+                        <!-- Look for all pending issues -->
+                        {% else %}
 
-        <div class="row">
-            <div class="col-sm-12">
-                <!-- Displays issues that have been resolved -->
-                <h2>Resolved Issues</h2>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Issue</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Last Updated</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for done_items in items %}
-                        <tr class="table-success">
-                            {% if done_items.done %}
-                            <td><strike>{{done_items.Issue | title}}</strike></td>
-                            <td>Complete</td>
-                            <td>{{ done_items.last_updated }}</td>
-                            {% endif %}
-                        </tr>
-
-                        {% empty %}
-                        <p>Nothing solved, for now...</p>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div> <!-- closing sm class -->
-        </div> <!-- closing row for table for resolved issues -->
-    </div> <!-- closing container -->
-
-    <!-- Features table -->
-    <div class="container margin_top">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>New Feature Requests</h2>
-                <p><a href="{% url 'all_products' %}">Request a new feature ticket</a></p>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Feature</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">££ got/££ needed</th>
-                            <th scope="col">Upvotes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for feature in features %}
-
-                        <tr>
-                            <!-- Features that are completed are ignored -->
-                            {% if feature.done %}
-
-                            <!-- Pending features are displayed here -->
-                            {% else %}
-                            
-                            <!-- Check if a user is logged in. If they are they can upvote a feature -->
+                            <!-- Check if a user is logged in. If they are, they can upvote an issue -->
                             {% if user.is_authenticated %}
-
+    
                                 <td>
-                                    <p>{{feature.name | title }}</p>
-                                    <p><b>added:</b> {{ feature.date_created }}</p>
+                                    <p>{{item.Issue | title }}</p>
+                                    <p><b>added:</b> {{ item.date_created }}</p>
                                 </td>
-
-                                <td>In Progress</td>
-                                
-                                <td>{{amount_got}}/{{feature.amount_needed}}</td>
-
-                                <td>
-                                    <!-- The code for upvoting a feature when logged in -->
-                                    <form method="POST" action="toggle/{{ feature.id }}">{% csrf_token %}<button class="plain_button border-radius-button like_button"><i
-                                                class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}</form>
-                                </td>
-
-                            <!-- If the user isn't logged in they will be given an alert telling them to log in before
-                            they can upvote a feature -->
-                            {% else %}
-                                <td>
-                                    <p>{{feature.name | title }}</p>
-                                    <p><b>added:</b> {{ feature.date_created }}</p>
-                                </td>
-
-                                <td>In Progress</td>
-
-                                <td>{{feature.amount_needed}}</td>
-
-                                <td>
-                                    <!-- Code with an extra class that will pop up an alert telling users to login before upvoting -->
-                                    <button class="plain_button border-radius-button login_to_like like_button"><i
-                                            class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}
-                                </td>
-
-                            {% endif %}
-
-                            {% endif %}
-                        </tr>
-                        {% empty %}
-                        <p>No features, for now...</p>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div> <!-- closing sm class -->
-        </div> <!-- closing row -->
-
-        <!-- Features in progress -->
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Features In Progress</h2>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Feature</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Last Updated</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for done_feature in features %}
-                        <tr>
-                            
-                            <td></td>
-                            <td>In Progress</td>
-                            <td></td>
-                            
-                        </tr>
         
-                        {% empty %}
-                        <p>No new features Implemented, for now...</p>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div> <!-- closing sm class -->
-        </div> <!-- closing row -->
+                                <td>In Progress</td>
 
-        <!-- Table for features that have been completed -->
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Completed Features</h2>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Feature</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Last Updated</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for done_feature in features %}
-                        <tr class="table-success">
-                            {% if done_feature.done %}
-                            <td><strike>{{done_feature.name | title}}</strike></td>
-                            <td>Complete</td>
-                            <td>{{ done_feature.last_updated }}</td>
+                                <td>
+                                    <!-- This is the code that allows a logged in user to upvote an issue -->
+                                    <form method="POST" action="toggle/{{ item.id }}">{% csrf_token %}<button
+                                            class="plain_button border-radius-button like_button"><i
+                                                class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}</form>
+                                </td>
+    
+                            <!-- If the user isn't logged in they will be sent an alert telling them to log in before they can upvote an issue -->
+                            {% else %}
+                            
+                                <td>
+                                    <p>{{item.Issue | title }}</p>
+                                    <p><b>added:</b> {{ item.date_created }}</p>
+                                </td>
+        
+                                <td>In Progress</td>
+        
+                                <!-- This is the code that has an extra class which will activate an alert to login
+                                before a user can upvote an issue -->
+                                <td>
+                                    <button class="plain_button border-radius-button login_to_like like_button"><i
+                                            class="fa fa-thumbs-o-up"></i></button>{{ item.likes.count }}
+                                </td>
+    
                             {% endif %}
-                        </tr>
 
-                        {% empty %}
-                        <p>No new features Implemented, for now...</p>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div> <!-- closing sm class -->
-        </div> <!-- closing row for implemented features  -->
-    </div> <!-- closing container -->
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <p>No issues, for now...</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div> <!-- closing col-sm class -->
+    </div> <!-- closing row  -->
+</div> <!-- Closing container for issues table -->
 
+<!-- Feature requests table -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Open Feature Requests <a class="custom_btn" href="{% url 'all_products' %}">Buy feature request</a></th>
+                        <th scope="col">££ got/££ needed</th>
+                        <th scope="col">Upvotes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for feature in features %}
 
-    <!-- Scroll to Top Button-->
+                    <tr>
+                        <!-- Features that are completed are ignored -->
+                        {% if feature.done %}
+
+                        <!-- Pending features are displayed here -->
+                        {% else %}
+                        
+                        <!-- Check if a user is logged in. If they are they can upvote a feature -->
+                        {% if user.is_authenticated %}
+
+                            {% if feature.name in features_in_progress %}
+
+                            {% else %}
+                            <td>
+                                <p>{{feature.name | title }}</p>
+                                <p><b>added:</b> {{ feature.date_created }}</p>
+                                <p>Upvote Cost: £ {{feature.like_cost}}</p>
+                            </td>
+                            
+                            <td>{{feature.money_received}}/{{feature.amount_needed}}</td>
+
+                            <td>
+                                <!-- The code for upvoting a feature when logged in -->
+                                <form method="POST" action="toggle/{{ feature.id }}">{% csrf_token %}<button class="plain_button border-radius-button like_button"><i
+                                            class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}</form>
+                            </td>
+
+                            {% endif %}
+
+                        <!-- If the user isn't logged in they will be given an alert telling them to log in before
+                        they can upvote a feature -->
+                        {% else %}
+                            {% if feature.name in features_in_progress %}
+
+                            {% else %}
+                            <td>
+                                <p>{{feature.name | title }}</p>
+                                <p><b>added:</b> {{ feature.date_created }}</p>
+                            </td>
+
+                            <td>{{feature.money_received}}/{{feature.amount_needed}}</td>
+
+                            <td>
+                                <!-- Code with an extra class that will pop up an alert telling users to login before upvoting -->
+                                <button class="plain_button border-radius-button login_to_like like_button"><i
+                                        class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}
+                            </td>
+                            {% endif %}
+
+                        {% endif %}
+
+                        {% endif %}
+                    </tr>
+                    {% empty %}
+                    <p>No features, for now...</p>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div> <!-- closing sm class -->
+    </div> <!-- closing row -->
+</div> <!-- Closing container for feature requests table -->
+
+<!-- Table for features in progress -->
+<div class="container margin_top">
+    <table class="table table-hover">
+        <h2>Features In Progress</h2>
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Feature</th>
+                <th scope="col">Handler</th>
+                <th scope="col">Expected completion date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feature_in_progress in features %}
+
+                <!-- Display features that have reached their monetary requirement -
+                        those will be the ones in progress -->
+                {% if feature_in_progress.name in features_in_progress %}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{{feature_in_progress.name}}</td>
+                        <td>@admin</td>
+                        <td>TBC</td>
+                    </tr>
+                
+                <!-- Ignore features that haven't reached the required amount of money -->
+                {% else %}
+                {% endif %}
+            {% empty %}
+                <p>No new features Implemented, for now...</p>
+            {% endfor %}
+        </tbody>
+    </table>
+</div> <!-- Closing container for features in progress table -->
+
+<!-- Scroll to Top Button-->
+<div class="container margin_top">
     <a class="rounded" href="#page-top">
         <i class="fa fa-arrow-circle-up"></i>
     </a>
-    
-</div> <!-- Closing container class -->
-
+</div>
 
 {% endblock %}
 
