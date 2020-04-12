@@ -118,13 +118,39 @@ table {
 
 
 /* Related to products  */
+
+/* For product card - Flex controls */
+.products_container {
+    display: flex;		/* Flexbox container */
+	flex-flow: row wrap; 	/* Create row layout and wrap them */
+	box-sizing:border-box;
+	margin-right:auto;
+	margin-left:auto;
+    max-width:1050px;
+    /* border: 1px solid black; */
+}
+
+.product-card {
+    flex:1; 
+	display: flex;	/* Flex controls */
+	flex-flow:column;	
+	min-width: 240px; 
+	margin: 10px;
+    padding: 20px;
+}
+
+/* Control button position - always at the bottom of the container */
+.input-group {
+    position: absolute;
+    bottom: 0px; left: inherit;
+}
+
 .product {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     width: 150px;
     height: 150px;
-    margin: 0 auto;
 }
 
 caption p {
