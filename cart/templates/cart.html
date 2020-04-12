@@ -5,6 +5,7 @@
 
 {% block body_text %}
 
+<!-- Displays items in the cart and quantity -->
 <div class="container">
     <div class="row row-flex products_container">
         {% for item in cart_items %}
@@ -17,14 +18,15 @@
                     <p class="product-description">{{ item.product.description }}</p>
                     <p><i class="fa fa-gbp">{{ item.product.price }}</i></p>
                     <p>
-                        <form class="form-inline" method="POST" action="{% url 'adjust_cart' item.id %}">
+                        <!-- Form to adjust items in the cart -->
+                        <form class="form-inline margin_top" method="POST" action="{% url 'adjust_cart' item.id %}">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="exampleInputAmount" class="sr-only">New Qty</label>
 
                                 <div class="input-group">
                                     <div class="input-group-addon">Qty</div>
-                                    <input name="quantity" type="number" min="0" max="10" class="form-control" value="{{item.quantity}}">
+                                    <input name="quantity" type="number" min="0" max="20" class="form-control" value="{{item.quantity}}">
                                     
                                     <div>
                                         <button type="submit" class="btn btn-primary">Amend</button>
@@ -41,10 +43,12 @@
         {% endfor %}
         
         <!-- Cart total and checkout -->
-        <div class="container">
+        <div class="container margin_top">
             {% if product_count == 0 %}
                 <p>Oops, your basket is empty!</p>
             {% else %}
+                <!-- If the user is logged in they can checkout, if not the 'else' statement is activated and the
+                user is asked to sign in or join -->
                 {% if user.is_authenticated %}
                     <p>£{{total}}</p>
                     <a href="{% url 'checkout' %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-ok-sign"
@@ -58,9 +62,9 @@
                     {{cart.quantity}}
                 {% endif %}
             {% endif %}
-        </div>
+        </div> <!-- Closes cart total and checkout -->
 
-    </div>
-</div>
+    </div> <!-- Closes row -->
+</div> <!-- Closes container -->
 
 {% endblock %}
