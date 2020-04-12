@@ -118,6 +118,9 @@ def todo_list(request):
     # Feature objects 
     features = Feature.objects.all()
 
+    # Determines how money_received will be calculated
+    for feature in features:
+        feature.money_received = feature.like_cost*feature.likes.count()
     
     # Call functions: pending_issue_count and pending_feature_count
     not_done_issues_count = pending_issue_count(request)
@@ -138,7 +141,7 @@ def todo_list(request):
                   })
 
 def closed_issues_and_features(request):
-    """ Load page displaying issues marked as 'done' """
+    """ Load page displaying issues and features marked as 'done' """
 
     # Issue objects
     results = Item.objects.all()
