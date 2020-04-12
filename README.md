@@ -54,32 +54,78 @@ As I was creating a website which allowed users to raise and keep track of issue
 
 ## Testing techniques
 
-### Manual testing
-A lot of manual testing has been implemented during the building stage of this project. 
+- Overview:
+1. Manual testing
+2. Django tests
+3. Form validation 
+4. In-person user testing
+
+### 1. Manual testing
+
+> Front-end testing 
+
+* W3C was used to validate HTML: https://validator.w3.org
 
 * Chrome’s responsive web tester was used in order to ensure the website was responsive on different devices as well as various screen sizes. 
-* The website was also tested on various browsers.
-* Manually testing all forms and functions work as expected:
-    - Includes checkout form, registration form and ensuring the correct amount of products are added to the basket. 
-    - Checking the count functions added or subtracted correctly. 
+    - https://chrome.google.com/webstore/detail/responsive-web-design-tes/bdpelkpfhjfiacjeobkhlkkgaphbobea.
+
+* The website was also tested on various browsers:
+    - Firefox
+    - Google
+    - Safari
+
+* Items and features are separated based on those marked as ‘in progress’ and ‘done’. I checked this was occurring correctly by creating test items and features and altering their progress status.
+
 * Charts displayed the correct pieces of information by displaying the right numbers.
 
+> Back-end testing
 
-### Django testing 
-* I created Django tests to test some of the models, views and forms.
+* Manually testing all functions worked as expected:
+    - Added a new issue and new feature.
+    - Marked issues and features as done and ensured they were then only displayed in the tables for completed items. 
+    - Checking the count functions added or subtracted correctly. 
+    - The correct number of expected items were added to the basket and any changes were correctly displayed in the cart product count.
 
-### Validation
-* W3C was used to validate HTML: https://validator.w3.org
-* Form validation was completed:
-    > Account related validation
-        - If login details are incorrect it alerts the user. I registered a new account and entered the incorrect details, and was successfully given error messages. 
-        - If registering for an account, if the user attempts to use an email that is already associated with another user then an error message will successfully be displayed informing the user the email address is already in use.
-        - Passwords have to match when registering and logging in. To check this I entered passwords that didn’t match and ensured an error message was displayed notifying the user.
-* Users can’t like an item or feature unless they’re logged in, so I attempted to do so and ensured an alert was displayed in the browser prompting the user to login. 
-* Items and features are separated based on those marked as ‘in progress’ and ‘done’. I checked this was occurring correctly by creating test items and features and altering their progress status.  
-* Checked the ‘date added’ and ‘last updated’ models were displaying the correct dates by altering details of a specific item and making sure the right model edited its date. 
-* Users have to be logged in before they can checkout. To test this I tried to checkout without being logged in, and an alert successfully prompts the user to login. 
+* Tested models:
+    - Checked the ‘date added’ and ‘last updated’ models were displaying the correct dates by altering details of a specific item and making sure the right model edited its date. 
+
+    - Tested feedback model 
+        - Added feedback and ensured it was added to the list in admin. 
+        - Checked that feedback would be displayed randomly on the feedback page. 
+        - Developed the need for the name to come from the user profile, and also the logic for an 'anonymous' name input if the name field is left empty. 
     
+    - Upvote logic:
+        - Upvoted an issue and feature and checked the total amount upvoted was correct. 
+        - Upvoted a feature request and checked the amount_received was the right amount.
+        - Users can’t like an item or feature unless they’re logged in, so I attempted to do so and ensured an alert was displayed in the browser prompting the user to login. 
+        
+
+### 2. Django testing 
+* Django tests were created to test some of the models, views and forms.
+    - Can be seen through the files:
+        - test_models.py
+        - test_views.py
+        - test_forms.py
+
+### 3. Form Validation
+* Account related validation
+    - **Login form**:
+        - If login details are incorrect it alerts the user. I registered a new account and entered the incorrect details, and was successfully given error messages. 
+    - **Registration form**: 
+        - If registering for an account, if the user attempts to use an email that is already associated with another user then an error message will successfully be displayed informing the user the email address is already in use.
+        - Attempted to register with certain details missing, and the user is successfully given an alert prompting them to provide the necessary information. 
+    - **Password criteria**: 
+        - Passwords have to match when registering and logging in. To check this I entered passwords that didn’t match and ensured an error message was displayed notifying the user.
+    - **Checkout form**: 
+        - Users have to be logged in before they can checkout. To test this I tried to checkout without being logged in, and an alert successfully prompts the user to login.
+        - Attempted to buy items with invalid card details and missing information, and an alert is successfully displayed telling the user to check their details and provide the information that is missing. 
+        - Tested whether the checkout form identified the correct amount of products to be paid for.
+
+### 4. In-person User Testing 
+
+* As part of the UX and UI testing, I conducted in-person user tests. This allowed me to observe natural user interactions. I was able to identify what users found difficult, and if any roadblocks existed. 
+* This lead to the following changes:
+    - Created a separate page for issues and features that were completed. This prevented information overload on the home page, and also allowed the user to quickly identify which issues and features were currently still open and pending.
 
 ## Deployment
 Github and Heroku were used for the deployment of this project.
