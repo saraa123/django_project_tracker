@@ -4,13 +4,13 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError 
 
 class UserLoginForm(forms.Form):
-    """ form to be used to log users in """
+    """ Form to be used to log users in """
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
 class UserRegistrationForm(UserCreationForm):
     """ Registration form to create a new user """
-    
+
     password1 = forms.CharField(
                                 widget=forms.PasswordInput,
                                 label="Password")
@@ -24,7 +24,6 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
     
-    """ Form validation """
     def clean_email(self):
         """ Make sure user provides email address that is unique, and provides a username """
         email = self.cleaned_data.get('email')
@@ -34,15 +33,24 @@ class UserRegistrationForm(UserCreationForm):
         return email 
     
     def clean_password2(self):
-        
+        """ Validate password - check it has a certain number of letters
+        and passwords match when confirming """ 
+
+        min_length = 8
+
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
 
-        """ if password field has been left empty """
+        # Check the password has the required length of letters
+        if len(password1) < min_length:
+            raise ValidationError(('Password needs to be {0} letters long').format(min_length))
+
+
+        # Check password has been entered 
         if not password1 or not password2:
             raise ValidationError("Please confirm password")
         
-        """ if both passwords don't match """
+        # Check passwords match when confirming password
         if password1 != password2:
             raise ValidationError("Both passwords must match")
             
