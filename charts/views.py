@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, render_to_response
 from django.db.models import Count, Case, When
 
-from to_do.views import Item, Feature
+from to_do.views import Item, Feature, in_progress_feature, feature_request_count
 
 import random
 import datetime
@@ -37,6 +37,13 @@ class ChartData(APIView):
         to_do_issues_count = []
         to_do_features_count = []
 
+        # Count for number of features in progress
+        features_in_progress = in_progress_feature(request)
+        features_in_progress_count = len(features_in_progress)
+
+        # Count for number of features requested 
+        feature_requests = len(feature_request_count(request))
+        
         # chart labels and data for issues done and pending
         labels = ["Issues Completed", "Issues To Do"]
         default_items = [done_issues_count, to_do_issues_count]
@@ -56,11 +63,11 @@ class ChartData(APIView):
 
         for k,v in Issues_Not_Done_Count.items():
             to_do_issues_count.append(v)
+        
 
-
-        # chart labels and data for features done and pending 
-        progressLabels = ["Features Completed", "Features To Do"]
-        progressItems = [done_features_count, to_do_features_count]
+        # chart labels and data for features done, requests, and in progress 
+        progressLabels = ["Requests", "Completed", "In progress"]
+        progressItems = [feature_requests, done_features_count, features_in_progress_count]
 
 
         # Completed features count
