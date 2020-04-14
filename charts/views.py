@@ -17,8 +17,9 @@ from rest_framework.response import Response
 users = get_user_model()
 
 
-# Load charts page
+
 def charts_home(request):
+    """ Load charts page """
     items = Item.objects.all()
     return render(request, "charts.html", {"item": items})
 
@@ -29,24 +30,14 @@ class ChartData(APIView):
     permission_classes = []
 
     def get(self, request, format=None):
-    
         
+        # ------------ Issues chart containing all functions and counts ---------------
+        
+        # Issues done count
         done_issues_count = []
-        done_features_count = []
 
+        # Issues pending count 
         to_do_issues_count = []
-        to_do_features_count = []
-
-        # Count for number of features in progress
-        features_in_progress = in_progress_feature(request)
-        features_in_progress_count = len(features_in_progress)
-
-        # Count for number of features requested 
-        feature_requests = len(feature_request_count(request))
-        
-        # chart labels and data for issues done and pending
-        labels = ["Issues Completed", "Issues To Do"]
-        default_items = [done_issues_count, to_do_issues_count]
 
         # Completed issues count
         Issues_Done_Count = Item.objects.aggregate(
@@ -56,20 +47,30 @@ class ChartData(APIView):
         for k, v in Issues_Done_Count.items():
             done_issues_count.append(v)
 
-        # Pending issues count 
+        # Pending issues count
         Issues_Not_Done_Count = Item.objects.aggregate(
             not_done_results=Count(Case(When(done=False, then='done')))
         )
 
-        for k,v in Issues_Not_Done_Count.items():
+        for k, v in Issues_Not_Done_Count.items():
             to_do_issues_count.append(v)
-        
 
-        # chart labels and data for features done, requests, and in progress 
-        progressLabels = ["Requests", "Completed", "In progress"]
-        progressItems = [feature_requests, done_features_count, features_in_progress_count]
+        # chart labels and data for issues done and pending
+        labels = ["Issues Completed", "Issues To Do"]
+        default_items = [done_issues_count, to_do_issues_count]
 
+        # ----------- Features chart containing all functions and counts -------------
 
+        # Features done count
+        done_features_count = []
+
+        # Count for number of features in progress
+        features_in_progress = in_progress_feature(request)
+        features_in_progress_count = len(features_in_progress)
+
+        # Count for number of features requested 
+        feature_requests = len(feature_request_count(request))
+    
         # Completed features count
         Features_done_count = Feature.objects.aggregate(
             done_features=Count(Case(When(done=True, then='done')))
@@ -77,16 +78,13 @@ class ChartData(APIView):
 
         for k, v in Features_done_count.items():
             done_features_count.append(v)
-
-        # Count for features left to do 
-        features_not_done_count = Feature.objects.aggregate(
-            not_done_features=Count(Case(When(done=False, then='done')))
-        )
-
-        for k,v in features_not_done_count.items():
-            to_do_features_count.append(v)
         
+        # chart labels and data for features done, requests, and in progress 
+        progressLabels = ["Requests", "Completed", "In progress"]
+        progressItems = [feature_requests, done_features_count, features_in_progress_count]
+
         
+        # Data to be returned and used for the charts
         data = {
             "labels": labels,
             "default": default_items,
