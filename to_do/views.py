@@ -57,17 +57,18 @@ def features_done_count(request):
 def feature_request_count(request):
     """ Function to count feature requests """
 
-    # List that will be used to count the features that are left to do
+    # List that will be used to count the number of features requested
     pending_features_to_do_count = []
 
-    # Features pending to do count
-    features_not_done_count = Feature.objects.aggregate(
-        not_done_features=Count(Case(When(done=False, then='done')))
-    )
+    features = Feature.objects.all()
 
-    # Append number of features still pending to the pending_features_to_do_count list
-    for k, v in features_not_done_count.items():
-            pending_features_to_do_count.append(v)
+    for feature in features:
+
+        feature.money_received = feature.like_cost*feature.likes.count()
+
+        if feature.money_received < feature.amount_needed and not feature.done:
+            pending_features_to_do_count.append(feature.name)
+
     
     return (pending_features_to_do_count)
 
@@ -124,12 +125,12 @@ def todo_list(request):
     
     # Call functions: pending_issue_count and pending_feature_count
     not_done_issues_count = pending_issue_count(request)
-    pending_features_to_do_count = feature_request_count(request)
+    pending_features_to_do_count = len(feature_request_count(request))
 
     # Calling function - count features in progress 
     features_in_progress = in_progress_feature(request)
     features_in_progress_count = len(features_in_progress)
-    
+
 
     return render(request, 'todo_list.html', 
                   {"items": results, 
