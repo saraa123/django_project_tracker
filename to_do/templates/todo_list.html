@@ -15,9 +15,6 @@
                     <i class="fa fa-fw fa-comments"></i>
                 </div>
                     
-                <!-- Total issues count -->
-                <div class="mr-5">{{items.count}} Total Issues</div>
-
                 <!-- Pending issues count -->
                 {% for not_done in not_done_issues_count %}
                 <div class="mr-5">{{not_done}} Pending Issues</div>
@@ -43,18 +40,10 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-list"></i>
                 </div>
-
-                <!-- Count features -->
-                {% if features.count == 0 %}
-                    <div class="mr-5">No Feature Requests</div>
-                {% else %}
-                    <div class="mr-5">{{features.count}} Total Features</div>
-                {% endif %}
-
-                <!-- Count features pending to do -->
-                {% for features_to_do in pending_features_to_do_count %}
-                    <div class="mr-5">{{features_to_do}} Feature Requests/{{features_in_progress_count}} in progress</div>
-                {% endfor %}
+                
+                <!-- Count feature requests and those completed -->
+                <div class="mr-5">{{pending_features_to_do_count}} Feature Requests/{{features_in_progress_count}} in progress</div>
+                
             </div>
             
             <!-- Link to products page -->
