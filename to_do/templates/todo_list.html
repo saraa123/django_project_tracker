@@ -201,8 +201,16 @@
 
                             <td>
                                 <!-- The code for upvoting a feature when logged in -->
-                                <form method="POST" action="toggle/{{ feature.id }}">{% csrf_token %}<button class="plain_button border-radius-button like_button"><i
-                                            class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}</form>
+                                <form method="POST" action="upvote_feature/{{ feature.id }}">
+                                
+                                    {% csrf_token %}
+                                    <button class="plain_button border-radius-button like_button" type="submit">
+                                        <i class="fa fa-thumbs-o-up"></i>
+            
+                                    </button>
+                                
+                                </form>
+                                            {{ feature.likes.count }}
                             </td>
 
                             {% endif %}
