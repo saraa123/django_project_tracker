@@ -60,3 +60,26 @@ def checkout(request):
     
     return render(request, "checkout.html", {"order_form": order_form, "payment_form": payment_form, "publishable": settings.STRIPE_PUBLISHABLE})
 
+
+@login_required()
+def upvote_checkout(request):
+    """ View what's being checked out and also display payment form """
+    
+    # Checkout section
+    payment_form = MakePaymentForm()
+    order_form = OrderForm()
+
+    product = Product.objects.get(name="Upvote ticket")
+
+    upvote_quantity = 1
+
+    total = product.price * upvote_quantity
+
+
+    return render(request, "upvote_checkout.html", 
+                {"order_form": order_form, 
+                "payment_form": payment_form, 
+                "publishable": settings.STRIPE_PUBLISHABLE, 
+                "product": product, 
+                "total": total,
+                "upvote_quantity": upvote_quantity})
