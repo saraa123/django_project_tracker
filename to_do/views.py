@@ -5,6 +5,8 @@ from .forms import ItemForm, FeatureForm, FeedbackForm
 from django.contrib.auth.models import User
 from django.db.models import Count, Case, When
 
+from checkout.views import upvote_checkout
+
 import random
 
 def pending_issue_count(request):
@@ -269,3 +271,26 @@ def toggle_status(request, id):
     return redirect(todo_list)
 
 
+def upvote_feature(request, id):
+    user = request.user
+    feature_upvoting = []
+
+    # If user likes a feature
+    if Feature.objects.filter(pk=id).exists():
+            feature = get_object_or_404(Feature, pk=id)
+            
+            like_cost = feature.like_cost
+
+            if user in feature.likes.all():
+                    feature.likes.remove(user)
+                    amount_got = like_cost * feature.likes.count()
+                    print('specific feature liked', feature)
+
+            else:   
+                    # Add if statement that if order is complete then add 1 to count
+                    feature.likes.add(user)
+                    amount_got = like_cost * feature.likes.count()
+                    feature_upvoting.append(feature)
+
+                    print("FEATURE UPVOTING LIST", feature_upvoting)
+    return redirect(upvote_checkout)
