@@ -85,6 +85,9 @@ table {
     color: white;   
 }
 
+.ul-no-design {
+    list-style-type: none;
+}
 
 
 /* Keep footer at the bottom of the page */
