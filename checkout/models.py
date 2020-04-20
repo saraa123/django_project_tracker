@@ -1,5 +1,8 @@
 from django.db import models
 from products.models import Product
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class Order(models.Model):
     full_name = models.CharField(max_length=50, blank=False)
@@ -11,6 +14,8 @@ class Order(models.Model):
     street_address2 = models.CharField(max_length=50, blank=False)
     county = models.CharField(max_length=40, blank=False)
     date = models.DateField()
+
+    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='orders', default=1)
 
     # Summary of the order
     def __str__(self):
