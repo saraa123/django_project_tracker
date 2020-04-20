@@ -7,5 +7,6 @@ class OrderLineAdminInline(admin.TabularInline):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = (OrderLineAdminInline, )
+    list_display = ["__str__", "user", "date"]
 
 admin.site.register(Order, OrderAdmin)
