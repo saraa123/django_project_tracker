@@ -34,7 +34,7 @@
             <input id="id_name" type="text" name="name" maxlength="100">
         </div>
         
-        <legend>Payment & Billing Details</legend>
+        <legend class="col-md-6">Payment & Billing Details</legend>
         
         <div id="credit-card-errors" style="display:none">
             <div class="alert-message block-message error" id="stripe-error-message"></div>
@@ -53,5 +53,8 @@
             <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
         </div>
     </form>
+    <div class="col-md-6">
+        <button class="btn btn-primary edited_button"><a href="{% url 'home' %}">Cancel order</a></button>
+    </div>
 </div>
 {% endblock %}
