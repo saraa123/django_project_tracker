@@ -4,8 +4,12 @@ $(document).ready(function() {
         alert("Login to like");
     });
 
-    $("button.empty_quantity_alert").click(function() {
-        alert("Please add a quantity");
+    $("button.login_to_buy").click(function () {
+        alert("Login to purchase a feature");
+    });
+
+    $("button.login_to_add_issue").click(function () {
+        alert("Login to add a new issue");
     });
 });
 
