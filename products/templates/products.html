@@ -15,48 +15,44 @@ Function on script.js file -->
     </div>
 </div>
 
+<div class="container small_container margin_top">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
 
-<!-- Products to purchase new issue and feature tickets -->
-<div class="container margin_top">
-    <div class="row row-flex products_container">
-        {% for product in products %}
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 product-card">   
-                <div class="panel-body">
-                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+            <!-- Table displaying ticket for issues and features -->
+            <table class="table table-borderless">
+                <tbody>
                     
-                    <h2>{{ product.name }}</h2>
-                    <p class="product-description">{{ product.description }}</p>
+                    <th>Add New Issue</th>
+                    <th>Add New Feature</th>
                     
-                    {% if product.price == 0 %}
-                        
-                    {% else %}
-                        <p><i class="fa fa-gbp">{{ product.price }}</i></p>
-                    {% endif %}
-                     
-                    <form class="margin_top" method="POST" action="{% url 'add_to_cart' product.id %}">
-                        {% csrf_token %}
-                        <div class="input-group">
-                            {% if product.name == 'Free Issue' %}
-                                <a class="btn btn-primary" href="{% url 'new_issue' %}">Add free issue</a>
-                            
-                            {% else %}
-                                <div>
-                                    <select class="margin_btn" name="quantity" type="number" placeholder="Quantity">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
-                            
-                                    <button class="btn btn-success margin_btn add_confirm" id="confirm" onclick="addToBasket()" type="submit">Add to basket</button>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </form>
+                    <tr>
+                        <td>
+                            Submit a free issue request
+                        </td>
+                        <td>
+                            <P>Purchase a feature ticket</P>
+                        </td>
+                    </tr>
                     
-                </div> <!-- Close panel-body class -->
-            </div> <!-- Close col classes-->
-        {% endfor %}
-    </div> <!-- Close row -->
-</div> <!-- Close products container -->
+                    <tr>
+                        {% if user.is_authenticated %}
+                        <td><a href="{% url 'new_issue' %}" class="btn btn-primary">Issue button</a></td>
+                        <td><a href="{% url 'checkout' %}" class="btn btn-primary">Feature button</a></td>
+
+                        <!-- The user will be sent an alert if they aren't logged in. 
+                        They will be told to log in before adding a new issue or buying a feature ticket -->
+                        {% else %}
+                        <td><button class="btn btn-primary login_to_add_issue">Add New Issue</button></td>
+                        <td><button class="btn btn-primary login_to_buy">Add New Feature</button>
+                        {% endif %}
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        </div> <!-- Closing col div -->
+    </div> <!-- Closing row -->
+</div> <!-- Closing container -->
+
 {% endblock %}
