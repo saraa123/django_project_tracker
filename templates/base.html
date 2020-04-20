@@ -69,26 +69,6 @@
                         {% endif %}
                     </li>
                     
-                    <!-- Shopping bag details -->
-                    
-                    <!-- Dropdown of cart -->
-                    <li class="nav-item dropdown no-arrow cart-icon">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-shopping-bag" id="shopping_bag"></i> 
-                            <!-- Shows product count only if there are items in the cart -->
-                            {% if product_count > 0 %}
-                                <span class="productCount">{{ product_count }}</span>
-                            {% endif %}
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">£ {{total}}</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'view_cart' %}">View Full Basket</a>
-                        </div>
-                    </li>
-                    
                 </ul>
 
                 <form class="form-inline my-2 my-lg-0">
