@@ -23,19 +23,23 @@
     </div>
 </div>
 
-<div class="container margin_top">
-
-    {{product.name}}
-    {{product.price}}
-    Qty: {{upvote_quantity}}
+<div class="container margin_top">    
 
     <div class="row">
-        <p>Total: </p>
-        <p><span aria-hidden="true"></span>£{{ total }}</p>
+        <ul class="ul-no-design">
+            <li>
+                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+                <p>{{product.name}}</p>
+                <p>£ {{product.price}}</p>
+                <p>Qty: {{upvote_quantity}}</p>
+                <p>Feature: {{feature}}</p>
+                <p>Total: <span aria-hidden="true"></span>£{{ total }}</p>
+            </li>
+        </ul>
     </div>
 
 
-    <form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
+    <form role="form" method="POST" id="payment-form" action="{% url 'upvote_checkout' feature.id %}">
         <legend>Payment Details</legend>
         <div id="credit-card-errors" style="display:none">
             <div class="alert-message block-message error" id="stripe-error-message"></div>
