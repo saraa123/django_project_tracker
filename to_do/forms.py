@@ -10,6 +10,7 @@ class FeatureForm(forms.ModelForm):
     class Meta:
         model = Feature
         fields = ("name", )
+        name = forms.CharField(label='name', max_length=30)
 
 class FeedbackForm(forms.ModelForm):
     class Meta:
