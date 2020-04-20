@@ -23,9 +23,9 @@ class Feature(models.Model):
     date_created = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
-    amount_needed = models.DecimalField(max_digits=6, decimal_places=2)
-    like_cost = models.DecimalField(max_digits=6, decimal_places=2)
-    money_received = models.DecimalField(max_digits=6, decimal_places=2)
+    amount_needed = models.DecimalField(max_digits=6, decimal_places=2, blank=False, default=40)
+    like_cost = models.DecimalField(max_digits=6, decimal_places=2, blank=False, default=10)
+    money_received = models.DecimalField(max_digits=6, decimal_places=2, blank=False, default=0)
 
 
     def __str__(self):
