@@ -158,7 +158,7 @@ def closed_issues_and_features(request):
 
     # Call functions: pending_issue_count and pending_feature_count
     not_done_issues_count = pending_issue_count(request)
-    pending_features_to_do_count = feature_request_count(request)
+    pending_features_to_do_count = len(feature_request_count(request))
 
     # Call in_progress_feature. Count how many features are in progress
     features_in_progress = in_progress_feature(request)
