@@ -56,11 +56,6 @@ span.sidebar_color{
     font-style: bold;
 }
 
-
-table {
-    border: 1px solid black;
-}
-
 .active_page {
     text-decoration: bold;
 
@@ -87,6 +82,10 @@ table {
 
 .ul-no-design {
     list-style-type: none;
+}
+
+.small_container {
+    width: 70%;
 }
 
 
