@@ -87,8 +87,33 @@
                 <h4>Closed Cases</h4>
             </a>
         </div>
-    </div>
+        
+        <!-- Check if the user is logged in. They can only purchase a feature 
+            ticket if they are, otherwise they'll be sent an alert to login -->
+        {% if user.is_authenticated %}
+            <div class="col-sm-12 col-md-2">
+                <a class="custom_a" href="{% url 'new_issue' %}">
+                    <h5><button class="btn btn-primary">New Issue Request</button></h5>
+                </a>
+            </div>
+        
+            <div class="col-sm-12 col-md-4">
+                <a class="custom_a" href="{% url 'checkout' %}">
+                    <h5><button class="btn btn-primary">Buy New Feature Request</button></h5>
+                </a>
+            </div>
 
+        {% else %}
+            <div class="col-sm-12 col-md-2">
+                <h5><button class="btn btn-primary login_to_add_issue">New Issue Request</button></h5>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+                <h5><button class="btn btn-primary login_to_buy">Buy New Feature Request</button></h5>
+            </div>
+
+        {% endif %}
+    </div>
 </div>
 
 <!-- Table for issues and separate table for features -->
@@ -99,7 +124,7 @@
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Open Issues <a class="custom_btn" href="{% url 'new_issue' %}">Add free issue</a></th>
+                        <th scope="col">Open Issues</th>
                         <th scope="col">Status</th>
                         <th scope="col">Upvotes</th>
                     </tr>
@@ -169,8 +194,8 @@
             
             <table class="table table-hover">
                 <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Open Feature Requests <a class="custom_btn" href="{% url 'all_products' %}">Buy feature request</a></th>
+                    <tr>   
+                        <th scope="col">Open Feature Requests</th>
                         <th scope="col">££ got/££ needed</th>
                         <th scope="col">Upvotes</th>
                     </tr>
@@ -201,7 +226,7 @@
 
                             <td>
                                 <!-- The code for upvoting a feature when logged in -->
-                                <form method="POST" action="upvote_feature/{{ feature.id }}">
+                                <form method="['POST', 'GET']" action="upvote_checkout/{{ feature.id }}">
                                 
                                     {% csrf_token %}
                                     <button class="plain_button border-radius-button like_button" type="submit">
