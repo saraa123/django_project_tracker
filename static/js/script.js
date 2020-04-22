@@ -11,6 +11,10 @@ $(document).ready(function() {
     $("button.login_to_add_issue").click(function () {
         alert("Login to add a new issue");
     });
+
+    $("button.login_to_send_feedback").click(function(){
+        alert("Login to send feedback");
+    });
 });
 
 
