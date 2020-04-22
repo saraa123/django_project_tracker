@@ -57,7 +57,7 @@ span.sidebar_color{
 }
 
 .active_page {
-    text-decoration: bold;
+    text-decoration: underline;
 
 }
 
