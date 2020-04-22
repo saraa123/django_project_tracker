@@ -194,36 +194,44 @@ def new_item(request):
 def add_feedback(request):
     """ Function for adding feedback """
 
+    user = request.user 
+
     # Query database - find all feedback
     feedback = Feedback.objects.all()
 
     # Randomly displays feedback
     random_feedback = random.choice(feedback)
 
-    # The feedback form
-    form = FeedbackForm(request.POST, request.FILES)
 
-    
-    if request.method == 'POST':
-        form = FeedbackForm(request.POST, request.FILES)
+    # First check if the user is logged in
+    if user.is_authenticated:
 
-        if form.is_valid():
-            messages.success(request, "Thanks for your feedback!")    
-            form.save()
-            return redirect(todo_list)
+        # If they are, proceed to then check if a POST method has been sent
+        if request.method == 'POST':
+            feedback_form = FeedbackForm(request.POST, request.FILES)
+
+            # Check if the form is valid and save it
+            if feedback_form.is_valid():
+                form = feedback_form.save(commit=False)
+                form.name = user 
+                form.save()
+                messages.success(request, "Thanks for your feedback!")
+                return redirect(todo_list)
+            
+            # Display the blank form if it isn't valid upon POST 
+            else:
+                feedback_form = FeedbackForm()
+
+        # Display the blank form if no POST method has been sent 
         else:
-            form = FeedbackForm()
+            feedback_form = FeedbackForm()
 
-
-     # Check if the user is logged in
-    if not request.user.is_authenticated:
-            form.name='anonymous'
-            user=form.name
+    # If they aren't logged in they won't be able to send feedback
     else:
-        user = User.objects.get(email=request.user.email)
-        
+        feedback_form = FeedbackForm()
+
     return render(request, 'add_feedback.html', 
-                {'form': form,
+                {'form': feedback_form,
                 "feedback": feedback,
                 "random_feedback": random_feedback,
                 "user": user})
