@@ -17,27 +17,16 @@
             <!-- Form to add feedback -->
             <form method="POST">
                 {% csrf_token %}
-                <!-- Displays the feedback input box -->
-                <label for="{{ form.feedback.id_for_label }}">Feedback:</label>
-                <label for="id_feedback"></label>
-                <input id="id_feedback" type="text" name="feedback" maxlength="100" /></p>
-
-                <!-- Checks if the user is logged in, if they are their name will be 
-                displayed in the name field -->
-                {% if user.is_authenticated %}
-                    <label for="{{ form.name.id_for_label }}">Name:</label>
-                    <label for="id_name"></label>
-                    <input id="id_name" type="text" name="name" maxlength="100" value={{user}}>
-                    
-                <!-- If they aren't logged in the name input field will be empty so
-                they can enter their name -->
-                {% else %}
-                    <label for="{{ form.name.id_for_label }}">Name:</label>
-                    <label for="id_name"></label>
-                    <input id="id_name" type="text" name="name" maxlength="100" /></p>
-                {% endif %}
+                {{form.as_p}}
                 
-                <button class="btn btn-primary" type="submit">Send</button>
+                <!-- Check if a user is logged in, otherwise they will be sent an alert to 
+                    login before they can send feedback -->
+                {% if user.is_authenticated %}
+                    <button class="btn btn-primary" type="submit">Send</button>
+                
+                {% else %}
+                    <button class="btn btn-primary login_to_send_feedback">Send</button>
+                {% endif %}
             </form>
         </div>
 
@@ -47,10 +36,7 @@
 
                 <!-- Display feedback randomly -->
                 <p class="italic">"{{random_feedback|title}}" 
-                    
-                    {% if random_feedback.name == '' %} Anonymous {% else %}
-                    {{random_feedback.name}} {% endif %}
-                    
+                    {{random_feedback.name|title}} 
                 </p>
             </div>
         </div>
