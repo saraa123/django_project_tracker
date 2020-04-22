@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings 
+from django.contrib.auth.models import User
 
 
 class Item(models.Model):
@@ -34,7 +35,8 @@ class Feature(models.Model):
 class Feedback(models.Model):
     feedback = models.CharField(max_length=200, blank=False)
     date_added = models.DateTimeField(auto_now=False, auto_now_add=True)
-    name = models.CharField(max_length=30, blank=True)
+    name_person = models.CharField(max_length=30, blank=True, db_column="name")
+    name = models.ForeignKey(User, default=1, related_name='feedback_user')
 
     def __str__(self):
         return self.feedback
