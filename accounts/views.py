@@ -3,6 +3,8 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from accounts.forms import UserLoginForm, UserRegistrationForm
+from to_do.models import Feature, Item
+from checkout.models import Order
 
 def index(request):
     """Return the index.html file, which is the registration landing page """
@@ -65,5 +67,24 @@ def logout(request):
 
 def profile(request):
     """ Profile page of user """
+
+    # Get user 
     user = User.objects.get(email=request.user.email)
-    return render(request,'profile.html', {"profile": user})
+
+    # Get orders, and filter them by the ones made by the user logged in. 
+    # Displayed with the most recent at the top, and limited to 5 results 
+    user_orders = Order.objects.filter(user=user).order_by("-date")[:5]
+
+    # Get the features that have been liked by the user
+    # Query results are limited to 8.
+    user_liked_feature = Feature.objects.filter(likes=user)[:8]
+
+    # Get the issues that have been liked by the user
+    # Query results are limited to 8.
+    user_liked_issues = Item.objects.filter(likes=user) [:8]
+
+    return render(request, 'profile.html', {
+        "profile": user, 
+        "user_orders": user_orders,
+        "user_liked_feature": user_liked_feature,
+        "user_liked_issues": user_liked_issues})
