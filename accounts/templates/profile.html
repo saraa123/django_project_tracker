@@ -18,11 +18,52 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container margin_top">
     <div class="row">
         <div class="col-sm-12">
-            <p><a href="{% url 'view_cart' %}">View your basket</a></p>
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+               
+        </div>
+    </div> <!-- Close row -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- If the user has made any orders, the most recent 5 will be displayed here -->
+            {% if user_orders %}
+                <p class="margin_top">Your 5 most recent orders</p>
+                {% for order in user_orders %}
+                    <p>{{order.date}}</p>
+                    <p>{{order.product}}</p>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-sm-12 margin_top">
+
+            <!-- If they user has liked any issues they will be displayed here -->
+            {% if user_liked_issues %}
+                <h4>Most Recent Liked Issues</h4>
+                {% for liked_issue in user_liked_issues %}
+                    <p>{{liked_issue}}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row margin_top">
+        <div class="col-sm-12">
+            <!-- If the user has liked any features the most recent will be displayed here -->
+            {% if user_liked_feature %}
+                <h4>Most Recent Features you've liked</h4>
+                {% for liked_feature in user_liked_feature %}
+                    <p>{{liked_feature|title}}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</div> <!-- Close container -->
 {% endblock %}
