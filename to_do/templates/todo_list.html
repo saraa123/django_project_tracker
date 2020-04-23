@@ -66,39 +66,30 @@
 <div class="container margin_top">
 
     <div class="row">
-        <div class="col-sm-12 col-md-2">
+        <div class="col-sm-12 col-md-3">
             <a class="custom_a" href="{% url 'home' %}">
                 <h4 class="active_page">Open Cases</h4>
             </a>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-3">
             <a class="custom_a" href="{% url 'closed_issues_and_features' %}">
                 <h4>Closed Cases</h4>
             </a>
         </div>
-        
-        <!-- Check if the user is logged in. They can only purchase a feature 
+    </div>
+    <div class="row margin_top">
+        <!-- Check if the user is logged in. They can only add an issue or a feature 
             ticket if they are, otherwise they'll be sent an alert to login -->
         {% if user.is_authenticated %}
-            <div class="col-sm-12 col-md-2">
-                <a class="custom_a" href="{% url 'new_issue' %}">
-                    <h5><button class="btn btn-primary">New Issue Request</button></h5>
-                </a>
-            </div>
-        
-            <div class="col-sm-12 col-md-4">
-                <a class="custom_a" href="{% url 'checkout' %}">
-                    <h5><button class="btn btn-primary">Buy New Feature Request</button></h5>
+            <div class="col-sm-12 col-md-3">
+                <a class="custom_a" href="{% url 'all_products' %}">
+                    <h4><button class="btn custom_btn">New Issue or Feature Request</button></h4>
                 </a>
             </div>
 
         {% else %}
-            <div class="col-sm-12 col-md-2">
-                <h5><button class="btn btn-primary login_to_add_issue">New Issue Request</button></h5>
-            </div>
-
-            <div class="col-sm-12 col-md-4">
-                <h5><button class="btn btn-primary login_to_buy">Buy New Feature Request</button></h5>
+            <div class="col-sm-12 col-md-3">
+                <h4><button class="btn custom_btn login_to_add_issue">New Issue or Feature Request</button></h4>
             </div>
 
         {% endif %}
