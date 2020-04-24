@@ -28,6 +28,7 @@ As a user I want to:
     - be able to see what progress is made
     - be able to see if any issues and features ever get completed 
 
+### Further analysis
 I then completed an in-depth analysis of the different aspects of user experience and user interface by following Garrett's elements. This included:
 
 * Surface
@@ -38,10 +39,10 @@ I then completed an in-depth analysis of the different aspects of user experienc
     - User stories were looked at in greater detail, along with user tasks and what was implemented to achieve this. 
 * Strategy
 
-This analysis was completed on a separate document. [Please click here to view it.] (UX/UX_UI_analysis.pdf)
+This analysis was completed on a separate document. [Please click here to view it.](UX/UX_UI_analysis.pdf)
 
 ### Wireframes 
-[Click here for the wireframe.] (UX/djangoTracker.pdf)
+[Click here for the wireframe.](UX/djangoTracker.pdf)
 
 ## Features
 * Created my own extra models
