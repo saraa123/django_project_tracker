@@ -7,12 +7,41 @@ https://sara-django-issue-tracker.herokuapp.com
 This project focuses on incorporating django, in order to provide front-end users with the ability to raise issue tickets, or purchase new feature tickets for an app.
 
 ## UX and UI
-As I was creating a website which allowed users to raise and keep track of issues and features, I wanted to create a theme and design that was inline with the scope of this project. 
-* Ease of use:
-    - I incorporated a Bootstrap theme which showcased a dashboard in order for users to easily be able to access different pieces of information 
+As I was creating a website which allowed users to raise and keep track of issues and features, I wanted to create a theme and design that was inline with the scope of this project. Some of the goals outlined included:
+
+* Ease of use
+
 * Quick access to information: 
-    - The home page displays all the issues/features, as well as their progress. 
+    - The home page displays all the issues and features
     - I have created the early workings of progress charts, enabling users to easily identify how many issues/features have been completed, and how many are outstanding. 
+
+
+### User stories
+I developed user stories to also identify the scope, and outline the needs and actions of the user. Doing so also helped direct other aspects of the UX and UI planning.  
+
+As a user I want to:
+    - add an issue
+    - add a feature
+    - pay for a feature request
+    - see what other issues and features have been added 
+    - be able to add feedback
+    - be able to see what progress is made
+    - be able to see if any issues and features ever get completed 
+
+I then completed an in-depth analysis of the different aspects of user experience and user interface by following Garrett's elements. This included:
+
+* Surface
+* Skeleton
+    - Wireframes - on a separate document, outlined below.
+* Structure
+* Scope
+    - User stories were looked at in greater detail, along with user tasks and what was implemented to achieve this. 
+* Strategy
+
+This analysis was completed on a separate document. [Please click here to view it.] (UX/UX_UI_analysis.pdf)
+
+### Wireframes 
+[Click here for the wireframe.] (UX/djangoTracker.pdf)
 
 ## Features
 * Created my own extra models
