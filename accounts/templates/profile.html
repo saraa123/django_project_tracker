@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container margin_top">
     <div class="row">
         <div class="col-sm-12">
             <h5>Welcome to your account!</h5>
@@ -31,10 +31,11 @@
         <div class="col-sm-12">
             <!-- If the user has made any orders, the most recent 5 will be displayed here -->
             {% if user_orders %}
-                <p class="margin_top">Your 5 most recent orders</p>
+                <h4 class="margin_top">Most Recent Orders</h4>
                 {% for order in user_orders %}
-                    <p>{{order.date}}</p>
-                    <p>{{order.product}}</p>
+                <ul>
+                    <li>{{order.date}}</li>
+                </ul>
                 {% endfor %}
             {% endif %}
         </div>
@@ -47,7 +48,9 @@
             {% if user_liked_issues %}
                 <h4>Most Recent Liked Issues</h4>
                 {% for liked_issue in user_liked_issues %}
-                    <p>{{liked_issue}}</p>
+                <ul>
+                    <li>{{liked_issue}}</li>
+                </ul>
                 {% endfor %}
             {% endif %}
         </div>
@@ -57,9 +60,11 @@
         <div class="col-sm-12">
             <!-- If the user has liked any features the most recent will be displayed here -->
             {% if user_liked_feature %}
-                <h4>Most Recent Features you've liked</h4>
+                <h4>Most Recent Liked Features</h4>
                 {% for liked_feature in user_liked_feature %}
-                    <p>{{liked_feature|title}}</p>
+                <ul>
+                    <li>{{liked_feature|title}}</li>
+                </ul>
                 {% endfor %}
             {% endif %}
         </div>
