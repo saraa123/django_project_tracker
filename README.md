@@ -31,18 +31,39 @@ As I was creating a website which allowed users to raise and keep track of issue
 
 ### Features left to implement
 > Front-end features
-* Give users the ability to edit their issues and add comments
-    - I initially was working on a function that would enable users to edit an issue they may have add, but due to time restraints I decided this would be something that would be better to work on in the future. 
-* Allow users to leave feedback 
-    - Currently feedback is hardcoded. However, in the future I would like to learn how to develop a real feedback section for users, as well as have snippets of this feedback presented on the progress page. 
+* Profile page:
+    - Go into greater detail when displaying orders on the user account.  
+
+* Update the invoice when checkout is complete so a summary of the order is displayed.
+
+* Allow users to see an expected date of completion for features. 
+
+* Allow users to see who the handler is for a given issue or feature.
 
 > Back-end features
+* Currently, feedback has been added within the to_do app primarily as it was a small model to add. However, in the future I want to add it as a stand-alone app.
+
 * Gain a general better understanding of what Django is capable of 
     - Experiment with Django admin and models.
+
 * Learn more about the use of slugs 
+
 * Learn backend security methods:
-    - Learn backend validated in order to increase security.
- 
+    - Learn more about backend validated in order to increase security.
+
+* Give users the ability to edit their issues
+    - I initially was working on a function that would enable users to edit an issue they may have had, but due to time restraints I decided this would be something that would be better to work on in the future.
+
+* Allow users to comment on issues and feature requests.
+
+* Cart changes:
+    - I initially allowed users to add tickets to their cart, but then decided on a different approach, whereby users are now sent directly to checkout when submitting or upvoting features, and can directly submit new free issues. 
+    - The cart app has remained however, as I want to develop a function that would allow users to add multiple tickets to their cart and make one payment. 
+
+* Have greater control over the feature costs:
+    - Currently there are default values set for upvote cost and the amount of money needed. Some have been manipulated in admin. I would like to develop a function whereby new features are given a status of ‘request submitted’ before being sent directly to the main feature request table, and are at that point individually assigned specific values for the factors mentioned above. 
+
+* Develop the search function further 
 
 ## Methods used
 * HTML
