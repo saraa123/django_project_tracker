@@ -22,6 +22,7 @@ from search import urls as search_urls
 
 # urls for checkout app
 from checkout import urls as checkout_urls
+from checkout.views import upvote_checkout
 
 # urls for charts app
 from charts import urls as charts_urls
@@ -44,5 +45,7 @@ urlpatterns = [
     url(r'^search/', include(search_urls)),
     url(r'^checkout/', include(checkout_urls)),
     url(r'^charts/', include(charts_urls)),
+    url(r'^upvote_checkout/(?P<id>\d+)$',
+        upvote_checkout, name='upvote_checkout'),
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT})
 ]
