@@ -15,6 +15,11 @@ $(document).ready(function() {
     $("button.login_to_send_feedback").click(function(){
         alert("Login to send feedback");
     });
+
+    $("button.login_alert").click(function () {
+        alert("Please login");
+    });
+
 });
 
 
