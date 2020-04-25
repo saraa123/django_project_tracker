@@ -219,6 +219,14 @@ heroku login
         python3 -m flask run
     ```
 
+### Linking Github and Heroku pushes 
+1. Log on to Heroku and locate the project. 
+2. When you are on the main dashboard of the project, locate the deploy tab.
+3. Once you have clicked this and have been redirected, scroll down to the option that allows you to connect your Github repo to Heroku. 
+4. Once connected you will then be able to enable automatic deploys. 
+
+* Now pushing to Github will also push changes to Heroku. 
+
 ## Credits
 
 * A bootstrap theme has been used and modified in order to take advantage of its sidebar feature.
