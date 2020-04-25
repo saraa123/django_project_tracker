@@ -9,8 +9,16 @@ def search_product(request):
 
 def search_issues_and_features(request):
     """ Function to search issues and features """
-    
-    search_query = (Q(Item.objects.filter(Issue__icontains=request.GET['q']).values('Issue')) | Q(Feature.objects.filter(name__icontains=request.GET['q']).values('name')))
-    
-    return render(request, 'search_results.html', {"search_results": search_query})
+
+    # Create an instance of the search query 
+    q = request.GET['q']
+
+    # Query the database - filter issues and features based on what's searched on the site    
+    search_issue = Item.objects.filter(Issue__icontains=request.GET['q']).values('Issue', 'done')
+    search_feature = Feature.objects.filter(name__icontains=request.GET['q']).values('name', 'done')
+
+    return render(request, 'search_results.html', {
+                  "search_issue": search_issue, 
+                  "search_feature": search_feature, 
+                  "q": q})
 
