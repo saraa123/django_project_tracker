@@ -88,6 +88,9 @@ span.sidebar_color{
     width: 70%;
 }
 
+.line_through {
+    text-decoration: line-through;
+}
 
 /* Keep footer at the bottom of the page */
 .body {
