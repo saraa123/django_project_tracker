@@ -45,19 +45,40 @@ This analysis was completed on a separate document. [Please click here to view i
 [Click here for the wireframe.](UX/djangoTracker.pdf)
 
 ## Features
-* Created my own extra models
+* Created extra models
+    - Feedback
+    - User profiles
+
+* Added extra fields to models:
     - Date added
     - Last updated
     - Number of likes
+    - Created foreign key between orders and users 
+    - Added monetary requirement fields for features i.e. money received, money needed, and upvost/like cost. 
+    
 * Chart.js
     - Previously I had stated that I wanted to delve further when using Javascript, therefore I chose chart.js to display the charts on this website. This allowed me to not only experiment with Javascript, but also experience using scripts in a different manner, such as directly within a HTML document. 
+    - This also enabled users to quickly identify progress. 
+
 * FontAwesome
     * Used to display icons.
+
 * Ability for users to interact with the owners of the website via social media
     - In the future I would like to expand on this feature, and allow users to be sent directly to the website's social media pages.
-* Users are able to purchase feature tickets that incur a cost. They can also purchase urgent issue tickets. There is also an option to request a free non-urgent issue ticket that doesn’t require the user to checkout. 
+
+* Feature tickets can be bought for a cost. 
+
+* Features and issues can be upvoted.
+
 * Ability to quickly track the progress of on going issues and features, and identify which ones have been marked as completed. 
 
+* Users can leave feedback as well as see what feedback others have left.
+
+* Created different alerts for different actions:
+    - I chose to create alerts displaying messages for that specific action so as to give the website a more personal feel.
+
+* Access to information on the user account page:
+    - Account details such as orders, liked issues and features can be viewed, as well as data from the user profiles model. However, this is something I want to expand on and develop further in the future. This has been explained in greater detail below. 
 
 ### Features left to implement
 > Front-end features
