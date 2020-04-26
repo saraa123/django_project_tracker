@@ -6,6 +6,17 @@ https://sara-django-issue-tracker.herokuapp.com
 ## Overview 
 This project focuses on incorporating django, in order to provide front-end users with the ability to raise issue tickets, or purchase new feature tickets for an app.
 
+### Issue with username during commits 
+There has been an issue with the username that is displayed during commits. When a commit is made it doesn’t display my Github username, it presents ‘usernameusername’ instead. This was due to the fact that my email address was set to private, so Github was unable to identify my username. 
+
+The repo for this project was created at the same time I created the repo for a previous project I was working on, with the issue being evident on both repositories. I was able to successfully solve the issue on the previous project. However, after doing so it then stated that there were two contributors to the project, even though I am the only contributor.  
+
+Therefore in order to maintain the correct number of contributors and the commit history I decided not to implement the solution to this project. 
+
+I have also attached a screenshot of the push message to assure you the commits are mine. 
+
+![commit-issues](screenshots/commit-issues.png)
+
 ## UX and UI
 As I was creating a website which allowed users to raise and keep track of issues and features, I wanted to create a theme and design that was inline with the scope of this project. Some of the goals outlined included:
 
