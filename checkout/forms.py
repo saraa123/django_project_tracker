@@ -4,7 +4,7 @@ from .models import Order
 class MakePaymentForm(forms.Form):
 
     MONTH_CHOICES = [(i, i) for i in range(1, 12)]
-    YEAR_CHOICES = [(i, i) for i in range(2019, 2040)]
+    YEAR_CHOICES = [(i, i) for i in range(2020, 2040)]
 
     credit_card_number = forms.CharField(label='Credit card number', required=False)
     cvv = forms.CharField(label='Security code (CVV)', required=False)
