@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+{% block page_title %}Edit {{ user|title }}'s' Profile{% endblock %}
+{% block body_text %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>{{ user|title }}'s page</h1>
+        </div>
+    </div>
+</div>
+
+<!-- Form to edit favourite games on the user profile -->
+<div class="container margin_top">
+    <form method="POST">
+        {% csrf_token  %}
+        <legend class="margin_top">Edit Profile</legend>
+        {{ form | as_bootstrap }}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
