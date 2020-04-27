@@ -18,10 +18,28 @@
     </div>
 </div>
 
+
+<div class="container margin_top">
+    <div class="row">
+        <div class="col-sm-12">
+            {% if messages %}
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 <div class="container margin_top">
     <div class="row">
         <div class="col-sm-12">
             <p>Username: {{user.username}}</p>
+            {% if user.first_name %}
+                <p>Name: {{user.first_name|title}} {{user.last_name|title}}</p>
+            {% else %}
+
+            {% endif %}
             <p>Email: {{user.email}}</p>
                
         </div>
@@ -71,4 +89,27 @@
     </div>
 
 </div> <!-- Close container -->
+
+<!-- Pulling data from user profile model - displays favourite games depending on
+whether any exist -->
+<div class="container margin_top">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            {% if user.profile %}
+                
+                {% if user.profile.favourite_games == '' %}
+                    <h4>Want to add some of your favourite games?</h4>
+                {% else %}
+                    <h4>Some of your favourite games!</h4>
+                    <p>{{user.profile.favourite_games|title}}</p>
+                {% endif %}
+
+                <a class="btn btn-primary" href="{% url 'edit_profile' %}">Edit favourite games</a>
+                
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
