@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError 
+from .models import UserProfile
 
 class UserLoginForm(forms.Form):
     """ Form to be used to log users in """
@@ -20,9 +21,13 @@ class UserRegistrationForm(UserCreationForm):
     
     email = forms.EmailField(label="Email address")
 
+    first_name = forms.CharField(max_length=50)
+
+    last_name = forms.CharField(max_length=50)
+
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
     
     def clean_email(self):
         """ Make sure user provides email address that is unique, and provides a username """
@@ -56,3 +61,12 @@ class UserRegistrationForm(UserCreationForm):
             
         return password2
 
+class UpdateProfileForm(forms.ModelForm):
+    """ Form to be used to edit user profile - specifically the favourite 
+    game section """
+
+    favourite_games = forms.CharField(max_length=100)
+
+    class Meta:
+        model = UserProfile
+        fields = ('favourite_games', )
