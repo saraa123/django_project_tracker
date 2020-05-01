@@ -21,7 +21,7 @@
                 <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
                 <p>{{product.name}}</p>
                 <p>£ {{product.price}}</p>
-                <p>Total: <span aria-hidden="true"></span>£{{ total }}</p>
+                <p class="bold">Total: <span aria-hidden="true"></span>£{{ total }}</p>
             </li>
         </ul>
     </div>
@@ -34,7 +34,7 @@
             <input id="id_name" type="text" name="name" maxlength="100">
         </div>
         
-        <legend class="col-md-6">Payment & Billing Details</legend>
+        <legend class="col-md-6 margin_top">Payment & Billing Details</legend>
         
         <div id="credit-card-errors" style="display:none">
             <div class="alert-message block-message error" id="stripe-error-message"></div>
