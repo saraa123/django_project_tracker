@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from accounts.forms import UserLoginForm, UserRegistrationForm, UpdateProfileForm
 from to_do.models import Feature, Item
 from checkout.models import Order
-from accounts.models import UserProfile
 
 def index(request):
     """Return the index.html file, which is the registration landing page """
@@ -93,6 +92,7 @@ def profile(request):
         "user_liked_feature": user_liked_feature,
         "user_liked_issues": user_liked_issues})
 
+@login_required()
 def edit_profile(request):
     """ Function to edit the user profile - only favourite games is available at 
     the moment """
