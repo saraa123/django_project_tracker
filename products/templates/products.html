@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block page_title %}Products Page{% endblock %}
+{% block page_title %}Tickets Page{% endblock %}
 
 
 {% block body_text %}
@@ -37,8 +37,8 @@ Function on script.js file -->
                     
                     <tr>
                         {% if user.is_authenticated %}
-                        <td><a href="{% url 'new_issue' %}" class="btn btn-primary">Issue button</a></td>
-                        <td><a href="{% url 'checkout' %}" class="btn btn-primary">Feature button</a></td>
+                        <td><a href="{% url 'new_issue' %}" class="btn btn-primary">Add New Issue</a></td>
+                        <td><a href="{% url 'checkout' %}" class="btn btn-primary">Add New Feature</a></td>
 
                         <!-- The user will be sent an alert if they aren't logged in. 
                         They will be told to log in before adding a new issue or buying a feature ticket -->
