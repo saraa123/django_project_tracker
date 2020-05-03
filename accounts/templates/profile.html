@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block page_title %}{{ user|title }}'s' Profile{% endblock %}
+{% block page_title %}{{ user|title }}'s Profile{% endblock %}
 {% block body_text %}
 
 <div class="container">
@@ -62,7 +62,7 @@
     <div class="row">
         <div class="col-sm-12 margin_top">
 
-            <!-- If they user has liked any issues they will be displayed here -->
+            <!-- If the user has liked any issues they will be displayed here -->
             {% if user_liked_issues %}
                 <h4>Most Recent Liked Issues</h4>
                 {% for liked_issue in user_liked_issues %}
