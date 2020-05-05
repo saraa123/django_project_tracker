@@ -5,7 +5,20 @@ from .forms import ItemForm, FeatureForm, FeedbackForm
 from django.contrib.auth.models import User
 from django.db.models import Count, Case, When
 
+from  products.models import Product
+
 import random
+
+def feature_request_price():
+    """ Function to return the price of the 'new feature request' ticket """
+    
+    # Query the database - look for the new feature request ticket
+    products = Product.objects.filter(name='Request a new feature')
+    
+    for ticket in products:
+        ticket_price = ticket.price
+
+    return (ticket_price)
 
 def pending_issue_count(request):
     """ Function to count pending issues """
@@ -60,11 +73,15 @@ def feature_request_count(request):
     # List that will be used to count the number of features requested
     pending_features_to_do_count = []
 
+    # Calls the feature_request_price function - returns
+    # the price of the feature request ticket.
+    feature_price = feature_request_price()
+
     features = Feature.objects.all()
 
     for feature in features:
 
-        feature.money_received = feature.like_cost*feature.likes.count()
+        feature.money_received = feature_price+(feature.like_cost*feature.likes.count())
 
         if feature.money_received < feature.amount_needed and not feature.done:
             pending_features_to_do_count.append(feature.name)
@@ -82,11 +99,18 @@ def in_progress_feature(request):
 
     features_in_progress = []
 
+    # Calls the feature_request_price function - returns
+    # the price of the feature request ticket.
+    feature_price = feature_request_price()
+
     for feature in features:
-        feature.money_received = feature.like_cost*feature.likes.count()
+        feature.money_received = feature_price+(feature.like_cost*feature.likes.count())
 
         if feature.money_received == feature.amount_needed:
-            features_in_progress.append(feature.name)
+            
+            # Ignores features that are marked as 'done'.
+            if feature.done == False:
+                features_in_progress.append(feature.name)
             print("We've reached our target!")
 
         elif feature.money_received > feature.amount_needed:
@@ -119,9 +143,13 @@ def todo_list(request):
     # Feature objects 
     features = Feature.objects.all()
 
+    # Calls the feature_request_price function - returns
+    # the price of the feature request ticket.
+    feature_price = feature_request_price()
+
     # Determines how money_received will be calculated
     for feature in features:
-        feature.money_received = feature.like_cost*feature.likes.count()
+        feature.money_received = feature_price+(feature.like_cost*feature.likes.count())
     
     # Call functions: pending_issue_count and pending_feature_count
     not_done_issues_count = pending_issue_count(request)
