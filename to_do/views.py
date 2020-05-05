@@ -103,33 +103,21 @@ def in_progress_feature(request):
     # the price of the feature request ticket.
     feature_price = feature_request_price()
 
+    # Checks how much money each feature has received. If the money has reached
+    # the required amount then it will be added to the features_in_progress list
     for feature in features:
         feature.money_received = feature_price+(feature.like_cost*feature.likes.count())
 
+        # Check if the money received equals the amount needed for that feature
         if feature.money_received == feature.amount_needed:
             
             # Ignores features that are marked as 'done'.
             if feature.done == False:
                 features_in_progress.append(feature.name)
-            print("We've reached our target!")
 
+        # Check if the money receieved is greater than the amount needed 
         elif feature.money_received > feature.amount_needed:
             features_in_progress.append(feature.name)
-            print("Above our target!")
-
-        elif feature.money_received == 0:
-            print("Be the first to upvote")
-
-        else:
-            print("We're working towards the target")
-        print(feature.money_received)
-
-        if feature.name in features_in_progress:
-            print (feature.name)
-            print("It's in progress")
-        else:
-            print("Not reached target yet")
-
     
     return (features_in_progress)
 
