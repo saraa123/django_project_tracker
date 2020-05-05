@@ -14,47 +14,55 @@
 {% endblock %}
 
 {% block body_text %}
-<div class="container">
+<div class="container margin_top">
     <div class="row">
-        <ul class="ul-no-design">
-            <li>
-                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
-                <p>{{product.name}}</p>
-                <p>£ {{product.price}}</p>
-                <p class="bold">Total: <span aria-hidden="true"></span>£{{ total }}</p>
-            </li>
-        </ul>
-    </div>
-
-    <form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
-        <div class="form-group col-md-6">
-            <h3>New Feature Requested</h3>
-            <label for="{{ feature_form.name.id_for_label }}">New Feature:</label>
-            <label for="id_name"></label>
-            <input id="id_name" type="text" name="name" maxlength="100">
+        <div class="col-sm-12">
+            <h4>New Feature Request Checkout</h4>
         </div>
-        
-        <legend class="col-md-6 margin_top">Payment & Billing Details</legend>
-        
-        <div id="credit-card-errors" style="display:none">
-            <div class="alert-message block-message error" id="stripe-error-message"></div>
-        </div>
-
-        <div class="form-group col-md-6">
-            {{ order_form | as_bootstrap }}
-        </div>
-
-        <div class="form-group col-md-6">
-            {{ payment_form | as_bootstrap }}
-        </div>
-
-        {% csrf_token %}
-        <div class="form-group col-md-12">
-            <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
-        </div>
-    </form>
-    <div class="col-md-6">
-        <button class="btn btn-primary edited_button"><a href="{% url 'home' %}">Cancel order</a></button>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image }}')"></div>
+            <p class="bold">Total: <span aria-hidden="true"></span>£{{ total }}</p>
+        </div>
+    </div>
+    
+    <div class="row margin_top">
+        <form role="form" method="POST" id="payment-form" action="{% url 'checkout' %}">
+            <div class="form-group col-sm-12 col-md-12">
+                <h3>New Feature Request</h3>
+                <label for="{{ feature_form.name.id_for_label }}">New Feature:</label>
+                <label for="id_name"></label>
+                <input id="id_name" type="text" name="name" maxlength="100" required=True>
+            </div>
+            
+            <legend class=" col-sm-12 col-md-12 margin_top">Payment & Billing Details</legend>
+            
+            <div class="form-group col-sm-12 col-md-12">
+                {{ order_form | as_bootstrap }}
+            </div>
+
+            <div class="form-group col-sm-12 col-md-12">
+                {{ payment_form | as_bootstrap }}
+            </div>
+
+            <!-- Display any error message -->
+            <div class="col-sm-12 col-md-12 margin_bottom" id="credit-card-errors" style="display:none">
+                <div class="alert-message block-message error" id="stripe-error-message"></div>
+            </div>
+
+            {% csrf_token %}
+            <div class="form-group col-md-12">
+                <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
+            </div>
+        </form>
+        <div class="col-sm-12 col-md-12">
+            <button class="btn btn-primary edited_button"><a href="{% url 'home' %}">Cancel order</a></button>
+        </div>
+    </div> <!-- Closing row -->
+    
+</div> <!-- Closing container -->
 {% endblock %}
