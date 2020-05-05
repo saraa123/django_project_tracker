@@ -227,9 +227,8 @@ def add_feedback(request):
     # Query database - find all feedback
     feedback = Feedback.objects.all()
 
-    # Randomly displays feedback
-    random_feedback = random.choice(feedback)
-
+    # Randomly displays feedback with a limit of 4
+    random_feedback = random.sample(list(feedback), 4)
 
     # First check if the user is logged in
     if user.is_authenticated:
@@ -244,7 +243,7 @@ def add_feedback(request):
                 form.name = user 
                 form.save()
                 messages.success(request, "Thanks for your feedback!")
-                return redirect(todo_list)
+                return redirect(add_feedback)
             
             # Display the blank form if it isn't valid upon POST 
             else:
