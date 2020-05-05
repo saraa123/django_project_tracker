@@ -63,38 +63,41 @@
     </div>
 </div>
 
-<div class="container margin_top">
 
+<div class="container margin_top">
     <div class="row">
+
         <div class="col-sm-12 col-md-3">
             <a class="custom_a" href="{% url 'home' %}">
-                <h4 class="active_page">Open Cases</h4>
+                <h5 class="active_page">Open Cases</h5>
             </a>
         </div>
         <div class="col-sm-12 col-md-3">
             <a class="custom_a" href="{% url 'closed_issues_and_features' %}">
-                <h4>Closed Cases</h4>
+                <h5>Closed Cases</h5>
             </a>
         </div>
-    </div>
-    <div class="row margin_top">
-        <!-- Check if the user is logged in. They can only add an issue or a feature 
-            ticket if they are, otherwise they'll be sent an alert to login -->
-        {% if user.is_authenticated %}
-            <div class="col-sm-12 col-md-3">
-                <a class="custom_a" href="{% url 'all_products' %}">
-                    <h4><button class="btn custom_btn">New Issue or Feature Request</button></h4>
-                </a>
-            </div>
 
-        {% else %}
-            <div class="col-sm-12 col-md-3">
-                <h4><button class="btn custom_btn login_alert">New Issue or Feature Request</button></h4>
-            </div>
+        <div class="col-sm-12 col-md-3">
+            <!-- Check if the user is logged in. They can only add an issue or a feature 
+                ticket if they are, otherwise they'll be sent an alert to login -->
+            {% if user.is_authenticated %}
+                <div class="col-sm-12 col-md-3">
+                    <a class="custom_a" href="{% url 'all_products' %}">
+                        <h4><button class="btn custom_btn">New Issue or Feature Request</button></h4>
+                    </a>
+                </div>
 
-        {% endif %}
-    </div>
-</div>
+            {% else %}
+                <div class="col-sm-12 col-md-3">
+                    <h5><button class="btn custom_btn login_alert">New Issue or Feature Request</button></h5>
+                </div>
+
+            {% endif %}
+        </div>
+
+    </div> <!-- Closing row -->
+</div> <!-- Closing container -->
 
 <!-- Table for issues and separate table for features -->
 <div class="container">
@@ -210,12 +213,9 @@
                                 
                                     {% csrf_token %}
                                     <button class="plain_button border-radius-button like_button" type="submit">
-                                        <i class="fa fa-thumbs-o-up"></i>
-            
-                                    </button>
+                                        <i class="fa fa-thumbs-o-up"></i></button>{{ feature.likes.count }}
                                 
-                                </form>
-                                            {{ feature.likes.count }}
+                                </form>   
                             </td>
 
                             {% endif %}
@@ -260,7 +260,6 @@
         <h2>Features In Progress</h2>
         <thead class="thead-dark">
             <tr>
-                <th scope="col"></th>
                 <th scope="col">Feature</th>
                 <th scope="col">Handler</th>
                 <th scope="col">Expected completion date</th>
@@ -272,12 +271,17 @@
                 <!-- Display features that have reached their monetary requirement -
                         those will be the ones in progress -->
                 {% if feature_in_progress.name in features_in_progress %}
+
+                    <!-- Ignore the features marked as 'done' -->
+                    {% if feature_in_progress.done == True %}
+
+                    {% else %}
                     <tr>
-                        <th scope="row">1</th>
-                        <td>{{feature_in_progress.name}}</td>
+                        <td>{{feature_in_progress.name|title}} (£{{feature_in_progress.amount_needed}})</td>
                         <td>@admin</td>
                         <td>TBC</td>
                     </tr>
+                    {% endif %}
                 
                 <!-- Ignore features that haven't reached the required amount of money -->
                 {% else %}
