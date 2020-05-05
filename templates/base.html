@@ -50,7 +50,7 @@
                         
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i>
+                        <i class="fa fa-user fa-fw"></i>My Account
                         </a>
 
                         <!-- If user is already signed in -->
@@ -62,9 +62,9 @@
                             </div>
                         {% else %}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'login' %}">Sign In</a>
+                                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'register' %}">Join Us</a>
+                                <a class="dropdown-item" href="{% url 'register' %}">Register</a>
                             </div>
                         {% endif %}
                     </li>
@@ -80,16 +80,8 @@
 
         <!-- Content for body -->
         <div class="container">
-            {% block page_heading %}
-            {% endblock %}
-            
-            {% block breadcrumb_overview_of_page %}
-            {% endblock %}
             
             {% block icon_cards %}
-            {% endblock %}
-            
-            {% block heading %}
             {% endblock %}
             
             {% block body_text %}
