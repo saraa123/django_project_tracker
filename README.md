@@ -1,4 +1,4 @@
-# Sara's django issue tracker 
+# Sara's Django Issue Tracker 
 
 Heroku live link: 
 https://sara-django-issue-tracker.herokuapp.com
@@ -18,29 +18,11 @@ I have also attached a screenshot of the push message to assure you the commits 
 ![commit-issues](screenshots/commit-issues.png)
 
 ## UX and UI
-As I was creating a website which allowed users to raise and keep track of issues and features, I wanted to create a theme and design that was inline with the scope of this project. Some of the goals outlined included:
 
-* Ease of use
-
-* Quick access to information: 
-    - The home page displays all the issues and features
-    - I have created the early workings of progress charts, enabling users to easily identify how many issues/features have been completed, and how many are outstanding. 
-
-
-### User stories
-I developed user stories to also identify the scope, and outline the needs and actions of the user. Doing so also helped direct other aspects of the UX and UI planning.  
-
-As a user I want to:
-    - add an issue
-    - add a feature
-    - pay for a feature request
-    - see what other issues and features have been added 
-    - be able to add feedback
-    - be able to see what progress is made
-    - be able to see if any issues and features ever get completed 
+The full analysis was completed on a separate document. [Please click here to view it.](UX/UX_UI_analysis.pdf)
 
 ### Further analysis
-I then completed an in-depth analysis of the different aspects of user experience and user interface by following Garrett's elements. This included:
+The document mentioned above contains an analysis following Garrett’s elements. It also helped justify the decisions made during the implementation stage. The elements examined were:
 
 * Surface
 * Skeleton
@@ -50,9 +32,35 @@ I then completed an in-depth analysis of the different aspects of user experienc
     - User stories were looked at in greater detail, along with user tasks and what was implemented to achieve this. 
 * Strategy
 
-This analysis was completed on a separate document. [Please click here to view it.](UX/UX_UI_analysis.pdf)
+### Goals
+As I was creating a website which allowed users to raise and keep track of issues and features, I wanted to create a theme and design that was inline with the scope of this project. Some of the basic goals outlined included:
 
-### Wireframes 
+* Ease of use:
+    - Create a positive experience for the user so they return to the website.
+
+* Quick access to information: 
+    - The home page displays all the issues and features.
+    - I have created the early workings of progress charts, enabling users to easily identify how many issues/features have been completed and how many are outstanding. 
+
+* Develop a responsive mobile first website.
+
+
+### User stories
+An in-depth analysis of the user stories can be seen on the separate document mentioned above, with the key points mentioned below. 
+Developing user stories helped identify the scope and outline the needs and actions of the user. Doing so also helped direct other aspects of the UX and UI planning. 
+
+* As a user I want to:
+    - add an issue
+    - add a feature
+    - pay for a feature request
+    - see what other issues and features have been added 
+    - be able to add feedback
+    - be able to see what progress is made
+    - be able to see if any issues and features ever get completed 
+    - see which features are in progress 
+    - upvote/like an issue/feature
+
+### Wireframes (Skeleton)
 [Click here for the wireframe.](UX/djangoTracker.pdf)
 
 ## Features
@@ -268,4 +276,6 @@ heroku login
 All the media for this project has been obtained from Google.  
 
 ### Acknowledgements
+Feedback from my mentor: Dick Vlaanderen
+
 This is for educational purposes.
