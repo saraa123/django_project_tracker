@@ -102,21 +102,30 @@ Developing user stories helped identify the scope and outline the needs and acti
 ### Features left to implement
 > Front-end features
 * Profile page:
-    - Go into greater detail when displaying orders on the user account.  
+    - Go into greater detail when displaying orders on the user account such as providing a brief outline of what was ordered.
+
+* Add more details to the user profile:
+	- Currently there is only a favourite games section within the user profile model. In the future I want to add more fields and individual pieces of information for that user, for example a profile picture or avatar. 
 
 * Update the invoice when checkout is complete so a summary of the order is displayed.
 
 * Allow users to see an expected date of completion for features. 
 
-* Allow users to see who the handler is for a given issue or feature.
+* Allow users to see who the handler is for a given issue or feature. 
+    - Currently it is automatically assigned to admin for features in progress.
+
+* Incorporate pagination: 
+    – All tables for issues and features and account order details.
+
+* Create a community board where different users can communicate with one another. 
 
 > Back-end features
-* Currently, feedback has been added within the to_do app primarily as it was a small model to add. However, in the future I want to add it as a stand-alone app.
+* Currently feedback has been added within the to_do app primarily as it was a small model to add. However, in the future I want to add it as a stand-alone app and expand it.
 
-* Gain a general better understanding of what Django is capable of 
+* Gain a general better understanding of what Django is capable of:
     - Experiment with Django admin and models.
 
-* Learn more about the use of slugs 
+* I would also like to gain a better understanding of slugs and how to use them within my Django project.
 
 * Learn backend security methods:
     - Learn more about backend validated in order to increase security.
@@ -127,13 +136,24 @@ Developing user stories helped identify the scope and outline the needs and acti
 * Allow users to comment on issues and feature requests.
 
 * Cart changes:
-    - I initially allowed users to add tickets to their cart, but then decided on a different approach, whereby users are now sent directly to checkout when submitting or upvoting features, and can directly submit new free issues. 
-    - The cart app has remained however, as I want to develop a function that would allow users to add multiple tickets to their cart and make one payment. 
+    - I initially had a cart app and function, but during testing I realised the current layout of the project didn’t necessarily need a cart. I have however kept the cart app and all its associated classes and code as I want to utilise them in the future. I want to create a function that would allow users to add multiple tickets to their cart and only make one payment. After doing so they would have a count on their profile stating how many tickets they have available. 
+    - Now users are sent directly to checkout when submitting or upvoting features, and can directly submit new free issues. 
 
 * Have greater control over the feature costs:
-    - Currently there are default values set for upvote cost and the amount of money needed. Some have been manipulated in admin. I would like to develop a function whereby new features are given a status of ‘request submitted’ before being sent directly to the main feature request table, and are at that point individually assigned specific values for the factors mentioned above. 
+    - Currently there are default values set for the upvote cost and the amount of money needed per feature. Some have been manipulated in admin. I would like to develop a function whereby new features are given a status of ‘request submitted’ before being sent directly to the main feature request table, and are at that point individually assigned specific values for the factors mentioned above. 
 
 * Develop the search function further 
+    – Currently the search function returns queries relating to issues and features. I want to develop this further whereby other aspects are also searched such as progress and possibly feedback. 
+    - Improve search results by enabling users to click on a result and if it is an issue or feature they will be taken to the details of that item. 
+
+* Create stricter password requirements:
+    - Currently there is a minimum password length of 8. In the future I want to make password requirements more secure by including capital letters and symbol requirements.
+
+* Give users the ability to change their account information:
+    - Their email address, registered name and password.
+
+### Other Areas of Interest 
+* In the future I want to utilise git more and create different branches for development. 
 
 ## Methods used
 * HTML
