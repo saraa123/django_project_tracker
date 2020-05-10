@@ -17,7 +17,7 @@
                     
                 <!-- Pending issues count -->
                 {% for not_done in not_done_issues_count %}
-                <div class="mr-5">{{not_done}} Pending Issues</div>
+                <div class="mr-5">{{not_done}} Open Issues</div>
                 {% endfor %}
 
             </div> <!-- Close card-body class -->
@@ -37,9 +37,9 @@
                 <!-- Count feature requests and those completed -->
                 <div class="mr-5">{{pending_features_to_do_count}} Feature Requests</div>
                 {% if features_in_progress_count == 1 %}
-                    <div class="mr-5">{{features_in_progress_count}} Feature in progress</div>
+                    <div class="mr-5">{{features_in_progress_count}} Feature in Progress</div>
                 {% else %}
-                    <div class="mr-5">{{features_in_progress_count}} Features in progress</div>
+                    <div class="mr-5">{{features_in_progress_count}} Features in Progress</div>
                 {% endif %}
             </div>
             
