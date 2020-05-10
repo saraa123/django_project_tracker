@@ -82,7 +82,7 @@ Developing user stories helped identify the scope and outline the needs and acti
 * FontAwesome
     * Used to display icons.
 
-* Ability for users to interact with the owners of the website via social media
+* Ability for users to interact with the owners of the website via social media:
     - In the future I would like to expand on this feature, and allow users to be sent directly to the website's social media pages.
 
 * Feature tickets can be bought for a cost. 
@@ -98,6 +98,19 @@ Developing user stories helped identify the scope and outline the needs and acti
 
 * Access to information on the user account page:
     - Account details such as orders, liked issues and features can be viewed, as well as data from the user profiles model. However, this is something I want to expand on and develop further in the future. This has been explained in greater detail below. 
+
+* On the account page the user can add and edit any favourite games they may have. 
+
+* Originally the user that created a feature couldn’t then also upvote it. However for the sake of assessment I removed this so as to make it easier to test the upvote function without having to create a new user. 
+
+* New features that are submitted will automatically display the money a user has paid:
+    - When the user submits their new feature they will automatically see their request record the amount of money they paid for the feature ticket.  This will be seen on the amount received section. 
+
+* Bootstrap theme icon cards:
+    - I originally implemented a bootstrap theme with a dashboard in order to showcase a more adventurous appearance and display a different set of skills I had learnt, whilst also working within a certain timeframe. 
+    - However when performing in-person tests it was evident the theme and dashboard were better left absent. 
+    - I have kept the files from the bootstrap theme as I wanted to keep the icon cards at the top of the home and closed cases pages. The icon cards display the number of issues and features requested, in progress and those marked as ‘done’. 
+
 
 ### Features left to implement
 > Front-end features
@@ -191,6 +204,9 @@ Developing user stories helped identify the scope and outline the needs and acti
 
 > Back-end testing
 
+* Testing JavaScript code:
+    - http://jshint.com
+
 * Manually testing all functions worked as expected:
     - Added a new issue and new feature.
     - Marked issues and features as done and ensured they were then only displayed in the tables for completed items. 
@@ -209,7 +225,8 @@ Developing user stories helped identify the scope and outline the needs and acti
         - Upvoted an issue and feature and checked the total amount upvoted was correct. 
         - Upvoted a feature request and checked the amount_received was the right amount.
         - Users can’t like an item or feature unless they’re logged in, so I attempted to do so and ensured an alert was displayed in the browser prompting the user to login. 
-        
+
+* Greatly used the print ability and the console to understand the code.
 
 ### 2. Django testing 
 * Django tests were created to test some of the models, views and forms.
@@ -232,11 +249,44 @@ Developing user stories helped identify the scope and outline the needs and acti
         - Attempted to buy items with invalid card details and missing information, and an alert is successfully displayed telling the user to check their details and provide the information that is missing. 
         - Tested whether the checkout form identified the correct amount of products to be paid for.
 
+* Purposefully omitted form validation for the checkout forms:
+    - For the checkout form I added the address and telephone details so as to replicate an actual checkout form and checking billing details. However validation for these input types hasn’t been added so it is quicker to go through the form during assessment. 
+
 ### 4. In-person User Testing 
 
 * As part of the UX and UI testing, I conducted in-person user tests. This allowed me to observe natural user interactions. I was able to identify what users found difficult, and if any roadblocks existed. 
 * This lead to the following changes:
+
     - Created a separate page for issues and features that were completed. This prevented information overload on the home page, and also allowed the user to quickly identify which issues and features were currently still open and pending.
+    
+    - Cart changes:
+        - The way the website was created meant it was easier to direct the user straight to checkout when wanting to purchase or upvote a feature. 
+        - However, in the future I would like to alter the website scheme so as to enable users to easily add tickets to their cart, enabling them to pay for multiple tickets at once. Therefore the cart app still remains within the project.
+    
+    - Removal of the bootstrap theme and dashboard. 
+
+### Overview of Issues and Solutions
+
+**Issue 1:** Features in progress that were marked as done were still being displayed in the ‘in progress’ table. This also affected the count. 
+**Solution:** Added a 'for' loop that would ignore features marked as 'done' for both the table and the count. 
+
+**Issue 2:** Forms could be manipulated by users when using developer tools. This could allow them to bypass any validation requirements. 
+**Solution:** Initially some of the forms were rendered using html in order to apply specific labels and change ordering. However I changed this and utilised the built-in validation function used in Django, therefore removing the possibility of users altering validation through developer tools. 
+
+**Issue 3:** If a user bought a new feature request the money received wouldn’t take their payment into account.
+**Solution:** Added the price of the new feature request ticket when calculating how much money was received for a feature. 
+
+#### Experiences when creating new models
+
+* Various issues arose during the creation and testing process of models, all of which allowed me to gain a greater understanding of the database and what happens when new migrations are made.
+* The issues outlined below also enabled me to experiment with different commands that are used when dealing with migrations. Some of which included get-migrations and show migrations.  
+
+**Issue 1:** The feedback model had two columns with the same name, one of which was a foreign key. This caused problems when new data was sent to the database whereby it would state that certain required pieces of information were missing when the form was submitted. 
+**Solution 1:** Manually manipulating the migration files. 
+**Solution 2:** The fields within the model were assigned database column names so the database knew which field belonged to which column.
+
+**Issue 2:** User profile model: An extra foreign key had been made in the database, therefore it was then expecting two user instances when a new user was being created. 
+**Solution:** Correctly deleted the user profile and started it again, and ensured an extra user foreign key hadn’t been created.  
 
 ## Deployment
 Github and Heroku were used for the deployment of this project.
