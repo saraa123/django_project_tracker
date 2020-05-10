@@ -3,7 +3,7 @@
 
 
 {% block icon_cards %}
-<!-- Icon Cards - will display icons at the top of the home page and count issues and features  -->
+<!-- Icon Cards - will display icons at the top of the page and count issues and features  -->
 <div class="row">
 
     <!-- Icon card for issues -->
@@ -17,12 +17,16 @@
                 
                 <!-- Pending issues count -->
                 {% for not_done in not_done_issues_count %}
-                <div class="mr-5">{{not_done}} Pending Issues</div>
+                <div class="mr-5">{{not_done}} Open Issues</div>
                 {% endfor %}
 
                 <!-- Count issues done -->
                 {% for count in issues_done %}
-                    <p>{{count}} Issues done</p>
+                    {% if count == 1 %}
+                        <p>{{count}} Issue done</p>
+                    {% else %}
+                        <p>{{count}} Issues done</p>
+                    {% endif %}
                 {% endfor %}
 
             </div> <!-- Close card-body class -->
@@ -41,15 +45,15 @@
 
                 <!-- Count features pending to do -->
                 <div class="mr-5"> {{pending_features_to_do_count}} Feature Requests</div>
-                <div class="mr-5">{{features_in_progress_count}} In progress</div>
+                <div class="mr-5">{{features_in_progress_count}} Feature in Progress</div>
                 
 
                 <!-- Count issues done -->
                 {% for count in features_done %}
                     {% if count == 1 %}
-                        <p>{{count}} Feature done</p>
+                        <p>{{count}} Feature Done</p>
                     {% elif count > 1 %}
-                        <p>{{count}} Features done</p>
+                        <p>{{count}} Features Done</p>
                     {% endif %}
                 {% endfor %}
                 
@@ -67,12 +71,12 @@
 
         <div class="col-sm-12 col-md-3">
             <a class="custom_a" href="{% url 'home' %}">
-                <h4>Open Cases</h4>
+                <h5>Open Cases</h5>
             </a>
         </div>
         <div class="col-sm-12 col-md-3">
             <a class="custom_a" href="{% url 'closed_issues_and_features' %}">
-                <h4 class="active_page">Closed Cases</h4>
+                <h5 class="active_page">Closed Cases</h5>
             </a>
         </div>
 
@@ -85,11 +89,10 @@
         <div class="col-sm-12">
 
             <!-- Displays issues that have been resolved -->
-            <h3 class="margin_top">Completed Issues</h3>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Issue</th>
+                        <th scope="col">Completed Issues</th>
                         <th scope="col">Status</th>
                         <th scope="col">Last Updated</th>
                     </tr>
@@ -116,11 +119,10 @@
     <!-- Table for features that have been completed -->
     <div class="row">
         <div class="col-sm-12">
-            <h3 class="margin_top">Completed Features</h3>
-            <table class="table">
+            <table class="table margin_top">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Feature</th>
+                        <th scope="col">Completed Features</th>
                         <th scope="col">Status</th>
                         <th scope="col">Last Updated</th>
                     </tr>
