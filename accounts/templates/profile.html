@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h1>{{ user|title }}'s page</h1>
+            <h1>Hi {{ user|title }}</h1>
         </div>
     </div>
 </div>
@@ -35,14 +35,16 @@
     <div class="row">
         <div class="col-sm-12">
             <p>Username: {{user.username}}</p>
+
+            <!-- If a first name exists for the user then display the full name, 
+            otherwise don't display the name -->
             {% if user.first_name %}
                 <p>Name: {{user.first_name|title}} {{user.last_name|title}}</p>
             {% else %}
 
             {% endif %}
             <p>Email: {{user.email}}</p>
-               
-        </div>
+        </div> <!-- Close col class -->
     </div> <!-- Close row -->
 
     <div class="row">
