@@ -147,7 +147,7 @@ def upvote_checkout(request, id):
                     # been completed 
                     if user not in feature.likes.all():
                         feature.likes.add(user)
-                        print("added new user")
+                        
 
                     return redirect(reverse('invoice'))
                 else:
