@@ -6,7 +6,6 @@ from django.contrib import admin
 from to_do.views import todo_list, closed_issues_and_features, new_item, add_feedback, toggle_status
 
 # urls for accounts app
-# from accounts.views import index, logout, login, profile
 from accounts.views import index 
 from accounts import urls as accounts_urls
 
