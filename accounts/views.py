@@ -38,7 +38,7 @@ def index(request):
 def login(request):
     """Allow user to login"""
 
-    """Redirect user if they are aleady logged in"""               
+    # Redirect the user if they are logged in               
     if request.user.is_authenticated:
         return redirect(reverse('home'))
     
