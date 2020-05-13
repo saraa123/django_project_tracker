@@ -254,20 +254,24 @@ def add_feedback(request):
 
 
 def toggle_status(request, id):
-    """ Function to upvote an issue or feature """ 
+    """ Function to upvote an issue """ 
 
     user = request.user
 
     # Check if the user is logged in
     if user.is_authenticated():
             
-            # If user likes an issue
-            if Item.objects.filter(pk=id).exists():
-                    item = get_object_or_404(Item, pk=id)
-                    if user in item.likes.all():
-                            item.likes.remove(user)
-                    else:
-                            item.likes.add(user)
+        # The if statement activates if the user upvotes an issue
+        if Item.objects.filter(pk=id).exists():
+            item = get_object_or_404(Item, pk=id)
+
+            # If the user has already upvoted an issue, remove them from it if they click the upvote button again
+            if user in item.likes.all():
+                item.likes.remove(user)
+            
+            # If the user hasn't already upvoted that issue, clicking the icon will allow them to upvote it
+            else:
+                item.likes.add(user)
     
             
     return redirect(todo_list)
