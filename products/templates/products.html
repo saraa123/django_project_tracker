@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-
 {% block page_title %}Tickets Page{% endblock %}
-
 
 {% block body_text %}
 
@@ -28,14 +26,15 @@ Function on script.js file -->
                     
                     <tr>
                         <td>
-                            Submit a free issue request
+                            <p>Submit a free issue request</p>
                         </td>
                         <td>
-                            <P>Purchase a feature ticket</P>
+                            <p>Purchase a feature ticket</p>
                         </td>
                     </tr>
                     
                     <tr>
+                        <!-- Checks if the user is logged in. If they are they can add a new issue or feature. -->
                         {% if user.is_authenticated %}
                         <td><a href="{% url 'new_issue' %}" class="btn btn-primary">Add New Issue</a></td>
                         <td><a href="{% url 'checkout' %}" class="btn btn-primary">Add New Feature</a></td>
