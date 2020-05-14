@@ -24,7 +24,7 @@
 
 <div class="container margin_top">
     <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-6 margin_bottom">
 
             <!-- Form to add feedback -->
             <form method="POST">
@@ -37,7 +37,7 @@
                     <button class="btn btn-primary" type="submit">Send</button>
                 
                 {% else %}
-                    <button class="btn btn-primary login_to_send_feedback">Send</button>
+                    <button class="btn btn-primary login_to_send_feedback margin_bottom">Send</button>
                 {% endif %}
             </form>
         </div>
@@ -45,18 +45,17 @@
         <div class="col-sm-12 col-md-6">
             <h4 class="margin_bottom">What others think</h4>
             
-
                 <!-- Display feedback randomly -->
                 {% for feedback in random_feedback %}
-                <p class="italic">"{{feedback|title}}" 
-                     <span class="bold">{{feedback.name|title}}</span><br>
-                    {{feedback.date_added}}
-                </p>
+                    <p class="italic">"{{feedback|title}}"
+                        <span class="bold">{{feedback.name|title}}.</span>
+                        {{feedback.date_added}}
+                    </p>
                 {% endfor %}
             
         </div>
-    </div>
-</div>
+    </div> <!-- Close row -->
+</div> <!-- Close container -->
 
 
 {% endblock %}
