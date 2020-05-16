@@ -33,7 +33,7 @@ def pending_issue_count(request):
 
     # Append the number of issues not done to the not_done_issues_count list
     for k, v in Issues_Not_Done_Count.items():
-            not_done_issues_count.append(v)
+        not_done_issues_count.append(v)
 
     return (not_done_issues_count)
 
@@ -46,6 +46,7 @@ def issues_done_count(request):
         done_results=Count(Case(When(done=True, then='done')))
     )
 
+    # Append the issues marked as 'done' to the issues_done list
     for k, v in Done_results.items():
         issues_done.append(v)
 
@@ -61,6 +62,7 @@ def features_done_count(request):
         done_features=Count(Case(When(done=True, then='done')))
     )
 
+    # Append the features marked as 'done' to the issues_done list
     for k, v in Done_features.items():
         features_done.append(v)
 
@@ -81,8 +83,11 @@ def feature_request_count(request):
 
     for feature in features:
 
+        # Takes in other fields when calculating the money_received field 
         feature.money_received = feature_price+(feature.like_cost*feature.likes.count())
 
+        # Append those features to the pending_features_to_do_count that haven't met the amount
+        # of money needed and aren't marked as 'done'
         if feature.money_received < feature.amount_needed and not feature.done:
             pending_features_to_do_count.append(feature.name)
 
@@ -103,19 +108,21 @@ def in_progress_feature(request):
     # the price of the feature request ticket.
     feature_price = feature_request_price()
 
-    # Checks how much money each feature has received. If the money has reached
-    # the required amount then it will be added to the features_in_progress list
     for feature in features:
+
+        # Takes in other fields when calculating the money_received field
         feature.money_received = feature_price+(feature.like_cost*feature.likes.count())
 
-        # Check if the money received equals the amount needed for that feature
+        # Checks how much money each feature has received. If the money has reached
+        # the required amount then it will be added to the features_in_progress list
         if feature.money_received == feature.amount_needed:
             
-            # Ignores features that are marked as 'done'.
+            # Features that aren't marked as 'done' will be added to the features_in_progress list
             if feature.done == False:
                 features_in_progress.append(feature.name)
 
-        # Check if the money receieved is greater than the amount needed 
+        # If the money received is greater than the amount needed it will be added to the
+        # features_in_progress list
         elif feature.money_received > feature.amount_needed:
             features_in_progress.append(feature.name)
     
@@ -135,11 +142,13 @@ def todo_list(request):
     # the price of the feature request ticket.
     feature_price = feature_request_price()
 
-    # Determines how money_received will be calculated
+    
     for feature in features:
+
+        # Determines how money_received will be calculated
         feature.money_received = feature_price+(feature.like_cost*feature.likes.count())
     
-    # Call functions: pending_issue_count and pending_feature_count
+    # Call functions: pending_issue_count and feature_request_count
     not_done_issues_count = pending_issue_count(request)
     pending_features_to_do_count = len(feature_request_count(request))
 
@@ -172,7 +181,7 @@ def closed_issues_and_features(request):
     # Count for how many features are done
     features_done = features_done_count(request)
 
-    # Call functions: pending_issue_count and pending_feature_count
+    # Call functions: pending_issue_count and feature_request_count
     not_done_issues_count = pending_issue_count(request)
     pending_features_to_do_count = len(feature_request_count(request))
 
@@ -196,6 +205,7 @@ def closed_issues_and_features(request):
 def new_item(request):
     """ Function for adding a new issue """
 
+    # The form for adding a new issue
     if request.method=='POST':
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
