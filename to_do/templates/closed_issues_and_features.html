@@ -4,64 +4,66 @@
 
 {% block icon_cards %}
 <!-- Icon Cards - will display icons at the top of the page and count issues and features  -->
-<div class="row">
+<div class="container">
+    <div class="row">
 
-    <!-- Icon card for issues -->
-    <div class="col-xl-6 col-sm-6 mb-3 margin_top">
-        <div class="card text-white bg-primary o-hidden h-100">
+        <!-- Icon card for issues -->
+        <div class="col-xl-6 col-sm-6 mb-3 margin_top">
+            <div class="card text-white bg-primary o-hidden h-100">
 
-            <div class="card-body">
-                <div class="card-body-icon">
-                    <i class="fa fa-fw fa-comments"></i>
-                </div>
-                
-                <!-- Pending issues count -->
-                {% for not_done in not_done_issues_count %}
-                <div class="mr-5">{{not_done}} Open Issues</div>
-                {% endfor %}
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    
+                    <!-- Pending issues count -->
+                    {% for not_done in not_done_issues_count %}
+                        <div class="mr-5">{{not_done}} Open Issues</div>
+                    {% endfor %}
 
-                <!-- Count issues done -->
-                {% for count in issues_done %}
-                    {% if count == 1 %}
-                        <p>{{count}} Issue done</p>
-                    {% else %}
-                        <p>{{count}} Issues done</p>
-                    {% endif %}
-                {% endfor %}
+                    <!-- Count issues done -->
+                    {% for count in issues_done %}
+                        {% if count == 1 %}
+                            <p>{{count}} Issue done</p>
+                        {% else %}
+                            <p>{{count}} Issues done</p>
+                        {% endif %}
+                    {% endfor %}
 
-            </div> <!-- Close card-body class -->
+                </div> <!-- Close card-body class -->
 
-        </div> <!-- Close card class -->
-    </div> <!-- Close col class -->
+            </div> <!-- Close card class -->
+        </div> <!-- Close col class -->
 
-    <!-- Icon card for features -->
-    <div class="col-xl-6 col-sm-6 mb-3 margin_top">
+        <!-- Icon card for features -->
+        <div class="col-xl-6 col-sm-6 mb-3 margin_top">
 
-        <div class="card text-white bg-success o-hidden h-100">
-            <div class="card-body">
-                <div class="card-body-icon">
-                    <i class="fa fa-fw fa-list"></i>
-                </div>
+            <div class="card text-white bg-success o-hidden h-100">
+                <div class="card-body">
+                    <div class="card-body-icon">
+                        <i class="fa fa-fw fa-list"></i>
+                    </div>
 
-                <!-- Count features pending to do -->
-                <div class="mr-5"> {{pending_features_to_do_count}} Feature Requests</div>
-                <div class="mr-5">{{features_in_progress_count}} Feature in Progress</div>
-                
+                    <!-- Count feature requests and features in progress -->
+                    <div class="mr-5"> {{pending_features_to_do_count}} Feature Requests</div>
+                    <div class="mr-5">{{features_in_progress_count}} Feature in Progress</div>
+                    
 
-                <!-- Count issues done -->
-                {% for count in features_done %}
-                    {% if count == 1 %}
-                        <p>{{count}} Feature Done</p>
-                    {% elif count > 1 %}
-                        <p>{{count}} Features Done</p>
-                    {% endif %}
-                {% endfor %}
-                
-            </div>
+                    <!-- Count features done -->
+                    {% for count in features_done %}
+                        {% if count == 1 %}
+                            <p>{{count}} Feature Done</p>
+                        {% elif count > 1 %}
+                            <p>{{count}} Features Done</p>
+                        {% endif %}
+                    {% endfor %}
+                    
+                </div> <!-- Close card body -->
+            </div> <!-- Close card class -->
+        </div> <!-- Close col class -->
 
-        </div> <!-- Close card class -->
-    </div> <!-- Close col class -->
-</div> <!-- Close row -->
+    </div> <!-- Close row -->
+</div> <!-- Close container -->
 {% endblock %}
 
 {% block body_text %}
@@ -85,10 +87,10 @@
 
 <!-- Displays issue and feature tables -->
 <div class="container">
+
+    <!-- Table for issues marked as 'done' -->
     <div class="row">
         <div class="col-sm-12">
-
-            <!-- Displays issues that have been resolved -->
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -99,24 +101,23 @@
                 </thead>
                 <tbody>
                     {% for done_items in items %}
-                    <tr class="table-success">
-                        {% if done_items.done %}
-                        <td><strike>{{done_items.Issue | title}}</strike></td>
-                        <td>Complete</td>
-                        <td>{{ done_items.last_updated }}</td>
-                        {% endif %}
-                    </tr>
+                        <tr class="table-success">
+                            {% if done_items.done %}
+                            <td><strike>{{done_items.Issue | title}}</strike></td>
+                            <td>Complete</td>
+                            <td>{{ done_items.last_updated }}</td>
+                            {% endif %}
+                        </tr>
 
                     {% empty %}
-                    <p>Nothing solved, for now...</p>
+                        <p>Nothing solved, for now...</p>
                     {% endfor %}
                 </tbody>
             </table>
+        </div> <!-- Closing col class -->
+    </div> <!-- Closing row for issues table -->
 
-        </div> <!-- Closing sm class -->
-    </div> <!-- Closing row for table for resolved issues -->
-
-    <!-- Table for features that have been completed -->
+    <!-- Table for features marked as 'done' -->
     <div class="row">
         <div class="col-sm-12">
             <table class="table margin_top">
@@ -138,19 +139,19 @@
                         {% endif %}
     
                     {% empty %}
-                    <p>No new features Implemented, for now...</p>
+                        <p>No new features Implemented, for now...</p>
                     {% endfor %}
                 </tbody>
             </table>
-        </div> <!-- Closing sm class -->
-    </div> <!-- Closing row for features  -->
+        </div> <!-- Closing col class -->
+    </div> <!-- Closing row for features table  -->
     
     <!-- Scroll to Top Button-->
     <a class="rounded" href="#page-top">
         <i class="fa fa-arrow-circle-up"></i>
     </a>
 
-</div> <!-- Closing container class -->
+</div> <!-- Closing container for tables -->
 
 
 {% endblock %}
