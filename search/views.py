@@ -4,6 +4,8 @@ from products.models import Product
 from to_do.models import Item, Feature
 
 def search_product(request):
+    """ Function to search products """
+    
     products = Product.objects.filter(name__icontains=request.GET['q'])
     return render(request, 'products.html', {"products": products})
 
