@@ -210,9 +210,11 @@ def new_item(request):
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(
+                request, "Thanks for submitting a new issue, we’ll take care of it as soon as possible.")
             return redirect(todo_list)
     else:
-            form = ItemForm()
+        form = ItemForm()
 
     return render(request, 'add_new_item.html', {'form': form})
 
