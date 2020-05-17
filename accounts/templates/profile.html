@@ -51,7 +51,7 @@
         <div class="col-sm-12">
             <!-- If the user has made any orders, the most recent 5 will be displayed here -->
             {% if user_orders %}
-                <h4 class="margin_top">Most Recent Orders</h4>
+                <h4 class="margin_top">Most Recent Order Dates</h4>
                 {% for order in user_orders %}
                 <ul>
                     <li>{{order.date}}</li>
@@ -69,7 +69,7 @@
                 <h4>Most Recent Liked Issues</h4>
                 {% for liked_issue in user_liked_issues %}
                 <ul>
-                    <li>{{liked_issue}}</li>
+                    <li>{{liked_issue|title}}</li>
                 </ul>
                 {% endfor %}
             {% endif %}
