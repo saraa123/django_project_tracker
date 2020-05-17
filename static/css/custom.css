@@ -40,10 +40,6 @@ h1 {
     box-shadow: none;
 }
 
-span.sidebar_color{
-    color: white;
-}
-
 .card{
     border-radius: 30px;
 }
@@ -132,7 +128,6 @@ span.sidebar_color{
 	margin-right:auto;
 	margin-left:auto;
     max-width:1050px;
-    /* border: 1px solid black; */
 }
 
 .product-card {
