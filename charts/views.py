@@ -10,13 +10,12 @@ import random
 import datetime
 import time
 
-# REST framework
+""" REST framework """
 from rest_framework.views import APIView 
 from rest_framework.response import Response
 
+""" Global variable to return the user """
 users = get_user_model()
-
-
 
 def charts_home(request):
     """ Load charts page """
@@ -25,13 +24,14 @@ def charts_home(request):
 
 
 class ChartData(APIView):
-    
+    """ Chart data and labels for issues and features """
+
     authentication_classes = []
     permission_classes = []
 
     def get(self, request, format=None):
         
-        # ------------ Issues chart containing all functions and counts ---------------
+        """ Issues chart containing all functions and counts """
         
         # Issues done count
         done_issues_count = []
@@ -55,11 +55,11 @@ class ChartData(APIView):
         for k, v in Issues_Not_Done_Count.items():
             to_do_issues_count.append(v)
 
-        # chart labels and data for issues done and pending
+        # Chart labels and data for issues done and pending
         labels = ["Issues Completed", "Issues To Do"]
         default_items = [done_issues_count, to_do_issues_count]
 
-        # ----------- Features chart containing all functions and counts -------------
+        """ Features chart containing all functions and counts """
 
         # Features done count
         done_features_count = []
@@ -79,7 +79,7 @@ class ChartData(APIView):
         for k, v in Features_done_count.items():
             done_features_count.append(v)
         
-        # chart labels and data for features done, requests, and in progress 
+        # Chart labels and data for features done, requests, and in progress 
         progressLabels = ["Requests", "Completed", "In progress"]
         progressItems = [feature_requests, done_features_count, features_in_progress_count]
 
