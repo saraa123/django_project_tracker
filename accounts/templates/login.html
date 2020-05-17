@@ -30,10 +30,16 @@
     <p class="margin_top"><a href='{% url "password_reset" %}'>Forgotten password</a></p>
 </div>
 
-{% if messages %}
-    {% for message in messages %}
-        {{ message }}
-    {% endfor %}
-{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock %}
