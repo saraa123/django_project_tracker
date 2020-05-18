@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block page_title %}500 Error{% endblock %}
+
+{% block body_text %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>500 error</h1>
+            <p>Oops, there seems to be an internal server error. Please try again.</p>
+            <p>Click <a href="{% url 'home' %}">here</a> to be sent home.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
