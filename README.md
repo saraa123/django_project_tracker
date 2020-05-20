@@ -173,7 +173,11 @@ Developing user stories helped identify the scope and outline the needs and acti
 ### Other Areas of Interest 
 * In the future I want to utilise git more and create different branches for development. 
 * PEP8 - I would change the project name so all the letters were lowercase.
+* Change names:
+    - Initially the name ‘item’ was used when referring to issues, however in the future I would alter this and call them issues so as to make it easier during development for other developers accessing the code. In order to prevent any disruption to the code and remain within the time frame my mentor thought it best to leave the name as it was. I have written comments within the code in order to highlight that items are issues. 
 
+    - Originally ‘products’ was used when directing users to issues and features, however it was identified that using ‘tickets’ was a better representation of what was being offered. Therefore in the future this is the name I would use. As I also want to expand on what can be purchased and introduce actual products a user can acquire, I would consider creating a separate file for products.
+    
 ## Methods used
 * HTML
 * CSS
@@ -234,6 +238,11 @@ Developing user stories helped identify the scope and outline the needs and acti
 
 * Checked that emails were being sent correctly by going through the ‘forgotten password’ process.
 
+* Tested that which was not expected:
+    - Pressing the back button after logging in/out and navigating through the website. 
+    - Typing in an incorrect url into the url bar.
+    - This lead to the creation of error pages.
+
 ### 2. Django testing 
 * Django tests were created to test some of the models, views and forms.
     - Can be seen through the files:
@@ -281,6 +290,13 @@ Developing user stories helped identify the scope and outline the needs and acti
 
 * **Issue 3:** If a user bought a new feature request the money received wouldn’t take their payment into account.
 * **Solution:** Added the price of the new feature request ticket when calculating how much money was received for a feature. 
+
+* **Issue 4:** Users could type a different url into the url bar.
+* **Solution:** This lead to the creation of custom error pages so as to offer an explanation to the user, and links so they can find their way back to the page they need.
+
+* **Issue 5:** The user could press the back button after logging in or out, and be sent to the basic error page when attempting any further actions on the website. 
+* **Solution 1:** As mentioned in the previous issue, an error page was created. For this issue the 403 error page was created.
+* **Solution 2:** After creating the error page, I was still faced with an issue whereby the in-built Django error page was still being displayed. Upon further research, I identified that I needed to change the file name so as to accommodate the csrf name within it. Then when testing it again, the custom error page would successfully be displayed. 
 
 #### Experiences when creating new models
 * Various issues arose during the creation and testing process of models, all of which allowed me to gain a greater understanding of the database and what happens when new migrations are made.
