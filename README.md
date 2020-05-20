@@ -4,7 +4,7 @@ Heroku live link:
 https://sara-django-issue-tracker.herokuapp.com
 
 ## Overview 
-This project focuses on incorporating django, in order to provide front-end users with the ability to raise issue tickets, or purchase new feature tickets for an app.
+The purpose of this project was to create a website utilising Django. The website created allows users to track and submit free issue requests, as well as purchase feature request tickets. Users also have the option to upvote an existing feature, which also has a cost. 
 
 ### Issue with username during commits 
 There has been an issue with the username that is displayed during commits. When a commit is made it doesn’t display my Github username, it presents ‘usernameusername’ instead. This was due to the fact that my email address was set to private, so Github was unable to identify my username. 
@@ -18,7 +18,6 @@ I have also attached a screenshot of the push message to assure you the commits 
 ![commit-issues](screenshots/commit-issues.png)
 
 ## UX and UI
-
 The full analysis was completed on a separate document. [Please click here to view it.](UX/UX_UI_analysis.pdf)
 
 ### Further analysis
@@ -33,7 +32,8 @@ The document mentioned above contains an analysis following Garrett’s elements
 * Strategy
 
 ### Goals
-As I was creating a website which allowed users to raise and keep track of issues and features, I wanted to create a theme and design that was inline with the scope of this project. Some of the basic goals outlined included:
+As I was creating a website that allowed users to raise and keep track of certain pieces of data, I thought about the needs this would introduce to the user. I wanted to create a design that was inline with these goals, as well as the scope of this project. I also thought about why this website was being made, which in turn helped identify the overall rationale for this project. 
+Some of the basic goals outlined included:
 
 * Ease of use:
     - Create a positive experience for the user so they return to the website.
@@ -75,7 +75,7 @@ Developing user stories helped identify the scope and outline the needs and acti
     - Created foreign key between orders and users 
     - Added monetary requirement fields for features i.e. money received, money needed, and upvost/like cost. 
     
-* Chart.js
+* Used AJAX and Chart.js
     - Previously I had stated that I wanted to delve further when using Javascript, therefore I chose chart.js to display the charts on this website. This allowed me to not only experiment with Javascript, but also experience using scripts in a different manner, such as directly within a HTML document. 
     - This also enabled users to quickly identify progress. 
 
@@ -116,8 +116,9 @@ Developing user stories helped identify the scope and outline the needs and acti
 > Front-end features
 * Profile page:
     - Go into greater detail when displaying orders on the user account such as providing a brief outline of what was ordered.
+    - Create a relationship between users and the features/issues they create and display them on their profile.
 
-* Add more details to the user profile:
+* Add more details to the user profile model:
 	- Currently there is only a favourite games section within the user profile model. In the future I want to add more fields and individual pieces of information for that user, for example a profile picture or avatar. 
 
 * Update the invoice when checkout is complete so a summary of the order is displayed.
@@ -152,11 +153,12 @@ Developing user stories helped identify the scope and outline the needs and acti
     - I initially had a cart app and function, but during testing I realised the current layout of the project didn’t necessarily need a cart. I have however kept the cart app and all its associated classes and code as I want to utilise them in the future. I want to create a function that would allow users to add multiple tickets to their cart and only make one payment. After doing so they would have a count on their profile stating how many tickets they have available. 
     - Now users are sent directly to checkout when submitting or upvoting features, and can directly submit new free issues. 
 
-* Have greater control over the feature costs:
+* Have greater control over the feature costs e.g. amount_needed and upvote_cost:
     - Currently there are default values set for the upvote cost and the amount of money needed per feature. Some have been manipulated in admin. I would like to develop a function whereby new features are given a status of ‘request submitted’ before being sent directly to the main feature request table, and are at that point individually assigned specific values for the factors mentioned above. 
 
 * Develop the search function further 
-    – Currently the search function returns queries relating to issues and features. I want to develop this further whereby other aspects are also searched such as progress and possibly feedback. 
+    – Currently the search function returns queries relating to issues and features. I want to develop this further whereby other aspects are also searched such as progress, products/tickets and possibly feedback. 
+    - I started working on a function that would enable users to search through products/tickets and add them to their cart. However due to the current structure of the project I removed the cart, and in turn removed the products/tickets search ability. In the future I want to re-introduce this search function when the cart has also been re-introduced, and I would also like to have other products that users can purchase. Therefore I have opted to keep the product/tickets search function within the project.
     - Improve search results by enabling users to click on a result and if it is an issue or feature they will be taken to the details of that item. 
 
 * Create stricter password requirements:
@@ -165,8 +167,12 @@ Developing user stories helped identify the scope and outline the needs and acti
 * Give users the ability to change their account information:
     - Their email address, registered name and password.
 
+* Apply the remaining validation requirements to the checkout form:
+    - Currently some inputs purposefully don't have validation so as to make it easier during assessment i.e. postcode, telephone number, and address. In the future I would apply validation so as to ensure the correct pieces of data are supplied.
+
 ### Other Areas of Interest 
 * In the future I want to utilise git more and create different branches for development. 
+* PEP8 - I would change the project name so all the letters were lowercase.
 
 ## Methods used
 * HTML
@@ -177,7 +183,6 @@ Developing user stories helped identify the scope and outline the needs and acti
 * Javascript & jQuery
 
 ## Testing techniques
-
 - Overview:
 1. Manual testing
 2. Django tests
@@ -185,7 +190,6 @@ Developing user stories helped identify the scope and outline the needs and acti
 4. In-person user testing
 
 ### 1. Manual testing
-
 > Front-end testing 
 
 * W3C was used to validate HTML: https://validator.w3.org
@@ -211,7 +215,7 @@ Developing user stories helped identify the scope and outline the needs and acti
     - Added a new issue and new feature.
     - Marked issues and features as done and ensured they were then only displayed in the tables for completed items. 
     - Checking the count functions added or subtracted correctly. 
-    - The correct number of expected items were added to the basket and any changes were correctly displayed in the cart product count.
+    - The correct number of expected items were added to the basket and any changes were correctly displayed in the cart product count. (This was done when the cart was still incorporated within the website.)
 
 * Tested models:
     - Checked the ‘date added’ and ‘last updated’ models were displaying the correct dates by altering details of a specific item and making sure the right model edited its date. 
@@ -227,6 +231,8 @@ Developing user stories helped identify the scope and outline the needs and acti
         - Users can’t like an item or feature unless they’re logged in, so I attempted to do so and ensured an alert was displayed in the browser prompting the user to login. 
 
 * Greatly used the print ability and the console to understand the code.
+
+* Checked that emails were being sent correctly by going through the ‘forgotten password’ process.
 
 ### 2. Django testing 
 * Django tests were created to test some of the models, views and forms.
@@ -253,7 +259,6 @@ Developing user stories helped identify the scope and outline the needs and acti
     - For the checkout form I added the address and telephone details so as to replicate an actual checkout form and checking billing details. However validation for these input types hasn’t been added so it is quicker to go through the form during assessment. 
 
 ### 4. In-person User Testing 
-
 * As part of the UX and UI testing, I conducted in-person user tests. This allowed me to observe natural user interactions. I was able to identify what users found difficult, and if any roadblocks existed. 
 * This lead to the following changes:
 
@@ -265,28 +270,28 @@ Developing user stories helped identify the scope and outline the needs and acti
     
     - Removal of the bootstrap theme and dashboard. 
 
+    - Reduce the input fields of the checkout form for assessment.
+
 ### Overview of Issues and Solutions
+* **Issue 1:** Features in progress that were marked as done were still being displayed in the ‘in progress’ table. This also affected the count. 
+* **Solution:** Added a 'for' loop that would ignore features marked as 'done' for both the table and the count. 
 
-**Issue 1:** Features in progress that were marked as done were still being displayed in the ‘in progress’ table. This also affected the count. 
-**Solution:** Added a 'for' loop that would ignore features marked as 'done' for both the table and the count. 
+* **Issue 2:** Forms could be manipulated by users when using developer tools. This could allow them to bypass any validation requirements. 
+* **Solution:** Initially some of the forms were rendered using html in order to apply specific labels and change ordering. However I changed this and utilised the built-in validation function used in Django, therefore removing the possibility of users altering validation through developer tools. 
 
-**Issue 2:** Forms could be manipulated by users when using developer tools. This could allow them to bypass any validation requirements. 
-**Solution:** Initially some of the forms were rendered using html in order to apply specific labels and change ordering. However I changed this and utilised the built-in validation function used in Django, therefore removing the possibility of users altering validation through developer tools. 
-
-**Issue 3:** If a user bought a new feature request the money received wouldn’t take their payment into account.
-**Solution:** Added the price of the new feature request ticket when calculating how much money was received for a feature. 
+* **Issue 3:** If a user bought a new feature request the money received wouldn’t take their payment into account.
+* **Solution:** Added the price of the new feature request ticket when calculating how much money was received for a feature. 
 
 #### Experiences when creating new models
-
 * Various issues arose during the creation and testing process of models, all of which allowed me to gain a greater understanding of the database and what happens when new migrations are made.
 * The issues outlined below also enabled me to experiment with different commands that are used when dealing with migrations. Some of which included get-migrations and show migrations.  
 
-**Issue 1:** The feedback model had two columns with the same name, one of which was a foreign key. This caused problems when new data was sent to the database whereby it would state that certain required pieces of information were missing when the form was submitted. 
-**Solution 1:** Manually manipulating the migration files. 
-**Solution 2:** The fields within the model were assigned database column names so the database knew which field belonged to which column.
+* **Issue 1:** The feedback model had two columns with the same name, one of which was a foreign key. This caused problems when new data was sent to the database whereby it would state that certain required pieces of information were missing when the form was submitted. 
+* **Solution 1:** Manually manipulating the migration files. 
+* **Solution 2:** The fields within the model were assigned database column names so the database knew which field belonged to which column.
 
-**Issue 2:** User profile model: An extra foreign key had been made in the database, therefore it was then expecting two user instances when a new user was being created. 
-**Solution:** Correctly deleted the user profile and started it again, and ensured an extra user foreign key hadn’t been created.  
+* **Issue 2:** User profile model: An extra foreign key had been made in the database, therefore it was then expecting two user instances when a new user was being created. 
+* **Solution:** Correctly deleted the user profile and started it again, and ensured an extra user foreign key hadn’t been created.  
 
 ## Deployment
 Github and Heroku were used for the deployment of this project.
@@ -324,7 +329,16 @@ heroku login
     ```sh
         pip3 install -r requirements.txt 
     ```
-3. Run the project:
+3. Set the config variables:
+    * As the secret key is kept hidden, you will need to set this variable personally. 
+
+4. Set the stripe variables:
+    * STRIPE_SECRET = Stripe secret key
+    * STRIPE_PUBLISHABLE = Stripe publishable API key
+    * For more information on Stripe:
+        https://stripe.com/gb
+
+5. Run the project:
     ```
         python3 -m flask run
     ```
@@ -338,7 +352,6 @@ heroku login
 * Now pushing to Github will also push changes to Heroku. 
 
 ## Credits
-
 * A bootstrap theme has been used and modified in order to take advantage of its sidebar feature.
 * The code for the charts from chart.js was partially implemented from a tutorial from ‘CodingEntrepreneurs’.
 
