@@ -60,7 +60,8 @@ def checkout(request):
 
             if customer.paid:
                 request.session['cart'] = {}
-                return redirect(reverse('invoice'))
+                messages.success(request, "Thanks for your new feature request.")
+                return redirect(reverse('home'))
             else:
                 messages.error(request, "Sorry, we have not been able to take your payment")
 
@@ -148,7 +149,7 @@ def upvote_checkout(request, id):
                     if user not in feature.likes.all():
                         feature.likes.add(user)
                         
-
+                    messages.success(request, "Your upvote has been registered.")
                     return redirect(reverse('invoice'))
                 else:
                     messages.error(request, "Sorry, we have not been able to take your payment")
