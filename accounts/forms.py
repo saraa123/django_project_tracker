@@ -12,11 +12,10 @@ class UserLoginForm(forms.Form):
 class UserRegistrationForm(UserCreationForm):
     """ Registration form to create a new user """
 
-    password1 = forms.CharField(
-                                widget=forms.PasswordInput,
+    password1 = forms.CharField(widget=forms.PasswordInput,
                                 label="Password")
-    password2 = forms.CharField(
-                                label="Password Confirmation", 
+                                
+    password2 = forms.CharField(label="Password Confirmation", 
                                 widget=forms.PasswordInput)
     
     email = forms.EmailField(label="Email address")
