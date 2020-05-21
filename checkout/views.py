@@ -74,12 +74,12 @@ def checkout(request):
         feature_form = FeatureForm()
 
     return render(request, "checkout.html", {"order_form": order_form, 
-                                              "payment_form": payment_form, 
-                                              "publishable": settings.STRIPE_PUBLISHABLE,
-                                             "feature_form": feature_form,
-                                             "product": product,
-                                             "total": total,
-                                             "quantity": quantity})
+                                            "payment_form": payment_form, 
+                                            "publishable": settings.STRIPE_PUBLISHABLE,
+                                            "feature_form": feature_form,
+                                            "product": product,
+                                            "total": total,
+                                            "quantity": quantity})
 
 
 @login_required()
@@ -148,14 +148,13 @@ def upvote_checkout(request, id):
                     # been completed 
                     if user not in feature.likes.all():
                         feature.likes.add(user)
-                        
-                    messages.success(request, "Your upvote has been registered.")
+                        messages.success(request, "Your upvote has been registered.")
+
                     return redirect(reverse('invoice'))
                 else:
                     messages.error(request, "Sorry, we have not been able to take your payment")
 
             else:
-                print(payment_form.errors)
                 messages.error(request, "Sorry, we were unable to process your payment with that card")
         else:
             payment_form = MakePaymentForm()
