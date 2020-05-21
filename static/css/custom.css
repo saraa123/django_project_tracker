@@ -54,7 +54,6 @@ h1 {
 
 .active_page {
     text-decoration: underline;
-
 }
 
 .custom_a {
@@ -103,7 +102,6 @@ h1 {
     height: 80px;
     width: 100%;
     line-height: -50px;
-
 }
 
 
@@ -192,7 +190,6 @@ caption p {
     margin-right: 5px;
 }
 
-
 .shopping_bag_alert {
     color: orange;
 }
@@ -201,7 +198,6 @@ caption p {
     font-size: 20px;
     background-color: orange;
     border: orange;
-
 }
 
 /* Chart area */
