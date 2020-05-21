@@ -90,6 +90,7 @@ Developing user stories helped identify the scope and outline the needs and acti
 * Features and issues can be upvoted.
 
 * Ability to quickly track the progress of on going issues and features, and identify which ones have been marked as completed. 
+    - Those marked as ‘done’ must first have their status changed in admin. 
 
 * Users can leave feedback as well as see what feedback others have left.
 
@@ -132,6 +133,8 @@ Developing user stories helped identify the scope and outline the needs and acti
     – All tables for issues and features and account order details.
 
 * Create a community board where different users can communicate with one another. 
+
+* There currently isn’t a table showing issues in progress as issues are constantly being worked on. If there was more interaction between the handlers and the users then I would implement a function that would allow the users to see when an issue is being worked on. 
 
 > Back-end features
 * Currently feedback has been added within the to_do app primarily as it was a small model to add. However, in the future I want to add it as a stand-alone app and expand it.
@@ -177,6 +180,8 @@ Developing user stories helped identify the scope and outline the needs and acti
     - Initially the name ‘item’ was used when referring to issues, however in the future I would alter this and call them issues so as to make it easier during development for other developers accessing the code. In order to prevent any disruption to the code and remain within the time frame my mentor thought it best to leave the name as it was. I have written comments within the code in order to highlight that items are issues. 
 
     - Originally ‘products’ was used when directing users to issues and features, however it was identified that using ‘tickets’ was a better representation of what was being offered. Therefore in the future this is the name I would use. As I also want to expand on what can be purchased and introduce actual products a user can acquire, I would consider creating a separate file for products.
+
+    - ‘Like’ references changed to ‘upvote’.  
     
 ## Methods used
 * HTML
