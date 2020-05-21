@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block page_title %}Search Results{% endblock %}
 
 {% block body_text %}
@@ -22,9 +21,9 @@
                 {% for item in search_issue %}
                     <!-- If the issue is marked as 'done' it will have the line_through class applied -->
                     {% if item.done == True %}
-                        <p class="line_through">{{item.Issue}}</p>
+                        <p class="line_through">{{item.Issue|title}}</p>
                     {% else %}
-                        <p>{{item.Issue}}</p>
+                        <p>{{item.Issue|title}}</p>
                     {% endif %}
                 {% endfor %}
             {% endif %}
@@ -35,9 +34,9 @@
                 {% for results in search_feature %}
                     <!-- If the feature is marked as 'done' it will have the line_through class applied -->
                     {% if results.done == True %}
-                        <p class="line_through">{{results.name}}</p>
+                        <p class="line_through">{{results.name|title}}</p>
                     {% else %}
-                        <p>{{results.name}}</p>
+                        <p>{{results.name|title}}</p>
                     {% endif %}
                 {% endfor %}
             {% endif %}
