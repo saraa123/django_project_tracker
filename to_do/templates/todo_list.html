@@ -83,16 +83,12 @@
             <!-- Check if the user is logged in. They can only add an issue or a feature 
                 ticket if they are, otherwise they'll be sent an alert to login -->
             {% if user.is_authenticated %}
-                <div class="col-sm-12 col-md-3">
-                    <a class="custom_a" href="{% url 'all_products' %}">
-                        <h5><button class="btn custom_btn">New Issue or Feature Request</button></h5>
-                    </a>
-                </div>
+                <a class="custom_a" href="{% url 'all_products' %}">
+                    <h5><button class="btn custom_btn">New Issue or Feature Request</button></h5>
+                </a>
 
             {% else %}
-                <div class="col-sm-12 col-md-3">
-                    <h5><button class="btn custom_btn login_alert">New Issue or Feature Request</button></h5>
-                </div>
+                <h5><button class="btn custom_btn login_alert">New Issue or Feature Request</button></h5>
 
             {% endif %}
         </div>
@@ -230,6 +226,7 @@
                                         <td>
                                             <p>{{feature.name | title }}</p>
                                             <p><span class="bold">added:</span> {{ feature.date_created }}</p>
+                                            <p>Upvote Cost: £ {{feature.like_cost}}</p>
                                         </td>
 
                                         <td>{{feature.money_received}}/{{feature.amount_needed}}</td>
