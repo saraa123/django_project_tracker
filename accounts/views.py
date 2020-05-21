@@ -18,10 +18,10 @@ def index(request):
             registration_form.save()
 
             user = auth.authenticate(username=request.POST['username'],
-                                password=request.POST['password1'],
-                                first_name=request.POST['first_name'],
-                                last_name=request.POST['last_name']
-                                )
+                                    password=request.POST['password1'],
+                                    first_name=request.POST['first_name'],
+                                    last_name=request.POST['last_name']
+                                    )
 
             if user:
                 auth.login(user=user, request=request)
@@ -42,6 +42,8 @@ def login(request):
     if request.user.is_authenticated:
         return redirect(reverse('home'))
     
+    # Checks if a POST method has been sent, and then checks that the login form is valid. If
+    # it is, then it will authenticate the user and log them in.
     if ['POST method']:
         login_form = UserLoginForm(request.POST or None)
 
