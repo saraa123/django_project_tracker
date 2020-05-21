@@ -44,6 +44,7 @@ class ChartData(APIView):
             done_results=Count(Case(When(done=True, then='done')))
         )
 
+        # Will append the issues that are done to the done_issues_count list
         for k, v in Issues_Done_Count.items():
             done_issues_count.append(v)
 
@@ -52,6 +53,7 @@ class ChartData(APIView):
             not_done_results=Count(Case(When(done=False, then='done')))
         )
 
+        # Appends issues not done to the to_do_issues_count list
         for k, v in Issues_Not_Done_Count.items():
             to_do_issues_count.append(v)
 
@@ -76,6 +78,7 @@ class ChartData(APIView):
             done_features=Count(Case(When(done=True, then='done')))
         )
 
+        # Appends features that are done to the done_features_count list
         for k, v in Features_done_count.items():
             done_features_count.append(v)
         
