@@ -15,6 +15,7 @@ def feature_request_price():
     # Query the database - look for the new feature request ticket
     products = Product.objects.filter(name='Request a new feature')
     
+    # Assigns the price of the ticket
     for ticket in products:
         ticket_price = ticket.price
 
@@ -40,8 +41,10 @@ def pending_issue_count(request):
 def issues_done_count(request):
     """ Count how many issues are marked as 'done' """
 
+    # List that will be used to count the number of issues marked as done
     issues_done = []
 
+    # Count how many issues are done
     Done_results = Item.objects.aggregate(
         done_results=Count(Case(When(done=True, then='done')))
     )
@@ -56,13 +59,15 @@ def issues_done_count(request):
 def features_done_count(request):
     """ Count how many features are marked as 'done' """
 
+    # List that will be used to count how many features are done
     features_done = []
 
+    # Count how many features are marked as done
     Done_features = Feature.objects.aggregate(
         done_features=Count(Case(When(done=True, then='done')))
     )
 
-    # Append the features marked as 'done' to the issues_done list
+    # Append the features marked as 'done' to the features_done list
     for k, v in Done_features.items():
         features_done.append(v)
 
@@ -158,13 +163,12 @@ def todo_list(request):
 
 
     return render(request, 'todo_list.html', 
-                  {"items": results, 
-                  "features": features, 
-                  "not_done_issues_count": not_done_issues_count, 
-                  "pending_features_to_do_count": pending_features_to_do_count,
-                  "features_in_progress": features_in_progress,
-                  "features_in_progress_count": features_in_progress_count
-                  })
+                {"items": results, 
+                "features": features, 
+                "not_done_issues_count": not_done_issues_count, 
+                "pending_features_to_do_count": pending_features_to_do_count,
+                "features_in_progress": features_in_progress,
+                "features_in_progress_count": features_in_progress_count})
 
 def closed_issues_and_features(request):
     """ Load page displaying issues and features marked as 'done' """
@@ -190,16 +194,13 @@ def closed_issues_and_features(request):
     features_in_progress_count = len(features_in_progress)
 
     return render(request, "closed_issues_and_features.html",
-                {
-                    "items": results,
-                    "features": features,
-                    "not_done_issues_count": not_done_issues_count,
-                    "pending_features_to_do_count": pending_features_to_do_count,
-                    "features_in_progress_count": features_in_progress_count,
-                    "issues_done": issues_done,
-                    "features_done": features_done
-
-                })
+                {"items": results,
+                "features": features,
+                "not_done_issues_count": not_done_issues_count,
+                "pending_features_to_do_count": pending_features_to_do_count,
+                "features_in_progress_count": features_in_progress_count,
+                "issues_done": issues_done,
+                "features_done": features_done})
 
 
 def new_item(request):
