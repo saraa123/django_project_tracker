@@ -4,7 +4,7 @@ Heroku live link:
 https://sara-django-issue-tracker.herokuapp.com
 
 ## Overview 
-The purpose of this project was to create a website utilising Django. The website created allows users to track and submit free issue requests, as well as purchase feature request tickets. Users also have the option to upvote an existing feature, which also has a cost. 
+The purpose of this project was to create a website utilising Django. Users have the ability to track and submit free issue requests, as well as purchase feature request tickets for a gaming website. Users also have the option to upvote an existing feature, which also has a cost. 
 
 ### Issue with username during commits 
 There has been an issue with the username that is displayed during commits. When a commit is made it doesn’t display my Github username, it presents ‘usernameusername’ instead. This was due to the fact that my email address was set to private, so Github was unable to identify my username. 
@@ -13,7 +13,7 @@ The repo for this project was created at the same time I created the repo for a 
 
 Therefore in order to maintain the correct number of contributors and the commit history I decided not to implement the solution to this project. 
 
-I have also attached a screenshot of the push message to assure you the commits are mine. 
+I have also attached a screenshot of the push message to assure you the commits are mine and I am the only contributor to this project. 
 
 ![commit-issues](screenshots/commit-issues.png)
 
@@ -50,15 +50,18 @@ An in-depth analysis of the user stories can be seen on the separate document me
 Developing user stories helped identify the scope and outline the needs and actions of the user. Doing so also helped direct other aspects of the UX and UI planning. 
 
 * As a user I want to:
-    - add an issue
-    - add a feature
-    - pay for a feature request
-    - see what other issues and features have been added 
-    - be able to add feedback
-    - be able to see what progress is made
-    - be able to see if any issues and features ever get completed 
-    - see which features are in progress 
-    - upvote/like an issue/feature
+    - Add an issue,
+    - Add a feature,
+    - Pay for a feature request,
+    - See what other issues and features have been added,
+    - Be able to add feedback,
+    - Be able to see what progress is made,
+    - Be able to see if any issues and features ever get completed,
+    - See which features are in progress,
+    - Upvote/like an issue/feature.
+
+### In-person user tests 
+In-person user tests were also conducted in order to gain a better understanding of what the user’s natural actions would be. This helped direct changes to the project, as well as help understand the various goals and desires they had which may originally have been overlooked. 
 
 ### Wireframes (Skeleton)
 [Click here for the wireframe.](UX/djangoTracker.pdf)
@@ -73,7 +76,7 @@ Developing user stories helped identify the scope and outline the needs and acti
     - Last updated
     - Number of likes
     - Created foreign key between orders and users 
-    - Added monetary requirement fields for features i.e. money received, money needed, and upvost/like cost. 
+    - Added monetary requirement fields for features i.e. money received, money needed, and upvote/like cost. 
     
 * Used AJAX and Chart.js
     - Previously I had stated that I wanted to delve further when using Javascript, therefore I chose chart.js to display the charts on this website. This allowed me to not only experiment with Javascript, but also experience using scripts in a different manner, such as directly within a HTML document. 
@@ -98,7 +101,7 @@ Developing user stories helped identify the scope and outline the needs and acti
     - I chose to create alerts displaying messages for that specific action so as to give the website a more personal feel.
 
 * Access to information on the user account page:
-    - Account details such as orders, liked issues and features can be viewed, as well as data from the user profiles model. However, this is something I want to expand on and develop further in the future. This has been explained in greater detail below. 
+    - Account details such as orders, liked issues and features can be viewed, as well as data from the user profiles model. However, this is something I want to expand on and develop further in the future. This has been explained in greater detail in the next section. 
 
 * On the account page the user can add and edit any favourite games they may have. 
 
@@ -117,7 +120,7 @@ Developing user stories helped identify the scope and outline the needs and acti
 > Front-end features
 * Profile page:
     - Go into greater detail when displaying orders on the user account such as providing a brief outline of what was ordered.
-    - Create a relationship between users and the features/issues they create and display them on their profile.
+    - Create a relationship between users and the features/issues they submit and display them on their profile.
 
 * Add more details to the user profile model:
 	- Currently there is only a favourite games section within the user profile model. In the future I want to add more fields and individual pieces of information for that user, for example a profile picture or avatar. 
@@ -145,7 +148,7 @@ Developing user stories helped identify the scope and outline the needs and acti
 * I would also like to gain a better understanding of slugs and how to use them within my Django project.
 
 * Learn backend security methods:
-    - Learn more about backend validated in order to increase security.
+    - Learn more about backend validation in order to increase security.
 
 * Give users the ability to edit their issues
     - I initially was working on a function that would enable users to edit an issue they may have had, but due to time restraints I decided this would be something that would be better to work on in the future.
@@ -173,6 +176,8 @@ Developing user stories helped identify the scope and outline the needs and acti
 * Apply the remaining validation requirements to the checkout form:
     - Currently some inputs purposefully don't have validation so as to make it easier during assessment i.e. postcode, telephone number, and address. In the future I would apply validation so as to ensure the correct pieces of data are supplied.
 
+* The charts can sometimes take a while to load, therefore I’d like to find a way to reduce the lag they produce. 
+
 ### Other Areas of Interest 
 * In the future I want to utilise git more and create different branches for development. 
 * PEP8 - I would change the project name so all the letters were lowercase.
@@ -190,6 +195,8 @@ Developing user stories helped identify the scope and outline the needs and acti
 * Django
 * Python
 * Javascript & jQuery
+* Stripe
+* REST framework & AJAX - when developing the charts 
 
 ## Testing techniques
 - Overview:
@@ -221,7 +228,7 @@ Developing user stories helped identify the scope and outline the needs and acti
     - http://jshint.com
 
 * Manually testing all functions worked as expected:
-    - Added a new issue and new feature.
+    - Added a new issue and new feature and checked it was displayed on the correct table.
     - Marked issues and features as done and ensured they were then only displayed in the tables for completed items. 
     - Checking the count functions added or subtracted correctly. 
     - The correct number of expected items were added to the basket and any changes were correctly displayed in the cart product count. (This was done when the cart was still incorporated within the website.)
@@ -232,12 +239,14 @@ Developing user stories helped identify the scope and outline the needs and acti
     - Tested feedback model 
         - Added feedback and ensured it was added to the list in admin. 
         - Checked that feedback would be displayed randomly on the feedback page. 
-        - Developed the need for the name to come from the user profile, and also the logic for an 'anonymous' name input if the name field is left empty. 
+        - As the user's name for the feedback would come from the user profile, I added new feedback and checked the correct name was connected to it. 
     
     - Upvote logic:
         - Upvoted an issue and feature and checked the total amount upvoted was correct. 
         - Upvoted a feature request and checked the amount_received was the right amount.
         - Users can’t like an item or feature unless they’re logged in, so I attempted to do so and ensured an alert was displayed in the browser prompting the user to login. 
+
+* Tested all alerts were working as expected.
 
 * Greatly used the print ability and the console to understand the code.
 
@@ -268,23 +277,24 @@ Developing user stories helped identify the scope and outline the needs and acti
         - Users have to be logged in before they can checkout. To test this I tried to checkout without being logged in, and an alert successfully prompts the user to login.
         - Attempted to buy items with invalid card details and missing information, and an alert is successfully displayed telling the user to check their details and provide the information that is missing. 
         - Tested whether the checkout form identified the correct amount of products to be paid for.
+        - I completed the checkout and upvote checkout processes to test that once complete, either a new feature was displayed on the table or the relevant feature displayed an increase in its upvote count. 
 
 * Purposefully omitted form validation for the checkout forms:
-    - For the checkout form I added the address and telephone details so as to replicate an actual checkout form and checking billing details. However validation for these input types hasn’t been added so it is quicker to go through the form during assessment. 
+    - For the checkout form I added the address and telephone details so as to replicate an actual checkout form and checking billing details. However validation hasn’t been incorporated for these input types so it is quicker to go through the form during assessment. 
 
 ### 4. In-person User Testing 
 * As part of the UX and UI testing, I conducted in-person user tests. This allowed me to observe natural user interactions. I was able to identify what users found difficult, and if any roadblocks existed. 
 * This lead to the following changes:
 
-    - Created a separate page for issues and features that were completed. This prevented information overload on the home page, and also allowed the user to quickly identify which issues and features were currently still open and pending.
+    - Created a separate page for issues and features that were completed. This prevented information overload on the home page, and also allowed the user to quickly identify which issues and features were currently still open and those that were completed.
     
     - Cart changes:
-        - The way the website was created meant it was easier to direct the user straight to checkout when wanting to purchase or upvote a feature. 
+        - The way the website was created meant it was easier to direct the user straight to checkout when wanting to purchase a feature ticket or upvote a feature. 
         - However, in the future I would like to alter the website scheme so as to enable users to easily add tickets to their cart, enabling them to pay for multiple tickets at once. Therefore the cart app still remains within the project.
     
     - Removal of the bootstrap theme and dashboard. 
 
-    - Reduce the input fields of the checkout form for assessment.
+    - Reduced the input fields of the checkout form for assessment.
 
 ### Overview of Issues and Solutions
 * **Issue 1:** Features in progress that were marked as done were still being displayed in the ‘in progress’ table. This also affected the count. 
@@ -296,7 +306,7 @@ Developing user stories helped identify the scope and outline the needs and acti
 * **Issue 3:** If a user bought a new feature request the money received wouldn’t take their payment into account.
 * **Solution:** Added the price of the new feature request ticket when calculating how much money was received for a feature. 
 
-* **Issue 4:** Users could type a different url into the url bar.
+* **Issue 4:** Users could type a different and incorrect url into the url bar.
 * **Solution:** This lead to the creation of custom error pages so as to offer an explanation to the user, and links so they can find their way back to the page they need.
 
 * **Issue 5:** The user could press the back button after logging in or out, and be sent to the basic error page when attempting any further actions on the website. 
@@ -305,7 +315,7 @@ Developing user stories helped identify the scope and outline the needs and acti
 
 #### Experiences when creating new models
 * Various issues arose during the creation and testing process of models, all of which allowed me to gain a greater understanding of the database and what happens when new migrations are made.
-* The issues outlined below also enabled me to experiment with different commands that are used when dealing with migrations. Some of which included get-migrations and show migrations.  
+* The issues outlined below also enabled me to experiment with different commands that are used when dealing with migrations, some of which included get-migrations and show migrations.  
 
 * **Issue 1:** The feedback model had two columns with the same name, one of which was a foreign key. This caused problems when new data was sent to the database whereby it would state that certain required pieces of information were missing when the form was submitted. 
 * **Solution 1:** Manually manipulating the migration files. 
@@ -329,7 +339,7 @@ https://devcenter.heroku.com/articles/heroku-cli
 
 
 ```sh
-heroku –version 
+heroku --version 
 ```
 
 4. Now login to your Heroku account from your terminal. This will allow you to connect to the Heroku CLI you’ve installed. 
@@ -354,6 +364,7 @@ heroku login
     * As the secret key is kept hidden, you will need to set this variable personally. 
 
 4. Set the stripe variables:
+    * They are also hidden and will need to be set personally. 
     * STRIPE_SECRET = Stripe secret key
     * STRIPE_PUBLISHABLE = Stripe publishable API key
     * For more information on Stripe:
@@ -361,7 +372,7 @@ heroku login
 
 5. Run the project:
     ```
-        python3 -m flask run
+        python3 manage.py runserver 
     ```
 
 ### Linking Github and Heroku pushes 
@@ -373,7 +384,7 @@ heroku login
 * Now pushing to Github will also push changes to Heroku. 
 
 ## Credits
-* A bootstrap theme has been used and modified in order to take advantage of its sidebar feature.
+* A previously applied bootstrap theme has remained within this project to take advantage of the icon cards that can be seen on the home and closed cases pages.
 * The code for the charts from chart.js was partially implemented from a tutorial from ‘CodingEntrepreneurs’.
 
 ### Media
