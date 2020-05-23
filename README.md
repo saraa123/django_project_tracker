@@ -298,31 +298,31 @@ In-person user tests were also conducted in order to gain a better understanding
 
 ### Overview of Issues and Solutions
 * **Issue 1:** Features in progress that were marked as done were still being displayed in the ‘in progress’ table. This also affected the count. 
-* **Solution:** Added a 'for' loop that would ignore features marked as 'done' for both the table and the count. 
+    - **Solution:** Added a 'for' loop that would ignore features marked as 'done' for both the table and the count. 
 
 * **Issue 2:** Forms could be manipulated by users when using developer tools. This could allow them to bypass any validation requirements. 
-* **Solution:** Initially some of the forms were rendered using html in order to apply specific labels and change ordering. However I changed this and utilised the built-in validation function used in Django, therefore removing the possibility of users altering validation through developer tools. 
+    - **Solution:** Initially some of the forms were rendered using html in order to apply specific labels and change ordering. However I changed this and utilised the built-in validation function used in Django, therefore removing the possibility of users altering validation through developer tools. 
 
 * **Issue 3:** If a user bought a new feature request the money received wouldn’t take their payment into account.
-* **Solution:** Added the price of the new feature request ticket when calculating how much money was received for a feature. 
+    - **Solution:** Added the price of the new feature request ticket when calculating how much money was received for a feature. 
 
 * **Issue 4:** Users could type a different and incorrect url into the url bar.
-* **Solution:** This lead to the creation of custom error pages so as to offer an explanation to the user, and links so they can find their way back to the page they need.
+    - **Solution:** This lead to the creation of custom error pages so as to offer an explanation to the user, and links so they can find their way back to the page they need.
 
 * **Issue 5:** The user could press the back button after logging in or out, and be sent to the basic error page when attempting any further actions on the website. 
-* **Solution 1:** As mentioned in the previous issue, an error page was created. For this issue the 403 error page was created.
-* **Solution 2:** After creating the error page, I was still faced with an issue whereby the in-built Django error page was still being displayed. Upon further research, I identified that I needed to change the file name so as to accommodate the csrf name within it. Then when testing it again, the custom error page would successfully be displayed. 
+    - **Solution 1:** As mentioned in the previous issue, an error page was created. For this issue the 403 error page was created.
+    - **Solution 2:** After creating the error page, I was still faced with an issue whereby the in-built Django error page was still being displayed. Upon further research, I identified that I needed to change the file name so as to accommodate the csrf name within it. Then when testing it again, the custom error page would successfully be displayed. 
 
 #### Experiences when creating new models
 * Various issues arose during the creation and testing process of models, all of which allowed me to gain a greater understanding of the database and what happens when new migrations are made.
 * The issues outlined below also enabled me to experiment with different commands that are used when dealing with migrations, some of which included get-migrations and show migrations.  
 
 * **Issue 1:** The feedback model had two columns with the same name, one of which was a foreign key. This caused problems when new data was sent to the database whereby it would state that certain required pieces of information were missing when the form was submitted. 
-* **Solution 1:** Manually manipulating the migration files. 
-* **Solution 2:** The fields within the model were assigned database column names so the database knew which field belonged to which column.
+    - **Solution 1:** Manually manipulating the migration files. 
+    - **Solution 2:** The fields within the model were assigned database column names so the database knew which field belonged to which column.
 
 * **Issue 2:** User profile model: An extra foreign key had been made in the database, therefore it was then expecting two user instances when a new user was being created. 
-* **Solution:** Correctly deleted the user profile and started it again, and ensured an extra user foreign key hadn’t been created.  
+    - **Solution:** Correctly deleted the user profile and started it again, and ensured an extra user foreign key hadn’t been created.  
 
 ## Deployment
 Github and Heroku were used for the deployment of this project.
