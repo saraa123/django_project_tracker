@@ -18,7 +18,11 @@
                     
                     <!-- Pending issues count -->
                     {% for not_done in not_done_issues_count %}
-                        <div class="mr-5">{{not_done}} Open Issues</div>
+                        {% if not_done == 1 %}
+                            <div class="mr-5">{{not_done}} Open Issue</div>
+                        {% else %}
+                            <div class="mr-5">{{not_done}} Open Issues</div>
+                        {% endif %}
                     {% endfor %}
 
                     <!-- Count issues done -->
@@ -44,11 +48,24 @@
                         <i class="fa fa-fw fa-list"></i>
                     </div>
 
-                    <!-- Count feature requests and features in progress -->
-                    <div class="mr-5"> {{pending_features_to_do_count}} Feature Requests</div>
-                    <div class="mr-5">{{features_in_progress_count}} Feature in Progress</div>
-                    
+                    <!-- Count feature requests -->
+                    <div class="mr-5"> 
+                        {% if pending_features_to_do_count == 1 %}
+                            {{pending_features_to_do_count}} Feature Request
+                        {% else %}
+                            {{pending_features_to_do_count}} Feature Requests
+                        {% endif %}
+                    </div>
 
+                    <!-- Count features in progress -->
+                    <div class="mr-5">
+                        {% if features_in_progress_count == 1 %}
+                            {{features_in_progress_count}} Feature in Progress
+                        {% else %}
+                            {{features_in_progress_count}} Features in Progress
+                        {% endif %}
+                    </div>
+                    
                     <!-- Count features done -->
                     {% for count in features_done %}
                         {% if count == 1 %}
