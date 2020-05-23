@@ -19,12 +19,20 @@ I have also attached a screenshot of the push message to assure you the commits 
 
 ![commit-issues](screenshots/commit-issues.png)
 
+
 ### Issue with payments 
 Currently, the payment form will detect if a card number is invalid, yet for some invalid card numbers it will still accept the payment and submit the form, but still displays an error to the user. This will then allow the new feature to be submitted and be displayed on the features table when the user hasn't successfully paid. 
 
 This function requires more work whereby the form and new feature submitted will not go through if the payment is invalid. This is something that I will work on in the future.
 
 I also want to alter the form so it prompts the user to enter the security code. For the purpose of this project validation for this input has not been implemented. 
+
+### Issue with GMAIL and emails
+In order to enable my project to send emails, I used and followed the Gmail smtp process. When testing emails on Heroku, I learnt that after a certain period of time Gmail will turn off allowing less secure apps, which will then disrupt the ability to send and receive emails. This is something I have become mindful of and will make sure this access remains, but in the future I would change the way my project sends emails.
+
+When submitting the project all emails were successfully working and being sent.
+
+During assessment, if attempting to follow the ‘forgotten password’ steps and the error 500 page is displayed then Gmail may again have removed access for less secure apps. If this does occur, please contact me if possible and I will be able to check if access to less secure apps has been automatically turned off by Gmail, and can turn it back on again. 
 
 ## UX and UI
 The full analysis was completed on a separate document. [Please click here to view it.](UX/UX_UI_analysis.pdf)
