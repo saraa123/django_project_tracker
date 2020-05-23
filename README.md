@@ -19,6 +19,13 @@ I have also attached a screenshot of the push message to assure you the commits 
 
 ![commit-issues](screenshots/commit-issues.png)
 
+### Issue with payments 
+Currently, the payment form will detect if a card number is invalid, yet for some invalid card numbers it will still accept the payment and submit the form, but still displays an error to the user. This will then allow the new feature to be submitted and be displayed on the features table when the user hasn't successfully paid. 
+
+This function requires more work whereby the form and new feature submitted will not go through if the payment is invalid. This is something that I will work on in the future.
+
+I also want to alter the form so it prompts the user to enter the security code. For the purpose of this project validation for this input has not been implemented. 
+
 ## UX and UI
 The full analysis was completed on a separate document. [Please click here to view it.](UX/UX_UI_analysis.pdf)
 
@@ -141,6 +148,13 @@ In-person user tests were also conducted in order to gain a better understanding
 
 * There currently isn’t a table showing issues in progress as issues are constantly being worked on. If there was more interaction between the handlers and the users then I would implement a function that would allow the users to see when an issue is being worked on. 
 
+* Incorporate responsive image sizes when the screen size changes.
+
+* Experiment more with chart.js:
+    - Look into the different x and y axis options.
+    - Delve into the different chart options.
+    - Learn about the other various features it has to offer.
+
 > Back-end features
 * Currently feedback has been added within the to_do app primarily as it was a small model to add. However, in the future I want to add it as a stand-alone app and expand it.
 
@@ -179,6 +193,9 @@ In-person user tests were also conducted in order to gain a better understanding
     - Currently some inputs purposefully don't have validation so as to make it easier during assessment i.e. postcode, telephone number, and address. In the future I would apply validation so as to ensure the correct pieces of data are supplied.
 
 * The charts can sometimes take a while to load, therefore I’d like to find a way to reduce the lag they produce. 
+
+* Checkout form:
+    - As previously mentioned, during checkout if the payment card details are incorrect the new feature entered will still be submitted. In the future I want to rectify this, with new features not being submitted if the card details are invalid. I also want to add validation to the security code for the checkout form.
 
 ### Other Areas of Interest 
 * In the future I want to utilise git more and create different branches for development. 
