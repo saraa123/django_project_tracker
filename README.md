@@ -6,6 +6,8 @@ https://sara-django-issue-tracker.herokuapp.com
 ## Overview 
 The purpose of this project was to create a website utilising Django. Users have the ability to track and submit free issue requests, as well as purchase feature request tickets for a gaming website. Users also have the option to upvote an existing feature, which also has a cost. 
 
+This project uses Django 1.11.17. 
+
 ### Issue with username during commits 
 There has been an issue with the username that is displayed during commits. When a commit is made it doesn’t display my Github username, it presents ‘usernameusername’ instead. This was due to the fact that my email address was set to private, so Github was unable to identify my username. 
 
